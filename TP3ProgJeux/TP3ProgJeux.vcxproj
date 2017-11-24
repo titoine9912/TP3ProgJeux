@@ -64,7 +64,7 @@
     </Link>
     <PostBuildEvent>
       <Command>xcopy /d /y $(SFML_ROOT)\bin\Debug\*.* "..\Debug\"</Command>
-    </PostBuildEvent>	
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -85,16 +85,50 @@
     </Link>
     <PostBuildEvent>
       <Command>xcopy /d /y $(SFML_ROOT)\bin\Release\*.* "..\Release\"</Command>
-    </PostBuildEvent>	
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="base_enemy.cpp" />
+    <ClCompile Include="base_tourret.cpp" />
+    <ClCompile Include="bomb_launcher_bonus.cpp" />
+    <ClCompile Include="bonus.cpp" />
+    <ClCompile Include="boss.cpp" />
+    <ClCompile Include="character.cpp" />
+    <ClCompile Include="enemy.cpp" />
+    <ClCompile Include="entity.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="kamikaze.cpp" />
+    <ClCompile Include="laser_bonus.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Testeur.cpp" />
+    <ClCompile Include="map.cpp" />
+    <ClCompile Include="movable.cpp" />
+    <ClCompile Include="nuke_bonus.cpp" />
+    <ClCompile Include="player_character.cpp" />
+    <ClCompile Include="point_bonus.cpp" />
+    <ClCompile Include="tile.cpp" />
+    <ClCompile Include="upgraded_turret.cpp" />
+    <ClCompile Include="vie_bonus.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="base_enemy.h" />
+    <ClInclude Include="base_turret.h" />
+    <ClInclude Include="bomb_launcher_bonus.h" />
+    <ClInclude Include="bonus.h" />
+    <ClInclude Include="boss.h" />
+    <ClInclude Include="character.h" />
+    <ClInclude Include="enemy.h" />
+    <ClInclude Include="entity.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="Testeur.h" />
+    <ClInclude Include="kamikaze.h" />
+    <ClInclude Include="laser_bonus.h" />
+    <ClInclude Include="map.h" />
+    <ClInclude Include="movable.h" />
+    <ClInclude Include="nuke_bonus.h" />
+    <ClInclude Include="player_character.h" />
+    <ClInclude Include="point_bonus.h" />
+    <ClInclude Include="tile.h" />
+    <ClInclude Include="upgraded_turret.h" />
+    <ClInclude Include="vie_bonus.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
