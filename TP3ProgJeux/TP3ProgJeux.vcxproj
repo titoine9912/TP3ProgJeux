@@ -118,12 +118,14 @@
     <ClInclude Include="character.h" />
     <ClInclude Include="enemy.h" />
     <ClInclude Include="entity.h" />
+    <ClInclude Include="file.hpp" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="kamikaze.h" />
     <ClInclude Include="laser_bonus.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="movable.h" />
     <ClInclude Include="nuke_bonus.h" />
+    <ClInclude Include="pile.hpp" />
     <ClInclude Include="player_character.h" />
     <ClInclude Include="point_bonus.h" />
     <ClInclude Include="tile.h" />
