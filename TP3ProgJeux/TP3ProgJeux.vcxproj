@@ -89,7 +89,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="base_enemy.cpp" />
-    <ClCompile Include="base_tourret.cpp" />
+    <ClCompile Include="base_turret.cpp" />
     <ClCompile Include="bomb_launcher_bonus.cpp" />
     <ClCompile Include="bonus.cpp" />
     <ClCompile Include="boss.cpp" />

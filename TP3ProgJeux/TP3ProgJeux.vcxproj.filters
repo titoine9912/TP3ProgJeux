@@ -60,9 +60,6 @@
     <ClCompile Include="base_enemy.cpp">
       <Filter>Fichiers sources\entity\movable\character\enemy</Filter>
     </ClCompile>
-    <ClCompile Include="base_tourret.cpp">
-      <Filter>Fichiers sources\entity\movable\character\enemy</Filter>
-    </ClCompile>
     <ClCompile Include="kamikaze.cpp">
       <Filter>Fichiers sources\entity\movable\character\enemy</Filter>
     </ClCompile>
@@ -104,6 +101,9 @@
     </ClCompile>
     <ClCompile Include="entity.cpp">
       <Filter>Fichiers sources\entity</Filter>
+    </ClCompile>
+    <ClCompile Include="base_turret.cpp">
+      <Filter>Fichiers sources\entity\movable\character\enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
