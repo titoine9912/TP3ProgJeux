@@ -32,7 +32,11 @@ public:
 protected:
 	float speed_;
 	bool is_active_;
+	IntRect** int_rects_movable_;
 
+	//Animation Variables
+	int current_frame_;
+	int current_anim_;
 
 
 
