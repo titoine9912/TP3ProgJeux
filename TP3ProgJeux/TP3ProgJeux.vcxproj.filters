@@ -116,9 +116,6 @@
     <ClInclude Include="vie_bonus.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="tile.h">
-      <Filter>Fichiers de ressources</Filter>
-    </ClInclude>
     <ClInclude Include="bomb_launcher_bonus.h">
       <Filter>Fichiers d%27en-tête\entity\movable\bonus</Filter>
     </ClInclude>
@@ -163,6 +160,15 @@
     </ClInclude>
     <ClInclude Include="player_character.h">
       <Filter>Fichiers d%27en-tête\entity\movable\character</Filter>
+    </ClInclude>
+    <ClInclude Include="tile.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="pile.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="file.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
