@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
-#include "../TP3ProgJeux/Pile.h"
+#include "../TP3ProgJeux/Pile.hpp"
+#include "../TP3ProgJeux/file.hpp"
 #include <vector>
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -10,7 +11,7 @@ namespace UnitTest1
 	{
 	public:
 		
-		TEST_METHOD(TestMethod1)
+		TEST_METHOD(TestMethodPile1)
 		{
 			// TODO: Ici, votre code de test
 			Pile<int> pile;
@@ -18,7 +19,7 @@ namespace UnitTest1
 			Assert::AreEqual(2, pile.Top());			
 		}
 
-		TEST_METHOD(TestMethod2)
+		TEST_METHOD(TestMethodPile2)
 		{
 			// TODO: Ici, votre code de test
 			Pile<int> pile;
@@ -27,7 +28,7 @@ namespace UnitTest1
 			Assert::AreEqual(3, pile.Top());
 		}
 
-		TEST_METHOD(TestMethod3)
+		TEST_METHOD(TestMethodPile3)
 		{
 			// TODO: Ici, votre code de test
 			Pile<int> pile;
@@ -37,7 +38,7 @@ namespace UnitTest1
 			Assert::AreEqual(2, pile.Top());
 		}
 
-		TEST_METHOD(TestMethod4)
+		TEST_METHOD(TestMethodPile4)
 		{
 			// TODO: Ici, votre code de test
 			Pile<int> pile;
@@ -46,7 +47,7 @@ namespace UnitTest1
 			Assert::IsFalse(pile.isEmpty());
 		}
 
-		TEST_METHOD(TestMethod5)
+		TEST_METHOD(TestMethodPile5)
 		{
 			// TODO: Ici, votre code de test
 			Pile<int> pile;
@@ -55,7 +56,7 @@ namespace UnitTest1
 			Assert::IsTrue(pile.isEmpty());
 		}
 
-		TEST_METHOD(TestMethod6)
+		TEST_METHOD(TestMethodPile6)
 		{
 			// TODO: Ici, votre code de test
 			Pile<int> pile;
@@ -64,7 +65,7 @@ namespace UnitTest1
 			Assert::AreEqual(2, (int)pile.Size());
 		}
 
-		TEST_METHOD(TestMethod7)
+		TEST_METHOD(TestMethodPile7)
 		{
 			// TODO: Ici, votre code de test
 			Pile<int> pile;
@@ -74,10 +75,19 @@ namespace UnitTest1
 			Assert::AreEqual(1, (int)pile.Size());
 		}
 
-		TEST_METHOD(TestMethod8)
+		TEST_METHOD(TestMethodPile8)
 		{
 			Pile<int> pile;
 			Assert::AreEqual(0, (int)pile.Size());
+		}
+
+		TEST_METHOD(TestMethodFile1)
+		{
+			File<int> file;
+			file.PushFront(3);
+			file.PushFront(4);
+			Assert::AreEqual(4, file.front());
+			Assert::AreEqual(3, file.back());
 		}
 	};
 }
