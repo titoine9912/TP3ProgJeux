@@ -1,30 +1,3 @@
-﻿  vie_bonus.cpp
-  upgraded_turret.cpp
-  tile.cpp
-  point_bonus.cpp
-  player_character.cpp
-  nuke_bonus.cpp
-  movable.cpp
-  map.cpp
-  Main.cpp
-  laser_bonus.cpp
-  kamikaze.cpp
-  Game.cpp
-  entity.cpp
-  enemy.cpp
-  character.cpp
-  boss.cpp
-  bonus.cpp
-  bomb_launcher_bonus.cpp
-  base_tourret.cpp
-  base_enemy.cpp
-  Génération de code en cours...
-  TP3ProgJeux.vcxproj -> C:\Users\titoine9912\Desktop\TP3Prog\TP3ProgJeux\Debug\TP3ProgJeux.exe
+﻿  TP3ProgJeux.vcxproj -> C:\Users\titoine9912\Desktop\TP3Prog\TP3ProgJeux\Debug\TP3ProgJeux.exe
   TP3ProgJeux.vcxproj -> C:\Users\titoine9912\Desktop\TP3Prog\TP3ProgJeux\Debug\TP3ProgJeux.pdb (Full PDB)
-  C:\LibrairiesProgrammation\SFML-2.4.2\bin\Debug\openal32.dll
-  C:\LibrairiesProgrammation\SFML-2.4.2\bin\Debug\sfml-audio-d-2.dll
-  C:\LibrairiesProgrammation\SFML-2.4.2\bin\Debug\sfml-graphics-d-2.dll
-  C:\LibrairiesProgrammation\SFML-2.4.2\bin\Debug\sfml-network-d-2.dll
-  C:\LibrairiesProgrammation\SFML-2.4.2\bin\Debug\sfml-system-d-2.dll
-  C:\LibrairiesProgrammation\SFML-2.4.2\bin\Debug\sfml-window-d-2.dll
-  6 fichier(s) copié(s)
+  0 fichier(s) copié(s)
