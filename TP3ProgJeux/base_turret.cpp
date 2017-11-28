@@ -1,4 +1,5 @@
 #include  "base_turret.h"
+Texture base_turret::texture_base_turret_;
 
 base_turret::base_turret(Vector2f position, int player_id) : enemy(position,0)
 {
