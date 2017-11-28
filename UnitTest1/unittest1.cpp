@@ -89,7 +89,17 @@ namespace UnitTest1
 			Assert::AreEqual(4, file.front());
 			Assert::AreEqual(3, file.back());
 		}
+		
 		TEST_METHOD(TestMethodFile2)
+		{
+			File<int> file;
+			file.PushFront(3);
+			file.PushBack(4);
+			Assert::AreEqual(3, file.front());
+			Assert::AreEqual(4, file.back());
+		}
+
+		TEST_METHOD(TestMethodFile3)
 		{
 			File<int> file;
 			file.PushFront(3);
