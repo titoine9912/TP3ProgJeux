@@ -1,19 +1,8 @@
-﻿  upgraded_turret.cpp
-  tile.cpp
-  player_character.cpp
-  movable.cpp
-  map.cpp
-  kamikaze.cpp
-  entity.cpp
-  enemy.cpp
-  character.cpp
-  boss.cpp
-  base_turret.cpp
-  base_enemy.cpp
-  Main.cpp
+﻿  map.cpp
   Game.cpp
-c:\users\titoine9912\desktop\tp3prog\tp3progjeux\tp3progjeux\game.cpp(4): error C2248: 'map::map' : impossible d'accéder à private membre déclaré(e) dans la classe 'map'
-  c:\users\titoine9912\desktop\tp3prog\tp3progjeux\tp3progjeux\map.h(11): note: voir la déclaration de 'map::map'
-  c:\users\titoine9912\desktop\tp3prog\tp3progjeux\tp3progjeux\map.h(10): note: voir la déclaration de 'map'
   Génération de code en cours...
-c:\users\titoine9912\desktop\tp3prog\tp3progjeux\tp3progjeux\map.cpp(15): error C4716: 'map::load_map' : doit retourner une valeur
+cl : Ligne de commande warning D9028: échec de la régénération minimale, passage à la génération normale
+  Compilation en cours...
+  Main.cpp
+c:\users\titoine9912\desktop\tp3prog\tp3progjeux\tp3progjeux\main.cpp : fatal error C1041: impossible d'ouvrir la base de données du programme 'C:\Users\titoine9912\Desktop\TP3Prog\TP3ProgJeux\TP3ProgJeux\Debug\vc140.idb' ; si plusieurs CL.EXE écrivent dans le même fichier .PDB, utilisez /FS.
+  Génération de code en cours...
