@@ -1,4 +1,5 @@
 #include "upgraded_turret.h"
+Texture upgraded_turret::texture_upgraded_turret;
 
 upgraded_turret::upgraded_turret(Vector2f position, int player_id) : enemy(position,0)
 {

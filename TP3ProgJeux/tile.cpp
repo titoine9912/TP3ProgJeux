@@ -1,4 +1,5 @@
 #include  "tile.h"
+Texture tile::texture_;
 
 
 tile::tile(Vector2f position, tile_type tile): entity(position)

@@ -1,4 +1,5 @@
 #include "player_character.h"
+Texture player_character::texture_player_character_;
 
 player_character::player_character(Vector2f position, int player_id) :character(position,0), respawn_counter_(120)
 {

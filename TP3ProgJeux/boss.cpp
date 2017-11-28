@@ -1,5 +1,5 @@
 #include "boss.h"
-
+Texture boss::texture_boss_;
 boss::boss(Vector2f position, int player_id) :enemy(position,0)
 {
 	//Aniation Variables

@@ -1,5 +1,5 @@
 #include  "kamikaze.h"
-
+Texture kamikaze::texture_kamikaze_;
 
 kamikaze::kamikaze(Vector2f position, int player_id) : enemy(position,0)
 {

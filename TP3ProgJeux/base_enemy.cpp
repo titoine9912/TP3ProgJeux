@@ -1,5 +1,5 @@
 #include "base_enemy.h"
-
+Texture base_enemy::texture_base_enemy_;
 base_enemy::base_enemy(Vector2f position, int player_id) : enemy(position,0)
 {
 	//Aniation Variables
