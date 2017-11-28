@@ -3,7 +3,7 @@
 #include  <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 using namespace sf;
-#include 
+
 class entity : public sf::Sprite
 {
 public:

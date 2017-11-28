@@ -1,3 +1,19 @@
-﻿  TP3ProgJeux.vcxproj -> C:\Users\titoine9912\Desktop\TP3Prog\TP3ProgJeux\Debug\TP3ProgJeux.exe
-  TP3ProgJeux.vcxproj -> C:\Users\titoine9912\Desktop\TP3Prog\TP3ProgJeux\Debug\TP3ProgJeux.pdb (Full PDB)
-  0 fichier(s) copié(s)
+﻿  upgraded_turret.cpp
+  tile.cpp
+  player_character.cpp
+  movable.cpp
+  map.cpp
+  kamikaze.cpp
+  entity.cpp
+  enemy.cpp
+  character.cpp
+  boss.cpp
+  base_turret.cpp
+  base_enemy.cpp
+  Main.cpp
+  Game.cpp
+c:\users\titoine9912\desktop\tp3prog\tp3progjeux\tp3progjeux\game.cpp(4): error C2248: 'map::map' : impossible d'accéder à private membre déclaré(e) dans la classe 'map'
+  c:\users\titoine9912\desktop\tp3prog\tp3progjeux\tp3progjeux\map.h(11): note: voir la déclaration de 'map::map'
+  c:\users\titoine9912\desktop\tp3prog\tp3progjeux\tp3progjeux\map.h(10): note: voir la déclaration de 'map'
+  Génération de code en cours...
+c:\users\titoine9912\desktop\tp3prog\tp3progjeux\tp3progjeux\map.cpp(15): error C4716: 'map::load_map' : doit retourner une valeur
