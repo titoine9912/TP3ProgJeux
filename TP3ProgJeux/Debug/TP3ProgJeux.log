@@ -1,8 +1,29 @@
-﻿  map.cpp
-  Game.cpp
-  Génération de code en cours...
-cl : Ligne de commande warning D9028: échec de la régénération minimale, passage à la génération normale
-  Compilation en cours...
+﻿  vie_bonus.cpp
+  upgraded_turret.cpp
+  tile.cpp
+  point_bonus.cpp
+  player_character.cpp
+  nuke_bonus.cpp
+  movable.cpp
+  map.cpp
   Main.cpp
-c:\users\titoine9912\desktop\tp3prog\tp3progjeux\tp3progjeux\main.cpp : fatal error C1041: impossible d'ouvrir la base de données du programme 'C:\Users\titoine9912\Desktop\TP3Prog\TP3ProgJeux\TP3ProgJeux\Debug\vc140.idb' ; si plusieurs CL.EXE écrivent dans le même fichier .PDB, utilisez /FS.
+  laser_bonus.cpp
+  kamikaze.cpp
+  Game.cpp
+  entity.cpp
+  enemy.cpp
+  character.cpp
+  boss.cpp
+  bonus.cpp
+  bomb_launcher_bonus.cpp
+  base_turret.cpp
+  base_enemy.cpp
   Génération de code en cours...
+base_enemy.obj : error LNK2001: symbole externe non résolu "private: static class sf::Texture base_enemy::texture_base_enemy_" (?texture_base_enemy_@base_enemy@@0VTexture@sf@@A)
+base_turret.obj : error LNK2001: symbole externe non résolu "private: static class sf::Texture base_turret::texture_base_turret_" (?texture_base_turret_@base_turret@@0VTexture@sf@@A)
+boss.obj : error LNK2001: symbole externe non résolu "private: static class sf::Texture boss::texture_boss_" (?texture_boss_@boss@@0VTexture@sf@@A)
+kamikaze.obj : error LNK2001: symbole externe non résolu "private: static class sf::Texture kamikaze::texture_kamikaze_" (?texture_kamikaze_@kamikaze@@0VTexture@sf@@A)
+player_character.obj : error LNK2001: symbole externe non résolu "private: static class sf::Texture player_character::texture_player_character_" (?texture_player_character_@player_character@@0VTexture@sf@@A)
+tile.obj : error LNK2001: symbole externe non résolu "private: static class sf::Texture tile::texture_" (?texture_@tile@@0VTexture@sf@@A)
+upgraded_turret.obj : error LNK2001: symbole externe non résolu "private: static class sf::Texture upgraded_turret::texture_upgraded_turret" (?texture_upgraded_turret@upgraded_turret@@0VTexture@sf@@A)
+C:\Users\titoine9912\Desktop\TP3Prog\TP3ProgJeux\Debug\TP3ProgJeux.exe : fatal error LNK1120: 7 externes non résolus

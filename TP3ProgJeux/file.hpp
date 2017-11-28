@@ -76,9 +76,9 @@ void File<T>::pop_back()
 template<class T>
 void File<T>::pop_front()
 {
-	T *temp = tab[head];
+	nbElem--;
 	head = tab[head + 1];
-	delete temp;
+	tab[nbElem] = T();
 }
 
 template<class T>
