@@ -5,4 +5,5 @@
 /*.dll/*.suo
 /TP3ProgJeux.VC.db
 /.vs
+/TP3ProgJeux/Debug/*.obj
 /x64
