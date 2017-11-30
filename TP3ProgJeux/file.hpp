@@ -48,9 +48,10 @@ void File<T>::PushBack(const T& valeur)
 {
 	if (nbElem == cap)
 		reserve(2 * cap + 1);
-
-	tab[nbElem] = valeur;
+	
 	nbElem++;
+	tab[(head + nbElem-1) % cap] = valeur;
+	
 }
 
 template<class T>
@@ -60,7 +61,11 @@ void File<T>::PushFront(const T& valeur)
 	{
 		reserve(2 * cap + 1);
 	}
-	head = cap - 1;
+	if (head <= 0)
+	{
+		head = cap;
+	}
+	head = head - 1;
 	nbElem++;	
 	tab[head] = valeur;
 }
@@ -77,8 +82,11 @@ template<class T>
 void File<T>::pop_front()
 {
 	nbElem--;
-	head = tab[head + 1];
-	tab[nbElem] = T();
+	tab[head] = T();
+	head = head%nbElem;
+	//head = tab[head + 1];
+
+	
 }
 
 template<class T>
