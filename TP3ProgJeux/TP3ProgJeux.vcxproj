@@ -88,6 +88,15 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\TP2\TP2_Prog_Nb_2\9_1_TP2_SideScrollingFighter\9_1_TP2_SideScrollingFighter\button.cpp" />
+    <ClCompile Include="..\..\TP2\TP2_Prog_Nb_2\9_1_TP2_SideScrollingFighter\9_1_TP2_SideScrollingFighter\defeat_screen.cpp" />
+    <ClCompile Include="..\..\TP2\TP2_Prog_Nb_2\9_1_TP2_SideScrollingFighter\9_1_TP2_SideScrollingFighter\main_menu.cpp" />
+    <ClCompile Include="..\..\TP2\TP2_Prog_Nb_2\9_1_TP2_SideScrollingFighter\9_1_TP2_SideScrollingFighter\menu.cpp" />
+    <ClCompile Include="..\..\TP2\TP2_Prog_Nb_2\9_1_TP2_SideScrollingFighter\9_1_TP2_SideScrollingFighter\menu_controller.cpp" />
+    <ClCompile Include="..\..\TP2\TP2_Prog_Nb_2\9_1_TP2_SideScrollingFighter\9_1_TP2_SideScrollingFighter\menu_factory.cpp" />
+    <ClCompile Include="..\..\TP2\TP2_Prog_Nb_2\9_1_TP2_SideScrollingFighter\9_1_TP2_SideScrollingFighter\pause_menu.cpp" />
+    <ClCompile Include="..\..\TP2\TP2_Prog_Nb_2\9_1_TP2_SideScrollingFighter\9_1_TP2_SideScrollingFighter\text.cpp" />
+    <ClCompile Include="..\..\TP2\TP2_Prog_Nb_2\9_1_TP2_SideScrollingFighter\9_1_TP2_SideScrollingFighter\victory_screen.cpp" />
     <ClCompile Include="base_enemy.cpp" />
     <ClCompile Include="base_turret.cpp" />
     <ClCompile Include="bomb_launcher_bonus.cpp" />
@@ -110,6 +119,16 @@
     <ClCompile Include="vie_bonus.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\TP2\TP2_Programmation_SideScroller\9_1_TP2_SideScrollingFighter\9_1_TP2_SideScrollingFighter\menu.h" />
+    <ClInclude Include="..\..\TP2\TP2_Prog_Nb_2\9_1_TP2_SideScrollingFighter\9_1_TP2_SideScrollingFighter\button.h" />
+    <ClInclude Include="..\..\TP2\TP2_Prog_Nb_2\9_1_TP2_SideScrollingFighter\9_1_TP2_SideScrollingFighter\defeat_screen.h" />
+    <ClInclude Include="..\..\TP2\TP2_Prog_Nb_2\9_1_TP2_SideScrollingFighter\9_1_TP2_SideScrollingFighter\main_menu.h" />
+    <ClInclude Include="..\..\TP2\TP2_Prog_Nb_2\9_1_TP2_SideScrollingFighter\9_1_TP2_SideScrollingFighter\menu.h" />
+    <ClInclude Include="..\..\TP2\TP2_Prog_Nb_2\9_1_TP2_SideScrollingFighter\9_1_TP2_SideScrollingFighter\menu_controller.h" />
+    <ClInclude Include="..\..\TP2\TP2_Prog_Nb_2\9_1_TP2_SideScrollingFighter\9_1_TP2_SideScrollingFighter\menu_factory.h" />
+    <ClInclude Include="..\..\TP2\TP2_Prog_Nb_2\9_1_TP2_SideScrollingFighter\9_1_TP2_SideScrollingFighter\pause_menu.h" />
+    <ClInclude Include="..\..\TP2\TP2_Prog_Nb_2\9_1_TP2_SideScrollingFighter\9_1_TP2_SideScrollingFighter\text.h" />
+    <ClInclude Include="..\..\TP2\TP2_Prog_Nb_2\9_1_TP2_SideScrollingFighter\9_1_TP2_SideScrollingFighter\victory_screen.h" />
     <ClInclude Include="base_enemy.h" />
     <ClInclude Include="base_turret.h" />
     <ClInclude Include="bomb_launcher_bonus.h" />

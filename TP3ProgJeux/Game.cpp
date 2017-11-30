@@ -1,4 +1,9 @@
 #include "Game.h"
+#include "tile.h"
+#include "text.h"
+
+
+
 
 Game::Game()
 {
@@ -37,6 +42,36 @@ int Game::run()
 
 bool Game::init()
 {
+	if(!tile::load_textures("Sprites\\.png"))
+	{
+		
+	}
+	if(!base_enemy::load_textures("Sprites\\Paranoid.png",base_enemy::texture_base_enemy_))
+	{
+		
+	}
+	if (!base_turret::load_textures("Sprites\\.png", base_turret::texture_base_enemy_))
+	{
+
+	}
+	if (!upgraded_turret::load_textures("Sprites\\.png", upgraded_turret::texture_base_enemy_))
+	{
+
+	}
+	if (!boss::load_textures("Sprites\\.png", boss::texture_base_enemy_))
+	{
+
+	}
+	if (!kamikaze::load_textures("Sprites\\Dove.png", kamikaze::texture_base_enemy_))
+	{
+
+	}
+	if (!player_character::load_textures("Sprites\\Lightning.png", player_character::texture_base_enemy_))
+	{
+
+	}
+
+
 	return true;
 }
 
