@@ -1,10 +1,16 @@
 #include "Game.h"
+#include "tile.h"
+#include "text.h"
 
-Game::Game()
+
+
+
+Game::Game() : scrolling_background_(LARGEUR, HAUTEUR)
 {
+
 	//On place dans le contructeur ce qui permet à la game elle-même de fonctionner
 
-	mainWin.create(VideoMode(LARGEUR, HAUTEUR, 32), "Le titre de mon jeu");  // , Style::Titlebar); / , Style::FullScreen);
+	mainWin.create(VideoMode(LARGEUR, HAUTEUR, 32), "Sidescroller Shooter");  // , Style::Titlebar); / , Style::FullScreen);
 	view = mainWin.getDefaultView();
 
 	//Synchonisation coordonnée à l'écran!  Normalement 60 frames par secondes. À faire absolument
@@ -37,6 +43,42 @@ int Game::run()
 
 bool Game::init()
 {
+	/*
+	if(!tile::load_textures("Sprites\\.png"))
+	{
+		
+	}
+	if(!base_enemy::load_textures("Sprites\\Paranoid.png",base_enemy::texture_base_enemy_))
+	{
+		
+	}
+	if (!base_turret::load_textures("Sprites\\.png", base_turret::texture_base_turret_))
+	{
+
+	}
+	if (!upgraded_turret::load_textures("Sprites\\.png", upgraded_turret::texture_upgraded_turret))
+	{
+
+	}
+	if (!boss::load_textures("Sprites\\.png", boss::texture_boss_))
+	{
+
+	}
+	if (!kamikaze::load_textures("Sprites\\Dove.png", kamikaze::texture_kamikaze_))
+	{
+
+	}
+	if (!player_character::load_textures("Sprites\\Lightning.png", player_character::texture_player_character_))
+	{
+
+	}
+	*/
+	if (!scrolling_background::load_textures("Sprites\\space_background\\back_sharp.jpg", "Sprites\\space_background\\asteroids.png", "Sprites\\space_background\\double_planet.png", "Sprites\\space_background\\plnette.png"))
+	{
+		return false;
+	}
+
+	scrolling_background_.set_texture();
 	return true;
 }
 
@@ -55,13 +97,16 @@ void Game::getInputs()
 
 void Game::update()
 {
-
+	scrolling_background_.move(0);
 }
 
 void Game::draw()
 {
 	//Toujours important d'effacer l'écran précédent
 	mainWin.clear();
+	
+	scrolling_background_.draw(mainWin);
 
 	mainWin.display();
+
 }
