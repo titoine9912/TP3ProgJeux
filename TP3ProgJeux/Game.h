@@ -59,7 +59,8 @@ private:
 	std::vector<base_enemy> base_enemies_;
 	std::vector<boss> bosses_;
 	std::vector<kamikaze> kamikazes_;
-	std::vector<player_character> player_characters_;
+
+	player_character player_character_;
 	scrolling_background scrolling_background_;
 
 

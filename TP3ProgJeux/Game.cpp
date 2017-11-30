@@ -5,7 +5,7 @@
 
 
 
-Game::Game() : scrolling_background_(LARGEUR, HAUTEUR)
+Game::Game() : scrolling_background_(LARGEUR, HAUTEUR), player_character_(Vector2f(32,32) ,1)
 {
 
 	//On place dans le contructeur ce qui permet à la game elle-même de fonctionner
@@ -68,16 +68,20 @@ bool Game::init()
 	{
 
 	}
-	if (!player_character::load_textures("Sprites\\Lightning.png", player_character::texture_player_character_))
-	{
-
-	}
 	*/
-	if (!scrolling_background::load_textures("Sprites\\space_background\\back_sharp.jpg", "Sprites\\space_background\\asteroids.png", "Sprites\\space_background\\double_planet.png", "Sprites\\space_background\\plnette.png"))
+
+	if (!player_character::load_textures("Sprites\\Lightning.png", player_character::texture_player_character_))
 	{
 		return false;
 	}
 
+	if (!scrolling_background::load_textures("Sprites\\space_background\\back_sharp.jpg", "Sprites\\space_background\\plnette.png", "Sprites\\space_background\\double_planet.png", "Sprites\\space_background\\asteroids.png"))
+	{
+		return false;
+	}
+
+	player_character_.visual_adjustments();
+	player_character_.set_texture();
 	scrolling_background_.set_texture();
 	return true;
 }
@@ -98,14 +102,17 @@ void Game::getInputs()
 void Game::update()
 {
 	scrolling_background_.move(0);
+	player_character_.update();
 }
 
 void Game::draw()
 {
 	//Toujours important d'effacer l'écran précédent
 	mainWin.clear();
-	
+
+
 	scrolling_background_.draw(mainWin);
+	player_character_.draw(mainWin);
 
 	mainWin.display();
 

@@ -7,11 +7,19 @@ sf::Texture scrolling_background::layer4_texture_;
 
 scrolling_background::scrolling_background(const int largeur, const int hauteur) : SCREEN_WIDTH_(largeur), SCREEN_HEIGHT_(hauteur)
 {
-	speed_layer1_ = 0.05f;
-	speed_layer2_ = 0.8f;
-	speed_layer3_ = 0.2f;
-	speed_layer4_ = 0.02f;
 	
+	speed_layer1_ = 0.02f;
+	speed_layer2_ = 0.04f;
+	speed_layer3_ = 0.5f;
+	speed_layer4_ = 10.0f;
+	
+
+	/*
+	speed_layer1_ = 10;
+	speed_layer2_ = 10;
+	speed_layer3_ = 10;
+	speed_layer4_ = 10;
+	*/
 
 }
 
@@ -95,20 +103,31 @@ void scrolling_background::move(int player_speed)
 
 void scrolling_background::draw(sf::RenderWindow& main_win)
 {
-	for (int i = 0; i < 2; i++)
-	{
-		layer1_sprite_.setPosition(positions_layer1_[i]);
+
+		layer1_sprite_.setPosition(positions_layer1_[0]);
 		main_win.draw(layer1_sprite_);
 
-		layer2_sprite_.setPosition(positions_layer2_[i]);
+		layer1_sprite_.setPosition(positions_layer1_[1]);
+		main_win.draw(layer1_sprite_);
+
+		layer2_sprite_.setPosition(positions_layer2_[0]);
 		main_win.draw(layer2_sprite_);
 
-		layer3_sprite_.setPosition(positions_layer3_[i]);
+		layer2_sprite_.setPosition(positions_layer2_[1]);
+		main_win.draw(layer2_sprite_);
+
+		layer3_sprite_.setPosition(positions_layer3_[0]);
 		main_win.draw(layer3_sprite_);
 
-		layer4_sprite_.setPosition(positions_layer4_[i]);
+		layer3_sprite_.setPosition(positions_layer3_[1]);
+		main_win.draw(layer3_sprite_);
+
+		layer4_sprite_.setPosition(positions_layer4_[0]);
 		main_win.draw(layer4_sprite_);
-	}
+
+		layer4_sprite_.setPosition(positions_layer4_[1]);
+		main_win.draw(layer4_sprite_);
+
 }
 
 bool scrolling_background::load_textures(const char texture_path_1[], const char texture_path_2[], const char texture_path_3[], const char texture_path_4[])
