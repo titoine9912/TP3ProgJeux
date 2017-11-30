@@ -6,31 +6,35 @@ class scrolling_background
 public:
 		scrolling_background(const int largeur, const int hauteur);
 
-		static bool load_textures(const char texture_path[]);
+		static bool load_textures(const char texture_path_1[], const char texture_path_2[] , const char texture_path_3[] , const char texture_path_4[]);
 		void set_texture();
-		void draw(sf::RenderWindow main_win);
+		void move( int player_speed);
+		void draw(sf::RenderWindow& main_win);
 private:
-	const int SCREEN_WIDTH;
-	const int SCREEN_HEIGHT;
+	const int SCREEN_WIDTH_;
+	const int SCREEN_HEIGHT_;
 
-	sf::Sprite layer1;
-	sf::Texture layer1;
+	sf::Sprite layer1_sprite_;
+	static sf::Texture layer1_texture_;
 
-	sf::Sprite layer2;
-	sf::Texture layer2;
+	sf::Sprite layer2_sprite_;
+	static sf::Texture layer2_texture_;
 
-	sf::Sprite layer3;
-	sf::Texture layer3;
+	sf::Sprite layer3_sprite_;
+	static sf::Texture layer3_texture_;
 
-	sf::Sprite layer4;
-	sf::Texture layer4;
+	sf::Sprite layer4_sprite_;
+	static sf::Texture layer4_texture_;
 
-	sf::Vector2f position[8];
+	sf::Vector2f positions_layer1_[2];
+	sf::Vector2f positions_layer2_[2];
+	sf::Vector2f positions_layer3_[2];
+	sf::Vector2f positions_layer4_[2];
 
-	int speed_layer1;
-	int speed_layer2;
-	int speed_layer3;
-	int speed_layer4;
+	int speed_layer1_;
+	int speed_layer2_;
+	int speed_layer3_;
+	int speed_layer4_;
 
 
 
