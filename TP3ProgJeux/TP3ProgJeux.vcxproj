@@ -135,6 +135,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="kamikaze.h" />
     <ClInclude Include="laser_bonus.h" />
+    <ClInclude Include="liste.hpp" />
     <ClInclude Include="main_menu.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="menu.h" />
