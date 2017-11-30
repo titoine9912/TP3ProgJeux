@@ -117,8 +117,14 @@ namespace UnitTest1
 			file.PushFront(2);
 			file.PushBack(4);
 			file.pop_front();
+			file.pop_front();
 			Assert::AreEqual(3, file.front());
-			Assert::AreEqual(2, (int)file.Size());
+			Assert::AreEqual(1, (int)file.Size());
+		}
+
+		TEST_METHOD(TestMethodeFile5)
+		{
+
 		}
 
 	};
