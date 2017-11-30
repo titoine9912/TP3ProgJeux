@@ -9,6 +9,7 @@
 #include "upgraded_turret.h"
 #include "kamikaze.h"
 #include "boss.h"
+#include "scrolling_background.h"
 
 
 
@@ -51,7 +52,7 @@ private:
 	int current_map_;
 	std::string maps_[3];
 
-	//Entity vectors
+	//Entity vectors and elements
 	std::vector<tile> tiles_;
 	std::vector<base_turret> base_turrets_;
 	std::vector<upgraded_turret> upgraded_turrets_ ;
@@ -59,6 +60,8 @@ private:
 	std::vector<boss> bosses_;
 	std::vector<kamikaze> kamikazes_;
 	std::vector<player_character> player_characters_;
+	scrolling_background scrolling_background_;
+
 
 
 	RenderWindow mainWin;

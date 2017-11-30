@@ -3,6 +3,7 @@
 
 main_menu::main_menu()
 {
+	/*
 	title_ = text("Main Menu", sf::Vector2f(0, 0), text::title);
 	title_.set_position(sf::Vector2f(game::view_width / 2 - title_.get_text_size() / 2, game::view_height / 2 - 60));
 
@@ -20,6 +21,7 @@ main_menu::main_menu()
 
 	exit_ = button("Exit", sf::Vector2f(0, 0), text::normal);
 	exit_.set_position(sf::Vector2f(game::view_width / 2 - exit_.get_text_size() / 2, game::view_height / 2 + 150));
+	*/
 }
 
 void main_menu::draw(sf::RenderWindow& main_win)

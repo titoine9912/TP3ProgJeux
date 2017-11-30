@@ -7,9 +7,9 @@ public:
 	kamikaze(Vector2f position, int player_id);
 	void update();
 	void set_texture();
+	static Texture texture_kamikaze_;
 
 private:
 	Sprite kamikaze_sprite_;
-	static Texture texture_kamikaze_;
 
 };

@@ -1,5 +1,5 @@
 #include "button.h"
-#include "input_manager.h"
+//#include "input_manager.h"
 
 
 button::button()
@@ -17,6 +17,7 @@ button::button(std::string text, sf::Vector2f position, style_text style) : text
 
 bool button::update()
 {
+	/*
 	// Evaluate if mouse is hovering over button
 	if (button_hitbox_.contains(sf::Vector2f(input_manager::get_input_manager()->get_mouse_position())))
 	{
@@ -31,7 +32,9 @@ bool button::update()
 	{
 		text_.setFillColor(color_);
 	}
+	*/
 	return false;
+	
 }
 
 void button::set_position(sf::Vector2f new_position)

@@ -31,10 +31,10 @@ private:
 	sf::Vector2f positions_layer3_[2];
 	sf::Vector2f positions_layer4_[2];
 
-	int speed_layer1_;
-	int speed_layer2_;
-	int speed_layer3_;
-	int speed_layer4_;
+	float speed_layer1_;
+	float speed_layer2_;
+	float speed_layer3_;
+	float speed_layer4_;
 
 
 

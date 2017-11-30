@@ -7,10 +7,12 @@ sf::Texture scrolling_background::layer4_texture_;
 
 scrolling_background::scrolling_background(const int largeur, const int hauteur) : SCREEN_WIDTH_(largeur), SCREEN_HEIGHT_(hauteur)
 {
-	speed_layer1_ = 1;
-	speed_layer2_ = 10;
-	speed_layer3_ = 20;
-	speed_layer4_ = 30;
+	speed_layer1_ = 0.05f;
+	speed_layer2_ = 0.8f;
+	speed_layer3_ = 0.2f;
+	speed_layer4_ = 0.02f;
+	
+
 }
 
 void scrolling_background::set_texture()

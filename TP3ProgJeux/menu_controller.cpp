@@ -1,11 +1,11 @@
 #include "menu_controller.h"
 #include "menu.h"
-#include "account_controller.h"
 
 menu_controller *menu_controller::menu_controller_;
 
 menu_controller::menu_controller()
 {
+	/*
 	current_game_state_ = game::get_current_game_state();
 	if (current_game_state_ == game::game_state::main_menu)
 	{
@@ -24,6 +24,7 @@ menu_controller::menu_controller()
 		current_menu_type_ = menu_factory::menu_factory::defeat_screen_e;
 	}
 	current_menu_ = menu_factory::menu_factory::create_menu(current_menu_type_);
+	*/
 }
 
 menu_controller* menu_controller::get_menu_controller()
@@ -42,6 +43,7 @@ void menu_controller::release()
 	}
 }
 
+/*
 game::game_state menu_controller::update()
 {
 	const auto new_menu_type = current_menu_->update();
@@ -115,6 +117,7 @@ game::game_state menu_controller::update()
 	}
 	return current_game_state_;
 }
+*/
 
 void menu_controller::draw(sf::RenderWindow & main_win) const
 {
