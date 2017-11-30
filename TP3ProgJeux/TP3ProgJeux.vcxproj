@@ -105,6 +105,7 @@
     <ClCompile Include="nuke_bonus.cpp" />
     <ClCompile Include="player_character.cpp" />
     <ClCompile Include="point_bonus.cpp" />
+    <ClCompile Include="scrolling_background.cpp" />
     <ClCompile Include="tile.cpp" />
     <ClCompile Include="upgraded_turret.cpp" />
     <ClCompile Include="vie_bonus.cpp" />
@@ -128,6 +129,7 @@
     <ClInclude Include="pile.hpp" />
     <ClInclude Include="player_character.h" />
     <ClInclude Include="point_bonus.h" />
+    <ClInclude Include="scrolling_background.h" />
     <ClInclude Include="tile.h" />
     <ClInclude Include="upgraded_turret.h" />
     <ClInclude Include="vie_bonus.h" />

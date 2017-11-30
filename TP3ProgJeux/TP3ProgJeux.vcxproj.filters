@@ -105,6 +105,9 @@
     <ClCompile Include="base_turret.cpp">
       <Filter>Fichiers sources\entity\movable\character\enemy</Filter>
     </ClCompile>
+    <ClCompile Include="scrolling_background.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -168,6 +171,9 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="file.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="scrolling_background.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
