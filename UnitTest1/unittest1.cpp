@@ -118,14 +118,69 @@ namespace UnitTest1
 			file.PushBack(4);
 			file.pop_front();
 			file.pop_front();
-			Assert::AreEqual(3, file.front());
+			Assert::AreEqual(4, file.front());
 			Assert::AreEqual(1, (int)file.Size());
 		}
 
 		TEST_METHOD(TestMethodeFile5)
 		{
-
+			File<int> file;
+			file.PushFront(3);
+			file.PushFront(2);
+			file.PushFront(1);
+			file.PushFront(0);
+			file.PushBack(4);
+			file.pop_front();
+			file.pop_back();
+			Assert::AreEqual(1, file.front());
+			Assert::AreEqual(3, file.back());
+			Assert::AreEqual(3, (int)file.Size());
 		}
 
+		TEST_METHOD(TestMethodeFile6)
+		{
+			File<int> file;
+			file.PushFront(4);
+			file.PushFront(3);
+			file.PushBack(5);
+			file.PushBack(6);
+			Assert::AreEqual(3, file.at(0));
+			Assert::AreEqual(4, file.at(1));
+			Assert::AreEqual(5, file.at(2));
+			Assert::AreEqual(6, file.at(3));
+		}
+
+		TEST_METHOD(TestMethodeFile7)
+		{
+			File<int> file;
+			file.PushFront(2);
+			file.PushFront(3);
+			file.PushBack(1);
+			file.pop_front();
+			file.pop_front();
+			file.pop_back();
+			Assert::IsTrue(file.isEmpty());
+		}
+
+		TEST_METHOD(TestMethodeFile8)
+		{
+			File<int> file;
+			file.PushFront(2);
+			file.PushFront(3);
+			file.PushBack(1);
+			file.pop_front();
+			file.pop_front();
+			Assert::IsFalse(file.isEmpty());
+		}
+
+		TEST_METHOD(TestMethodeFile9)
+		{
+			File<int> file;
+			file.PushFront(2);
+			file.PushFront(3);
+			file.PushBack(1);
+			file.clear();
+			Assert::IsTrue(file.isEmpty());
+		}
 	};
 }
