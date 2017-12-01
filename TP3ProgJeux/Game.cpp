@@ -1,9 +1,9 @@
 #include "Game.h"
 #include "tile.h"
 #include "text.h"
+#include "input_manager.h"
 
-
-
+Game::game_state Game::current_game_state_;
 
 Game::Game() : scrolling_background_(LARGEUR, HAUTEUR), player_character_(Vector2f(32,32) ,1)
 {
@@ -11,7 +11,8 @@ Game::Game() : scrolling_background_(LARGEUR, HAUTEUR), player_character_(Vector
 	//On place dans le contructeur ce qui permet à la game elle-même de fonctionner
 
 	mainWin.create(VideoMode(LARGEUR, HAUTEUR, 32), "Sidescroller Shooter");  // , Style::Titlebar); / , Style::FullScreen);
-	view = mainWin.getDefaultView();
+	view_game_ = mainWin.getDefaultView();
+	view_menu_ = mainWin.getDefaultView();
 
 	//Synchonisation coordonnée à l'écran!  Normalement 60 frames par secondes. À faire absolument
 	mainWin.setVerticalSyncEnabled(true);
@@ -79,6 +80,11 @@ bool Game::init()
 	{
 		return false;
 	}
+	view_current_center_ = Vector2f(LARGEUR/2, HAUTEUR/2);
+	view_game_.setCenter(view_current_center_);
+	view_x_pos_last_frame_ = view_current_center_.x;
+	view_menu_.setCenter(Vector2f(LARGEUR / 2, HAUTEUR / 2));
+	mainWin.setView(view_game_);
 
 	player_character_.visual_adjustments();
 	player_character_.set_texture();
@@ -91,6 +97,7 @@ void Game::getInputs()
 	//On passe l'événement en référence et celui-ci est chargé du dernier événement reçu!
 	while (mainWin.pollEvent(event))
 	{
+		input_manager::get_input_manager()->update(mainWin, event);
 		//x sur la fenêtre
 		if (event.type == Event::Closed)
 		{
@@ -101,6 +108,15 @@ void Game::getInputs()
 
 void Game::update()
 {
+	//Pauses the game
+	if (current_game_state_ == singleplayer && input_manager::get_input_manager()->get_esc_key())
+	{
+		current_game_state_ = paused;
+	}
+
+	player_character_.move(view_game_);
+	view_game_.move(1,0);
+	scrolling_background_.update(view_game_);
 	scrolling_background_.move(0);
 	player_character_.update();
 }
@@ -109,6 +125,7 @@ void Game::draw()
 {
 	//Toujours important d'effacer l'écran précédent
 	mainWin.clear();
+	mainWin.setView(view_game_);
 
 
 	scrolling_background_.draw(mainWin);
@@ -116,4 +133,9 @@ void Game::draw()
 
 	mainWin.display();
 
+}
+
+Game::game_state Game::get_current_game_state()
+{
+	return current_game_state_;
 }

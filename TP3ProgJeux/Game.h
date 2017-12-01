@@ -35,6 +35,8 @@ public:
 	static const int grid_size = 32;
 	static const int LARGEUR = 1280;
 	static const int HAUTEUR = 720;
+
+	static game_state get_current_game_state();
 private:
 
 	bool init();
@@ -62,10 +64,13 @@ private:
 
 	player_character player_character_;
 	scrolling_background scrolling_background_;
-
-
+	
+	static game_state current_game_state_;
+	View view_game_;
+	View view_menu_;
+	Vector2f view_current_center_;
+	int view_x_pos_last_frame_;
 
 	RenderWindow mainWin;
-	View view;
 	Event event;
 };

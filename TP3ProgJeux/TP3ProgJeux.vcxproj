@@ -99,6 +99,7 @@
     <ClCompile Include="enemy.cpp" />
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="input_manager.cpp" />
     <ClCompile Include="kamikaze.cpp" />
     <ClCompile Include="laser_bonus.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -133,6 +134,7 @@
     <ClInclude Include="entity.h" />
     <ClInclude Include="file.hpp" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="input_manager.h" />
     <ClInclude Include="kamikaze.h" />
     <ClInclude Include="laser_bonus.h" />
     <ClInclude Include="liste.hpp" />

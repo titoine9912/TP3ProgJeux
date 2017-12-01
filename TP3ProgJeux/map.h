@@ -13,8 +13,8 @@ public:
 	bool load_map(const char scene_path[], std::vector<boss>& bosses, std::vector<base_enemy> base_enemies,
 		std::vector<upgraded_turret> upgraded_turrets, std::vector<base_turret> base_turrets, std::vector<kamikaze> kamikazes);
 
-	static const int scene_width = 180;
-	static const int scene_height = 33;
+	static const int scene_width = 360;
+	static const int scene_height = 23;
 
 private:
 	int map_[scene_height][scene_width];
