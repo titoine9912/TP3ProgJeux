@@ -1,6 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
+//Code heavily inspired from what we saw in class
+
 class scrolling_background
 {
 public:
@@ -9,6 +11,7 @@ public:
 		static bool load_textures(const char texture_path_1[], const char texture_path_2[] , const char texture_path_3[] , const char texture_path_4[]);
 		void set_texture();
 		void move( int player_speed);
+		void update(sf::View game_view);
 		void draw(sf::RenderWindow& main_win);
 private:
 	const int SCREEN_WIDTH_;

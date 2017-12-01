@@ -30,6 +30,7 @@ public:
 
 
 protected:
+	float base_speed_;
 	float speed_;
 	bool is_active_;
 	IntRect** int_rects_movable_;
