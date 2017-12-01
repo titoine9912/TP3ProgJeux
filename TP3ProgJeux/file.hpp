@@ -83,7 +83,8 @@ void File<T>::pop_front()
 {
 	nbElem--;
 	tab[head] = T();
-	head = head%nbElem;
+	head = (head + 1)%cap;
+
 	//head = tab[head + 1];
 
 	
@@ -150,7 +151,7 @@ void File<T>::reserve(size_type new_cap)
 		size_type i = 0;
 
 		for (; i < nbElem; ++i)
-			tab[i] = tmp[head+i%cap];
+			tab[i] = tmp[(head+i)%cap];
 
 		for (; i < new_cap; ++i)
 			tab[i] = T();
