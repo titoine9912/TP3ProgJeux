@@ -18,6 +18,7 @@ player_character::player_character(Vector2f position, int player_id) :character(
 	//Character state variables
 	is_respawning_ = false;
 	respawn_delay_ = 120;
+	base_speed_applied_ = false;
 }
 
 
@@ -50,7 +51,7 @@ void player_character::set_texture()
 
 void player_character::move(View view)
 {
-	bool base_speed_applied_ = false;
+	base_speed_applied_ = false;
 	if(input_manager::get_input_manager()->get_d() ==true || input_manager::get_input_manager()->get_a()==true || input_manager::get_input_manager()->get_s()==true || input_manager::get_input_manager()->get_w()==true)
 	{
 		
@@ -114,7 +115,7 @@ void player_character::move(View view)
 			 }
 		}
 	}
-	else if (input_manager::get_input_manager()->get_d()== false)
+	else if (input_manager::get_input_manager()->get_d() == false && base_speed_applied_ == false)
 	{
 		player_character_sprite_.setPosition(Vector2f(player_character_sprite_.getPosition().x + base_speed_, player_character_sprite_.getPosition().y));
 	}	
@@ -165,3 +166,10 @@ float player_character::get_base_speed()
 {
 	return base_speed_;
 }
+
+
+void player_character::set_base_speed_applied(bool base_speed_applied)
+{
+	base_speed_applied_ = base_speed_applied;
+}
+

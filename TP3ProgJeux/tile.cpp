@@ -39,6 +39,7 @@ void tile::visual_adjustments()
 
 void tile::set_texture(int* map, int scene_width, int scene_height)
 {
+	setTexture(texture_);
 }
 
 
@@ -46,3 +47,4 @@ tile_type tile::get_tile_type() const
 {
 	return tile_type_;
 }
+

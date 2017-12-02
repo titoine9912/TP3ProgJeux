@@ -13,9 +13,12 @@ public:
 	 void draw(sf::RenderWindow& main_win);
 	 float get_speed();
 	 float get_base_speed();
+	 void set_base_speed_applied(bool base_speed_applied);
+	
 
 
 private:
+	bool base_speed_applied_;
 	int size_texture;
 	int anim_delay;
 	int anim_delay_counter;

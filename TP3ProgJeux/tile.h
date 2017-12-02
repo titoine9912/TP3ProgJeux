@@ -36,6 +36,8 @@ public :
 	/// </summary>
 	/// <returns>Le type de tuile.</returns>
 	tile_type get_tile_type() const;
+	
+
 
 private:
 	static Texture texture_;

@@ -35,7 +35,6 @@ public:
 	static const int grid_size = 32;
 	static const int LARGEUR = 1280;
 	static const int HAUTEUR = 720;
-
 	static game_state get_current_game_state();
 private:
 
