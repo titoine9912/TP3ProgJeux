@@ -8,8 +8,46 @@ map::map()
 {
 }
 
-bool map::load_map(const char scene_path[], std::vector<boss>& bosses, std::vector<base_enemy> base_enemies,
-	std::vector<upgraded_turret> upgraded_turrets, std::vector<base_turret> base_turrets, std::vector<kamikaze> kamikazes)
+
+bool map::load_map(const char scene_path[], std::vector<tile>& tiles)
 {
-	return true;
+	//Load map
+	std::ifstream ifs(scene_path);
+	if(ifs.is_open())
+	{
+		for (size_t y = 0; y < scene_height; ++y)
+		{
+			std::string line;
+			if (getline(ifs, line))
+			{
+				for (size_t x = 0; x < scene_width; ++x)
+				{
+					map_[y][x] = line[x] - '0';
+				}
+			}
+		}
+	}
+	else
+	{
+		return false;
+	}
+
+	//Load scene objects
+	for (size_t x = 0; x < scene_width; x++)
+	{
+		for (size_t y = 0; y < scene_height; y++)
+		{
+			if (map_[y][x] == 1)
+			{
+				tiles.push_back(tile(Vector2f(x * Game::grid_size, y * Game::grid_size), empty));
+				tiles.back().visual_adjustments();
+				tiles.back().set_texture(*map_, scene_width, scene_height);
+			}
+		}
+	}
+}
+
+Vector2f map::get_map_size()
+{
+	return Vector2f(scene_width, scene_height);
 }
