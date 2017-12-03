@@ -139,29 +139,89 @@ Box* Liste<T>::insert(Box* iterator, const T& value)
 	iterator->previous->next = iterator->previous = new Box(value, iterator->previous->suivant, iterator->previous);
 	return iterator->previous;
 }
-//template<class T>
-//inline void Liste<T>::Insert(Box* iterator, T value)
-//{
-//	if (iterator->next != nullptr && iterator->previous == nullptr)
-//	{
-//		iterator = new Box(value, iterator->next);
-//	}
 
-//	else if (iterator->next != nullptr)
-//	{
-//		iterator = new Box(value, iterator->previous,iterator->next);
-//		//iterator = iterator->next;
-//	}
-//	else if (iterator->next == nullptr)
-//	{
-//		iterator = new Box(value, iterator->previous);
-//		last = iterator->next;
-//	}
-//	else
-//	{
-//		iterator = last = first = new Box(value, nullptr);
-//	}
-
-//	sz++;
+template<class T>
+Box* Liste<T>::erase(Box* iterator)
+{
 	
-//}
+}
+
+template<class T>
+Liste<T>::iterator Liste<T>::Insert(iterator pos, const T& value)
+{
+	insert(pos, value);
+}
+
+template<class T>
+Liste<T>::iterator Liste<T>::erase(iterator pos)
+{
+
+}
+
+template<class T>
+void Liste<T>::push_back(const T& value)
+{
+	insert(apres, value);
+}
+
+template<class T>
+void Liste<T>::pop_back()
+{
+
+}
+
+template<class T>
+void Liste<T>::push_front(const T& value)
+{
+	insert(avant, value);
+}
+
+template<class T>
+void Liste<T>::pop_front()
+{
+
+}
+
+template<class T>
+T& Liste<T>::back()
+{
+	return apres;
+}
+
+template<class T>
+T& Liste<T>::front()
+{
+	return avant;
+}
+
+template<class T>
+void Liste<T>::clear()
+{
+	avant = nullptr;
+	apres = nullptr;
+	sz = 0;
+}
+
+template<class T>
+size_t Liste<T>::size() const
+{
+	return sz;
+}
+
+template<class T>
+bool Liste<T>::empty() const
+{
+	return sz == 0;
+}
+
+template<class T>
+Liste<T>::iterator Liste<T>::begin()
+{
+	front();
+}
+
+template<class T>
+Liste<T>::iterator Liste<T>::end()
+{
+	back();
+}
