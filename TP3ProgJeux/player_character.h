@@ -19,7 +19,7 @@ public:
 private:
 	bool end_of_level_;
 	bool base_speed_applied_;
-	int size_texture;
+	int size_sprite_;
 	int anim_delay;
 	int anim_delay_counter;
 	bool is_respawning_;

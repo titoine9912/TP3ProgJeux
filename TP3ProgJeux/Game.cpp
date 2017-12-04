@@ -75,7 +75,7 @@ bool Game::init()
 
 	}
 	*/
-	if(!tile::load_textures("Sprites\\x_tile.png"))
+	if(!tile::load_textures("Sprites\\pipe.png"))
 	{
 		return false;
 	}
@@ -89,6 +89,12 @@ bool Game::init()
 	{
 		return false;
 	}
+
+	if (!base_turret::load_textures_("Sprites\\base_turret_.png","Sprites\\grid_tile.png"))
+	{
+		return false;
+	}
+
 	view_current_center_ = Vector2f(LARGEUR/2, HAUTEUR/2);
 	view_game_.setCenter(view_current_center_);
 	view_x_pos_last_frame_ = view_current_center_.x;
@@ -99,7 +105,8 @@ bool Game::init()
 	player_character_.set_texture();
 	scrolling_background_.set_texture();
 
-	map_.load_map(maps_[current_map_].c_str(), tiles_);
+	map_.load_map(maps_[current_map_].c_str(), tiles_, base_turrets_);
+
 	return true;
 }
 
@@ -124,7 +131,10 @@ void Game::update()
 	{
 		current_game_state_ = paused;
 	}
+
 	player_character_.move(view_game_);
+
+
 	if(view_game_.getCenter().x + view_game_.getSize().x/2 < map_.get_map_size().x*32)
 	{
 		view_game_.move(1, 0);
@@ -133,6 +143,12 @@ void Game::update()
 	{
 		player_character_.end_of_level(true);
 	}
+
+	for (size_t i = 0; i < base_turrets_.size(); i++)
+	{
+		base_turrets_[i].update(player_character_.getPosition());
+	}
+
 	scrolling_background_.update(view_game_);
 	scrolling_background_.move(0);
 	player_character_.update();
@@ -150,6 +166,10 @@ void Game::draw()
 	for (size_t i = 0; i < tiles_.size(); i++)
 	{
 		mainWin.draw(tiles_[i]);
+	}
+	for (size_t i = 0; i < base_turrets_.size(); i++)
+	{
+		base_turrets_[i].draw(mainWin);
 	}
 
 	mainWin.display();

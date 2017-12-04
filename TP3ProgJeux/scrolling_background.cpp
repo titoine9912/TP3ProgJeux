@@ -1,6 +1,6 @@
 #include "scrolling_background.h"
 
-//Code heavily inspired from what we saw in class
+//Code heavily inspired from what we saw in class, it was adapted to a 4 layer background with dynamic speed. 
 
 sf::Texture scrolling_background::layer1_texture_;
 sf::Texture scrolling_background::layer2_texture_;
@@ -196,24 +196,4 @@ void scrolling_background::update(sf::View view)
 		positions_layer4_[0].x = view.getCenter().x - view.getSize().x / 2;
 		positions_layer4_[1].x = layer4_texture_.getSize().x + positions_layer4_[0].x;
 	}
-
-	/*
-	positions_layer1_[0].x = view.getCenter().x - view.getSize().x / 2;
-	positions_layer1_[0].y = view.getCenter().y - view.getSize().y / 2;
-	positions_layer2_[0].x = view.getCenter().x - view.getSize().x / 2;
-	positions_layer2_[0].y = view.getCenter().y - view.getSize().y / 2;
-	positions_layer3_[0].x = view.getCenter().x - view.getSize().x / 2;
-	positions_layer3_[0].y = view.getCenter().y - view.getSize().y / 2;
-	positions_layer4_[0].x = view.getCenter().x - view.getSize().x / 2;
-	positions_layer4_[0].y = view.getCenter().y - view.getSize().y / 2;
-
-	positions_layer1_[1].x = layer1_texture_.getSize().x + positions_layer1_[0].x;
-	positions_layer1_[1].y = 0.0f;
-	positions_layer2_[1].x = layer2_texture_.getSize().x + positions_layer2_[0].x;
-	positions_layer2_[1].y = 0.0f;
-	positions_layer3_[1].x = layer3_texture_.getSize().x + positions_layer3_[0].x;
-	positions_layer3_[1].y = 0.0f;
-	positions_layer4_[1].x = layer4_texture_.getSize().x + positions_layer4_[0].x;
-	positions_layer4_[1].y = 0.0f;
-	*/
 }

@@ -23,6 +23,7 @@ player_character::player_character(Vector2f position, int player_id) :character(
 	respawn_delay_ = 120;
 	base_speed_applied_ = false;
 	end_of_level_ = false;
+	is_active_ = true;
 	//Character movement state
 	is_moving_down = false;
 	is_moving_up = false;
@@ -55,7 +56,7 @@ void player_character::set_texture()
 	setTextureRect(int_rects_movable_[0][0]);
 	setOrigin(getGlobalBounds().width / 2 - 16, 0);
 	//rotate(90);
-	size_texture = texture_player_character_.getSize().x/4;
+	size_sprite_ = texture_player_character_.getSize().x/4;
 }
 
 void player_character::move(View view)
@@ -167,7 +168,7 @@ void player_character::move(View view)
 		 if (input_manager::get_input_manager()->get_s())
 		{
 			 //Projection du joueur vers le bas
-			 if (getPosition().y + speed_ + size_texture < view.getCenter().y + view.getSize().y / 2)
+			 if (getPosition().y + speed_ + size_sprite_ < view.getCenter().y + view.getSize().y / 2)
 			 {
 				 //Le joueur bouge vers le bas
 				 setPosition(Vector2f(getPosition().x, getPosition().y + speed_));
@@ -232,7 +233,7 @@ void player_character::visual_adjustments()
 	const auto nb_character_anims = 1;
 
 	int width = texture_player_character_.getSize().x / nb_character_frames;
-	 int height = texture_player_character_.getSize().y / nb_character_anims;
+	int height = texture_player_character_.getSize().y / nb_character_anims;
 
 	int_rects_movable_ = new IntRect*[nb_character_anims];
 	for (size_t i = 0; i < nb_character_anims; i++)
