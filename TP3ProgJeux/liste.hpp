@@ -4,6 +4,9 @@
 template <class T>
 class Liste
 {
+private:
+	Liste(const Liste&) = delete;
+
 	struct Box
 	{
 		T value;
@@ -12,20 +15,18 @@ class Liste
 		~Box() { previous = next = nullptr; }
 	};
 
-	Liste(const Liste&) = delete;
-
 	Box avant;
 	Box apres;
 	size_t sz;
 
 	Box* insert(Box* iterator, const T& value);
-	Box* erase(Box* iterator);
+	Box* Erase(Box* iterator);
 
 public:
 	class iterator;
 	Liste();
 	~Liste();
-	Liste(const Liste& other);
+//	Liste(const Liste& other);
 	Liste& operator=(const Liste& other);
 	void swap(Liste& other);
 
@@ -51,7 +52,7 @@ public:
 	void splice(iterator pos, Liste& other);
 };
 
-template <typename T>
+template <class T>
 class Liste<T>::iterator
 {
 	friend class Liste<T>;
@@ -106,10 +107,10 @@ public:
 
 
 template<class T>
-inline Liste<T>::Liste()
+inline Liste<T>::Liste():avant(T()),apres(T()),sz(0)
 {
-	first->next = last;
-	last->previous = first;
+	avant.next = &apres;
+	apres.previous = &avant;
 	sz = 0;
 }
 
@@ -119,11 +120,11 @@ inline Liste<T>::~Liste()
 
 }
 
-template<class T>
-inline Liste<T>::Liste(const Liste&)
-{
-	*this = other;
-}
+//template<class T>
+//inline Liste<T>::Liste(const Liste&)
+//{
+//	*this = other;
+//}
 
 template<class T>
 void Liste<T>::swap(Liste& other)
@@ -134,40 +135,48 @@ void Liste<T>::swap(Liste& other)
 }
 
 template<class T>
-Box* Liste<T>::insert(Box* iterator, const T& value)
+typename Liste<T>::Box * Liste<T>::insert(Box * iterator, const T & value)
 {
-	iterator->previous->next = iterator->previous = new Box(value, iterator->previous->suivant, iterator->previous);
+	iterator->previous->next = iterator->previous = new Box(value, iterator->previous->next, iterator->previous);
+	sz++;
 	return iterator->previous;
 }
 
 template<class T>
-Box* Liste<T>::erase(Box* iterator)
+typename Liste<T>::Box* Liste<T>::Erase(Box* iterator)
 {
+	Box<T>* temp = iterator->next;
+	iterator->previous = iterator->next;
+	iterator->next = iterator->previous;
+	delete iterator;
+	sz--;
 	
+	return temp;
 }
 
 template<class T>
-Liste<T>::iterator Liste<T>::Insert(iterator pos, const T& value)
+typename Liste<T>::iterator Liste<T>::Insert(iterator pos, const T& value)
 {
-	insert(pos, value);
+	return insert(pos, value);
 }
 
 template<class T>
-Liste<T>::iterator Liste<T>::erase(iterator pos)
+typename Liste<T>::iterator Liste<T>::erase(iterator pos)
 {
-
+	Liste<T>::iterator temp = Erase(pos);
+	return temp;
 }
 
 template<class T>
 void Liste<T>::push_back(const T& value)
 {
-	insert(apres, value);
+	insert(&apres, value);
 }
 
 template<class T>
 void Liste<T>::pop_back()
 {
-
+	erase(apres);
 }
 
 template<class T>
@@ -179,19 +188,19 @@ void Liste<T>::push_front(const T& value)
 template<class T>
 void Liste<T>::pop_front()
 {
-
+	erase(avant);
 }
 
 template<class T>
 T& Liste<T>::back()
 {
-	return apres;
+	return apres.previous->value;
 }
 
 template<class T>
 T& Liste<T>::front()
 {
-	return avant;
+	return avant.next->value;
 }
 
 template<class T>
@@ -215,13 +224,35 @@ bool Liste<T>::empty() const
 }
 
 template<class T>
-Liste<T>::iterator Liste<T>::begin()
+typename Liste<T>::iterator Liste<T>::begin()
 {
 	front();
 }
 
 template<class T>
-Liste<T>::iterator Liste<T>::end()
+typename Liste<T>::iterator Liste<T>::end()
 {
 	back();
+}
+
+template<class T>
+void Liste<T>::reverse()
+{
+	avant = apres;
+	apres = avant;
+	if (sz % 2 == 0)
+	{
+		for (int i = 1; i < sz / 2; i++)
+		{
+			avant->next = apres->previous;
+		}
+	}
+}
+
+template<class T>
+void Liste<T>::splice(iterator pos, Liste& other)
+{
+	insert(pos, other.front());
+	other.front() = pos->previous;
+	other.back() = other.back()->next;
 }

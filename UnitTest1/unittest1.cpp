@@ -2,6 +2,7 @@
 #include "CppUnitTest.h"
 #include "../TP3ProgJeux/Pile.hpp"
 #include "../TP3ProgJeux/file.hpp"
+#include "../TP3ProgJeux//liste.hpp"
 #include <vector>
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -181,6 +182,13 @@ namespace UnitTest1
 			file.PushBack(1);
 			file.clear();
 			Assert::IsTrue(file.isEmpty());
+		}
+
+		TEST_METHOD(TestMethodeList1)
+		{
+			Liste<int> list;
+			list.Insert(0, 2);
+			Assert::AreEqual(2, list.front());
 		}
 	};
 }
