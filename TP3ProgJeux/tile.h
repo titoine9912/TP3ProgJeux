@@ -36,10 +36,13 @@ public :
 	/// </summary>
 	/// <returns>Le type de tuile.</returns>
 	tile_type get_tile_type() const;
+
+	float get_size() const;
 	
 
 
 private:
+	float size_;
 	static Texture texture_;
 	IntRect* int_rects_tiles_;
 	tile_type tile_type_;

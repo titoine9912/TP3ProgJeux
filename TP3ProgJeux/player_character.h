@@ -13,11 +13,11 @@ public:
 	 void draw(sf::RenderWindow& main_win);
 	 float get_speed();
 	 float get_base_speed();
-	 void set_base_speed_applied(bool base_speed_applied);
-	
+	 void end_of_level(bool end_of_level);
 
 
 private:
+	bool end_of_level_;
 	bool base_speed_applied_;
 	int size_texture;
 	int anim_delay;
@@ -25,5 +25,5 @@ private:
 	bool is_respawning_;
 	int respawn_delay_;
 	int respawn_counter_;
-	Sprite player_character_sprite_;
+	
 };

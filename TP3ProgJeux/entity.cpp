@@ -56,3 +56,8 @@ bool entity::entity_pixel_perfect_collision_detection(entity& autre_entity)
 	}
 	return false;
 }
+
+bool entity::contains(Vector2f point) const
+{
+	return getGlobalBounds().contains(point);
+}

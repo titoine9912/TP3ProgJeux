@@ -124,7 +124,6 @@ void Game::update()
 	{
 		current_game_state_ = paused;
 	}
-
 	player_character_.move(view_game_);
 	if(view_game_.getCenter().x + view_game_.getSize().x/2 < map_.get_map_size().x*32)
 	{
@@ -132,29 +131,12 @@ void Game::update()
 	}
 	else
 	{
-		player_character_.set_base_speed_applied(true);
+		player_character_.end_of_level(true);
 	}
 	scrolling_background_.update(view_game_);
 	scrolling_background_.move(0);
 	player_character_.update();
-
-	for (size_t i = 0; i < tiles_.size(); i++)
-	{
-		float x = tiles_[i].getPosition().x - player_character_.getPosition().x;
-		float y = tiles_[i].getPosition().y - player_character_.getPosition().y;
-		float distance = sqrt((x*x)+(y*y));
-
-		if(distance <= 32)
-		{
-			if(player_character_.entity_pixel_perfect_collision_detection(tiles_[i]) ==true)
-			{
-				int i = 0;
-				
-			}
-
-		}
-
-	}
+	movable_and_tile_collision_detection(&player_character_);
 }
 
 void Game::draw()
@@ -177,4 +159,72 @@ void Game::draw()
 Game::game_state Game::get_current_game_state()
 {
 	return current_game_state_;
+}
+
+void Game::movable_and_tile_collision_detection(movable* movable) const
+{
+	movable->set_is_colliding_wall_left(false);
+	movable->set_is_colliding_wall_right(false);
+	movable->set_is_colliding_platform_over(false);
+	movable->set_is_colliding_platform_under(false);
+
+	auto movable_adjustment = Vector2f(0, 0);
+	for (size_t j = 0; j < tiles_.size(); j++)
+	{
+		if (abs(movable->getPosition().x - tiles_[j].getPosition().x)  <=
+			tiles_[j].getGlobalBounds().width + movable->getGlobalBounds().width
+			&&
+			abs(movable->getPosition().y - tiles_[j].getPosition().y) <=
+			tiles_[j].getGlobalBounds().height + movable->getGlobalBounds().height)
+		{
+			if (movable->get_is_going_up() == true)
+			{
+				
+				if (tiles_[j].contains(movable->get_top_left_point()) ||
+					tiles_[j].contains(movable->get_top_right_point()))
+				{
+					if (movable->get_speed_y() < 0 && movable->get_is_colliding_platform_over_() == false)
+					{
+						movable_adjustment.y = movable_adjustment.y + fabs(movable->get_speed_y());
+					}
+					movable->set_is_colliding_platform_over(true);
+				}
+			}
+			if (movable->get_is_going_down() == true )
+			{
+				if (tiles_[j].contains(movable->get_bottom_left_point()) ||
+					tiles_[j].contains(movable->get_bottom_right_point()))
+				{
+					if (movable_adjustment.y >= 0)
+					{
+						movable_adjustment.y = movable_adjustment.y - movable->get_speed_y();
+					}
+				}
+				movable->set_is_colliding_platform_under(true);
+			}
+			if (movable->get_is_going_left() == true && movable->get_is_colliding_wall_left_() == false)
+			{
+				if (tiles_[j].contains(movable->get_left_lower_point()) ||
+					tiles_[j].contains(movable->get_left_upper_point()))
+				{
+				 if (movable_adjustment.x <= 0)
+					{
+						movable_adjustment.x = movable_adjustment.x + fabs(movable->get_speed_x());
+					}
+				}
+
+			}
+			if (movable->get_is_going_right() == true && movable->get_is_colliding_wall_right_() == false)
+			{
+
+				if (tiles_[j].contains(movable->get_right_upper_point()) ||
+					tiles_[j].contains(movable->get_right_lower_point()))
+				{
+					movable_adjustment.x = movable_adjustment.x -(movable->get_speed_x());
+					movable->set_is_colliding_wall_right(true);
+				}
+			}
+		}
+	}
+	movable->adjust_movable_position(movable_adjustment);
 }

@@ -43,6 +43,7 @@ private:
 	void update();
 	void draw();
 	bool load_map();
+	void movable_and_tile_collision_detection(movable * movable) const;
 
 	//Game variables
 	bool character_outofbounds_left_;

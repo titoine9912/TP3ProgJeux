@@ -19,10 +19,8 @@ bool tile::load_textures(const char texture_path[])
 
 void tile::visual_adjustments()
 {
-	//Même logique, variables a changer
 
-	/*
-	const auto nb_of_rock_frames = 16;
+	const auto nb_of_rock_frames = 1;
 
 	const int width = texture_.getSize().x / nb_of_rock_frames;
 	const int height = texture_.getSize().y;
@@ -34,12 +32,13 @@ void tile::visual_adjustments()
 		int_rects_tiles_[i].width = width;
 		int_rects_tiles_[i].height = height;
 	}
-	*/
+	size_ = width;
 }
 
 void tile::set_texture(int* map, int scene_width, int scene_height)
 {
 	setTexture(texture_);
+	setTextureRect(int_rects_tiles_[0]);
 }
 
 
@@ -48,3 +47,7 @@ tile_type tile::get_tile_type() const
 	return tile_type_;
 }
 
+float tile::get_size() const
+{
+	return size_;
+}

@@ -1,13 +1,16 @@
 #include "player_character.h"
 #include "input_manager.h"
+#include <iostream>
 Texture player_character::texture_player_character_;
 
 player_character::player_character(Vector2f position, int player_id) :character(position,0), respawn_counter_(120)
 {
-	player_character_sprite_.setPosition(position);
+	setPosition(position);
 
 	base_speed_ = 1;
 	speed_ = 5;
+	current_speed_x = 0;
+	current_speed_y = 0;
 
 	//Aniation Variables
 	current_anim_ = 0;
@@ -19,6 +22,12 @@ player_character::player_character(Vector2f position, int player_id) :character(
 	is_respawning_ = false;
 	respawn_delay_ = 120;
 	base_speed_applied_ = false;
+	end_of_level_ = false;
+	//Character movement state
+	is_moving_down = false;
+	is_moving_up = false;
+	is_moving_right = false;
+	is_moving_left = false;
 }
 
 
@@ -35,90 +44,186 @@ void player_character::update()
 		{
 			current_anim_ = 0;
 		}
-		player_character_sprite_.setTextureRect(int_rects_movable_[0][current_anim_]);
+		setTextureRect(int_rects_movable_[0][current_anim_]);
 		anim_delay_counter = 0;
 	}
 }
 
 void player_character::set_texture()
 {
-	player_character_sprite_.setTexture(texture_player_character_);
-	player_character_sprite_.setTextureRect(int_rects_movable_[0][0]);
-	player_character_sprite_.setOrigin(player_character_sprite_.getGlobalBounds().width / 2 - 16, 0);
-	player_character_sprite_.rotate(90);
+	setTexture(texture_player_character_);
+	setTextureRect(int_rects_movable_[0][0]);
+	setOrigin(getGlobalBounds().width / 2 - 16, 0);
+	//rotate(90);
 	size_texture = texture_player_character_.getSize().x/4;
 }
 
 void player_character::move(View view)
 {
-	base_speed_applied_ = false;
+	is_moving_down = false;
+	is_moving_up = false;
+	is_moving_right = false;
+	is_moving_left = false;
+	current_speed_x = 0;
+	current_speed_y = 0;
+
+	//Si le joueur est a la fin du niveau, la base_speed ne sera plus affecté.
+	if (end_of_level_ == false)
+	{
+		base_speed_applied_ = false;
+	}
+	
+	//Si le joueur appuie sur l'une des touches directionelles
 	if(input_manager::get_input_manager()->get_d() ==true || input_manager::get_input_manager()->get_a()==true || input_manager::get_input_manager()->get_s()==true || input_manager::get_input_manager()->get_w()==true)
 	{
-		
+		//Si le joueur appuie sur d
 		if (input_manager::get_input_manager()->get_d())
 		{
-			if(player_character_sprite_.getPosition().x + speed_ < view.getCenter().x + view.getSize().x/2 )
+			//Projection du joueur si on le fait avancé vers la droite
+			if(getPosition().x + speed_ + 32 < view.getCenter().x + view.getSize().x/2 )
 			{
-				player_character_sprite_.setPosition(Vector2f(player_character_sprite_.getPosition().x + speed_, player_character_sprite_.getPosition().y));
+				//Le joueur avance vers la droite à sa vitesse
+				setPosition(Vector2f(getPosition().x + speed_, getPosition().y));
+				is_moving_right = true;
+				if (current_speed_x == 0)
+				{
+					current_speed_x = speed_;
+				}
 			}
-			else if(base_speed_applied_ == false)
+			//Sinon on regarde si la base speed peut être affecté
+			else if(base_speed_applied_ == false && getPosition().x + base_speed_ < view.getCenter().x + view.getSize().x / 2)
 			{
-				player_character_sprite_.setPosition(Vector2f(player_character_sprite_.getPosition().x + base_speed_, player_character_sprite_.getPosition().y));
+				setPosition(Vector2f(getPosition().x + base_speed_, getPosition().y));
 				base_speed_applied_ = true;
+				is_moving_right = true;
+				if (current_speed_x == 0)
+				{
+					current_speed_x = base_speed_;
+				}
 			}
 		}
+		//Si le joueur appuie sur W
 		 if (input_manager::get_input_manager()->get_w())
 		{
-			 if (player_character_sprite_.getPosition().y - speed_ >0)
+			 //Projection du joueur vers le haut
+			 if (getPosition().y - speed_ >0)
 			 {
-				 player_character_sprite_.setPosition(Vector2f(player_character_sprite_.getPosition().x, player_character_sprite_.getPosition().y - speed_));
+				 //Le joueur avance vers le haut
+				 setPosition(Vector2f(getPosition().x, getPosition().y - speed_));
+				 is_moving_up = true;
+				 current_speed_y = 0 - speed_;
+				 //On regarde si la base speed peut être affecté
 				 if(base_speed_applied_ == false)
 				 {
-					 player_character_sprite_.setPosition(Vector2f(player_character_sprite_.getPosition().x + base_speed_, player_character_sprite_.getPosition().y));
-					 base_speed_applied_ = true;
-					 
+					 //La base speed est affecté pour suivre la window.
+					 setPosition(Vector2f(getPosition().x + base_speed_, getPosition().y));
+					 is_moving_right = true;
+					 base_speed_applied_ = true; 
+					 if (current_speed_x == 0)
+					 {
+						 current_speed_x = base_speed_;
+					 }
 				 }
 			 }
+			 //Si on ne peut pas bouger vers le haut, la base speed est tout de même affecté pour suivre la window
 			 else if (base_speed_applied_ == false)
 			 {
-				 player_character_sprite_.setPosition(Vector2f(player_character_sprite_.getPosition().x + base_speed_, player_character_sprite_.getPosition().y));
+				 setPosition(Vector2f(getPosition().x + base_speed_, getPosition().y));
+				 is_moving_right = true;
 				 base_speed_applied_ = true;
+				 if (current_speed_x == 0)
+				 {
+					 current_speed_x = base_speed_;
+				 }
 			 }
 		}
+		 //Si le joueur appuie sur la touche a
 		 if (input_manager::get_input_manager()->get_a())
-		{
-			 if(player_character_sprite_.getPosition().x -speed_ - size_texture >view.getCenter().x-view.getSize().x/2 )
+		{ 
+			 //Projection du joueur vers la gauche
+			 if(getPosition().x -speed_  >view.getCenter().x-view.getSize().x/2 )
 			 {
-				 player_character_sprite_.setPosition(Vector2f(player_character_sprite_.getPosition().x - speed_, player_character_sprite_.getPosition().y));
+				 //Le joueur bouge vers la gauche
+				 setPosition(Vector2f(getPosition().x - speed_, getPosition().y));
+				 is_moving_left = true;
+				 if (current_speed_x == 0 || base_speed_ == 1)
+				 {
+					 current_speed_x += 0-speed_;
+				 }
 			 }
+			 //Sinon on bouge avec la window
 			 else if (base_speed_applied_ == false)
 			 {
-				 player_character_sprite_.setPosition(Vector2f(player_character_sprite_.getPosition().x + base_speed_, player_character_sprite_.getPosition().y));
+				 setPosition(Vector2f(getPosition().x + base_speed_, getPosition().y));
+				 is_moving_right = true;
 				 base_speed_applied_ = true;
+				 if (current_speed_x == 0)
+				 {
+					 current_speed_x = base_speed_;
+				 }
 			 }
 		}
+		 //Si le joueur appuie sur s
 		 if (input_manager::get_input_manager()->get_s())
 		{
-			 if (player_character_sprite_.getPosition().y + speed_ + size_texture < view.getCenter().y + view.getSize().y / 2)
+			 //Projection du joueur vers le bas
+			 if (getPosition().y + speed_ + size_texture < view.getCenter().y + view.getSize().y / 2)
 			 {
-				 player_character_sprite_.setPosition(Vector2f(player_character_sprite_.getPosition().x, player_character_sprite_.getPosition().y + speed_));
+				 //Le joueur bouge vers le bas
+				 setPosition(Vector2f(getPosition().x, getPosition().y + speed_));
+				 current_speed_y += speed_;
+				 is_moving_down = true;
 				 if(base_speed_applied_ == false)
 				 {
-					 player_character_sprite_.setPosition(Vector2f(player_character_sprite_.getPosition().x + base_speed_, player_character_sprite_.getPosition().y));
+					 setPosition(Vector2f(getPosition().x + base_speed_, getPosition().y));
+					 is_moving_right = true;
 					 base_speed_applied_ = true;
+					 if (current_speed_x == 0)
+					 {
+						 current_speed_x = base_speed_;
+					 }
 				 }
 			 }
 			 else if (base_speed_applied_ == false)
 			 {
-				 player_character_sprite_.setPosition(Vector2f(player_character_sprite_.getPosition().x + base_speed_, player_character_sprite_.getPosition().y));		
+				 setPosition(Vector2f(getPosition().x + base_speed_, getPosition().y));	
+				 is_moving_right = true;
 				 base_speed_applied_ = true;
+				 if (current_speed_x == 0)
+				 {
+					 current_speed_x = base_speed_;
+				 }
 			 }
 		}
 	}
 	else if (input_manager::get_input_manager()->get_d() == false && base_speed_applied_ == false)
 	{
-		player_character_sprite_.setPosition(Vector2f(player_character_sprite_.getPosition().x + base_speed_, player_character_sprite_.getPosition().y));
-	}	
+		setPosition(Vector2f(getPosition().x + base_speed_,getPosition().y));
+		is_moving_right = true;
+		base_speed_applied_ = true;
+		if (current_speed_x == 0)
+		{
+			current_speed_x = base_speed_;
+		}
+	}
+	system("CLS");
+
+	int a = current_speed_x;
+	std::string x = std::to_string(a);
+	std::cout << x << std::endl;
+
+	int b = current_speed_y;
+	std::string y = std::to_string(b);
+	std::cout << y << std::endl;
+
+	int c = getPosition().x;
+	std::string co = std::to_string(c);
+	std::cout << "Pos x" << co << std::endl;
+
+	int d = getPosition().y;
+	std::string coo = std::to_string(d);
+	std::cout << "Pos y" << coo << std::endl;
+
 }
 
 void player_character::visual_adjustments()
@@ -127,7 +232,7 @@ void player_character::visual_adjustments()
 	const auto nb_character_anims = 1;
 
 	int width = texture_player_character_.getSize().x / nb_character_frames;
-	const int height = texture_player_character_.getSize().y / nb_character_anims;
+	 int height = texture_player_character_.getSize().y / nb_character_anims;
 
 	int_rects_movable_ = new IntRect*[nb_character_anims];
 	for (size_t i = 0; i < nb_character_anims; i++)
@@ -141,11 +246,23 @@ void player_character::visual_adjustments()
 			int_rects_movable_[i][j].height = height;
 		}
 	}
+	width = 32;
+	height = 32;
+	// Adjust character collision points.
+	top_left_point_ = Vector2f(4,0);
+	top_right_point_ = Vector2f(width-4,0);
+	left_upper_point_ = Vector2f(0, 8);
+	left_lower_point_ = Vector2f(0, 26);
+	bottom_left_point_ = Vector2f(12, height);
+	bottom_right_point_ = Vector2f(width-12, height);
+	right_upper_point_ = Vector2f(width, height*0.25f);
+	right_lower_point_ = Vector2f(width, height*0.75f);
+
 }
 
 void player_character::draw(sf::RenderWindow& main_win)
 {
-	main_win.draw(player_character_sprite_);
+	main_win.draw(*this);
 }
 
 float player_character::get_speed()
@@ -168,8 +285,8 @@ float player_character::get_base_speed()
 }
 
 
-void player_character::set_base_speed_applied(bool base_speed_applied)
+void player_character::end_of_level(bool end_of_level)
 {
-	base_speed_applied_ = base_speed_applied;
+	end_of_level_ = end_of_level;
 }
 
