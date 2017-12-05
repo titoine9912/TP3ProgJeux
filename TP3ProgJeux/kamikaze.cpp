@@ -1,8 +1,9 @@
 #include  "kamikaze.h"
 #include <iostream>
+#include <type_traits>
 Texture kamikaze::texture_kamikaze_;
 
-kamikaze::kamikaze(Vector2f position) : enemy(position,0), anim_delay(5), anim_delay_counter(0)
+kamikaze::kamikaze(Vector2f position) : enemy(position,0), anim_delay(5), anim_delay_counter(3)
 {
 	//Aniation Variables
 	current_anim_ = 0;
@@ -15,7 +16,7 @@ kamikaze::kamikaze(Vector2f position) : enemy(position,0), anim_delay(5), anim_d
 
 	//State variables
 	triggered_ = false;
-	trigger_range_ = 720;
+	trigger_range_ = 200;
 	explosion_range_ = 50;
 	is_active_ = true;
 	has_exploded_ = false;
@@ -29,7 +30,10 @@ void kamikaze::update(Vector2f position)
 	if(is_active_ == true)
 	{
 		kamikaze_range_check(position);
-		rotate_and_move_towards_target(position);
+		if(triggered_ == true)
+		{
+			rotate_and_move_towards_target(position);
+		}
 
 		anim_delay_counter++;
 		if (anim_delay_counter >= anim_delay)
@@ -145,9 +149,20 @@ void kamikaze::rotate_and_move_towards_target(Vector2f position_entity)
 		float angle_deg = angle_ *(180.0000 / 3.1416);
 
 		angle_deg = -angle_deg;
-
-
 		setRotation(angle_deg);
+
+
+		float moveX = (float)cos(angle_) * speed_;
+		float moveY = (float)sin(angle_) * speed_;
+		float x = position_movable_.x;
+		float y = position_movable_.y;
+
+		sf::Vector2f prochainePosition = sf::Vector2f(x + moveX, y + moveY);
+		if (sqrt(((prochainePosition.x - position_movable_.x)*(prochainePosition.x - position_movable_.x)) + ((prochainePosition.y - position_movable_.y)*(prochainePosition.y - position_movable_.y))) > speed_)
+		{
+			setPosition(x + moveX, y + moveY);
+		}
+
 	}
 }
 
