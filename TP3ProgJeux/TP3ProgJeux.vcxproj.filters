@@ -144,6 +144,9 @@
     <ClCompile Include="input_manager.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="explosion.cpp">
+      <Filter>Fichiers sources\entity\movable</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -250,6 +253,9 @@
     </ClInclude>
     <ClInclude Include="bitmask_manager.h">
       <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="explosion.h">
+      <Filter>Fichiers d%27en-tête\entity\movable</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

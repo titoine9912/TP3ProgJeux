@@ -10,6 +10,7 @@
 #include "kamikaze.h"
 #include "boss.h"
 #include "scrolling_background.h"
+#include "explosion.h"
 
 
 
@@ -61,6 +62,7 @@ private:
 	std::vector<base_enemy> base_enemies_;
 	std::vector<boss> bosses_;
 	std::vector<kamikaze> kamikazes_;
+	explosion explosion_[15];
 
 	player_character player_character_;
 	scrolling_background scrolling_background_;

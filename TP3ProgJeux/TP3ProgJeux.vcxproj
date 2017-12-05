@@ -98,6 +98,7 @@
     <ClCompile Include="defeat_screen.cpp" />
     <ClCompile Include="enemy.cpp" />
     <ClCompile Include="entity.cpp" />
+    <ClCompile Include="explosion.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="input_manager.cpp" />
     <ClCompile Include="kamikaze.cpp" />
@@ -133,6 +134,7 @@
     <ClInclude Include="defeat_screen.h" />
     <ClInclude Include="enemy.h" />
     <ClInclude Include="entity.h" />
+    <ClInclude Include="explosion.h" />
     <ClInclude Include="file.hpp" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="input_manager.h" />

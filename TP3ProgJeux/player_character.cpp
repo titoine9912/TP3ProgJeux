@@ -34,19 +34,23 @@ player_character::player_character(Vector2f position, int player_id) :character(
 
 void player_character::update()
 {
-	anim_delay_counter++;
-	if (anim_delay_counter >= anim_delay)
+	if(is_active_ ==true)
 	{
-		if (current_anim_ < 3)
+		anim_delay_counter++;
+		if (anim_delay_counter >= anim_delay)
 		{
-			current_anim_++;
+			if (current_anim_ < 3)
+			{
+				current_anim_++;
+			}
+			else
+			{
+				current_anim_ = 0;
+			}
+			setTextureRect(int_rects_movable_[0][current_anim_]);
+			anim_delay_counter = 0;
 		}
-		else
-		{
-			current_anim_ = 0;
-		}
-		setTextureRect(int_rects_movable_[0][current_anim_]);
-		anim_delay_counter = 0;
+		
 	}
 }
 
@@ -55,7 +59,6 @@ void player_character::set_texture()
 	setTexture(texture_player_character_);
 	setTextureRect(int_rects_movable_[0][0]);
 	setOrigin(getGlobalBounds().width / 2 - 16, 0);
-	//rotate(90);
 	size_sprite_ = texture_player_character_.getSize().x/4;
 }
 
@@ -263,7 +266,10 @@ void player_character::visual_adjustments()
 
 void player_character::draw(sf::RenderWindow& main_win)
 {
-	main_win.draw(*this);
+	if (is_active_ == true)
+	{
+		main_win.draw(*this);
+	}
 }
 
 float player_character::get_speed()

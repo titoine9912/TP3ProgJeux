@@ -11,7 +11,7 @@ base_turret::base_turret(Vector2f position) : enemy(position,0), anim_delay(15),
 	
 	//State variables
 	triggered_ = false;
-	trigger_range_ = 720;
+	trigger_range_ = 350;
 	is_active_ = true;
 
 	position_ = Vector2f(position.x / 32, position.y / 32);
@@ -36,29 +36,30 @@ bool base_turret::load_textures_(const char texture_path_1[], const char texture
 
 void base_turret::update(Vector2f position)
 {
-	anim_delay_counter++;
-	turret_range_check(position);
-
-	if(anim_delay_counter >= anim_delay && triggered_ == false)
+	if(is_active_ == true)
 	{
-		if (current_anim_ < 3)
-		{
-			current_anim_++;
-		}
-		else
-		{
-			current_anim_ = 0;
-		}
-		setTextureRect(int_rects_movable_[0][current_anim_]);
-		anim_delay_counter = 0;
-	}
-	if(triggered_ == true)
-	{
-		setTextureRect(int_rects_movable_[0][2]);
-		rotate_towards_target(position);
-	}
+		anim_delay_counter++;
+		turret_range_check(position);
 
-
+		if (anim_delay_counter >= anim_delay && triggered_ == false)
+		{
+			if (current_anim_ < 3)
+			{
+				current_anim_++;
+			}
+			else
+			{
+				current_anim_ = 0;
+			}
+			setTextureRect(int_rects_movable_[0][current_anim_]);
+			anim_delay_counter = 0;
+		}
+		if (triggered_ == true)
+		{
+			setTextureRect(int_rects_movable_[0][2]);
+			rotate_towards_target(position);
+		}
+	}
 }
 
 void base_turret::set_texture()
@@ -86,7 +87,7 @@ void base_turret::visual_adjustments()
 
 	int_rects_movable_ = new IntRect*[nb_character_anims];
 
-	setRotation(90);
+	//setRotation(90);
 
 	for (size_t i = 0; i < nb_character_anims; i++)
 	{
@@ -103,8 +104,11 @@ void base_turret::visual_adjustments()
 
 void base_turret::draw(sf::RenderWindow& main_win)
 {
-	main_win.draw(sprite_turret_tile_);
-	main_win.draw(*this);
+	if(is_active_ == true)
+	{
+		main_win.draw(sprite_turret_tile_);
+		main_win.draw(*this);
+	}
 }
 
 void base_turret::turret_range_check(Vector2f position_entity)

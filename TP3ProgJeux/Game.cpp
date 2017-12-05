@@ -62,19 +62,16 @@ bool Game::init()
 	{
 
 	}
-	if (!upgraded_turret::load_textures("Sprites\\.png", upgraded_turret::texture_upgraded_turret))
-	{
-
-	}
 	if (!boss::load_textures("Sprites\\.png", boss::texture_boss_))
 	{
 
 	}
-	if (!kamikaze::load_textures("Sprites\\Dove.png", kamikaze::texture_kamikaze_))
-	{
-
-	}
 	*/
+	if(!explosion::load_textures("Sprites\\explosion.png", explosion::texture_explosion))
+	{
+		return false;
+	}
+
 	if(!tile::load_textures("Sprites\\pipe.png"))
 	{
 		return false;
@@ -94,6 +91,14 @@ bool Game::init()
 	{
 		return false;
 	}
+	if (!upgraded_turret::load_textures_("Sprites\\upgraded_turret.png","Sprites\\grid_tile.png" ))
+	{
+		return false;
+	}
+	if (!kamikaze::load_textures("Sprites\\Dove.png", kamikaze::texture_kamikaze_))
+	{
+		return false;
+	}
 
 	view_current_center_ = Vector2f(LARGEUR/2, HAUTEUR/2);
 	view_game_.setCenter(view_current_center_);
@@ -104,8 +109,15 @@ bool Game::init()
 	player_character_.visual_adjustments();
 	player_character_.set_texture();
 	scrolling_background_.set_texture();
+	for(int i =0; i<15;++i)
+	{
+		explosion_[i].visual_adjustments();
+		explosion_[i].set_texture();
+	}
 
-	map_.load_map(maps_[current_map_].c_str(), tiles_, base_turrets_);
+
+
+	map_.load_map(maps_[current_map_].c_str(), tiles_, base_turrets_, upgraded_turrets_, kamikazes_);
 
 	return true;
 }
@@ -135,7 +147,7 @@ void Game::update()
 	player_character_.move(view_game_);
 
 
-	if(view_game_.getCenter().x + view_game_.getSize().x/2 < map_.get_map_size().x*32)
+	if (view_game_.getCenter().x + view_game_.getSize().x / 2 < map_.get_map_size().x * 32)
 	{
 		view_game_.move(1, 0);
 	}
@@ -148,11 +160,40 @@ void Game::update()
 	{
 		base_turrets_[i].update(player_character_.getPosition());
 	}
+	for (size_t i = 0; i < upgraded_turrets_.size(); i++)
+	{
+		upgraded_turrets_[i].update(player_character_.getPosition());
+	}
+	for (size_t i = 0; i < kamikazes_.size(); i++)
+	{
+		kamikazes_[i].update(player_character_.getPosition());
 
-	scrolling_background_.update(view_game_);
-	scrolling_background_.move(0);
-	player_character_.update();
-	movable_and_tile_collision_detection(&player_character_);
+		if (kamikazes_[i].get_is_active() == false)
+		{
+			if (kamikazes_[i].get_has_exploded() == false)
+			{
+				for (int j = 0; j < 15; ++j)
+				{
+					if (explosion_[j].get_is_active() == false)
+					{
+						explosion_[j].activate_explosion(kamikazes_[i].getPosition());
+						kamikazes_[i].set_has_exploded(true);
+					}
+				}
+			}
+		}
+	}
+
+		for (int i = 0; i<15; ++i)
+		{
+			explosion_[i].update();
+		}
+
+
+		scrolling_background_.update(view_game_);
+		scrolling_background_.move(0);
+		player_character_.update();
+		movable_and_tile_collision_detection(&player_character_);
 }
 
 void Game::draw()
@@ -171,6 +212,23 @@ void Game::draw()
 	{
 		base_turrets_[i].draw(mainWin);
 	}
+
+	for (size_t i = 0; i < upgraded_turrets_.size(); i++)
+	{
+		upgraded_turrets_[i].draw(mainWin);
+	}
+
+	for (size_t i = 0; i < kamikazes_.size(); i++)
+	{
+		kamikazes_[i].draw(mainWin);
+	}
+
+
+	for (int i = 0; i<15; ++i)
+	{
+		explosion_[i].draw(mainWin);
+	}
+
 
 	mainWin.display();
 
