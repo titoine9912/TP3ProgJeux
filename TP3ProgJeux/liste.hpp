@@ -11,7 +11,7 @@ private:
 	{
 		T value;
 		Box *next, *previous;
-		Box(const T& value, Box*N = nullptr, Box*P = nullptr) {}
+		Box(const T& value, Box*N = nullptr, Box*P = nullptr):value(value),next(N),previous(P) {}
 		~Box() { previous = next = nullptr; }
 	};
 
@@ -137,17 +137,21 @@ void Liste<T>::swap(Liste& other)
 template<class T>
 typename Liste<T>::Box * Liste<T>::insert(Box * iterator, const T & value)
 {
-	iterator->previous->next = iterator->previous = new Box(value, iterator->previous->next, iterator->previous);
+	//iterator->previous->next = (iterator->previous = new Box(value, iterator->previous->next, iterator->previous));
+	Box* temp = new Box(value, iterator->previous->next, iterator->previous);
+	iterator->previous->next = temp;
+	iterator->previous = temp;
+	
 	sz++;
 	return iterator->previous;
 }
 
 template<class T>
-typename Liste<T>::Box* Liste<T>::Erase(Box* iterator)
+typename Liste<T>::Box * Liste<T>::Erase(Box * iterator)
 {
-	Box<T>* temp = iterator->next;
-	iterator->previous = iterator->next;
-	iterator->next = iterator->previous;
+	Box* temp = iterator->next;
+	iterator->previous->next = iterator->next;
+	iterator->next->previous = iterator->previous;
 	delete iterator;
 	sz--;
 	
@@ -157,13 +161,13 @@ typename Liste<T>::Box* Liste<T>::Erase(Box* iterator)
 template<class T>
 typename Liste<T>::iterator Liste<T>::Insert(iterator pos, const T& value)
 {
-	return insert(pos, value);
+	return insert(pos.POINTEUR, value);
 }
 
 template<class T>
 typename Liste<T>::iterator Liste<T>::erase(iterator pos)
 {
-	Liste<T>::iterator temp = Erase(pos);
+	Liste<T>::iterator temp = Erase(pos.POINTEUR);
 	return temp;
 }
 
@@ -176,19 +180,19 @@ void Liste<T>::push_back(const T& value)
 template<class T>
 void Liste<T>::pop_back()
 {
-	erase(apres);
+	Erase(apres.previous);
 }
 
 template<class T>
 void Liste<T>::push_front(const T& value)
 {
-	insert(avant, value);
+	insert(avant.next, value);
 }
 
 template<class T>
 void Liste<T>::pop_front()
 {
-	erase(avant);
+	Erase(avant.next);
 }
 
 template<class T>
@@ -226,13 +230,13 @@ bool Liste<T>::empty() const
 template<class T>
 typename Liste<T>::iterator Liste<T>::begin()
 {
-	front();
+	return avant.next;
 }
 
 template<class T>
 typename Liste<T>::iterator Liste<T>::end()
 {
-	back();
+	return &apres;
 }
 
 template<class T>
