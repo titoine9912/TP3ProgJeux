@@ -2,6 +2,7 @@
 #include "CppUnitTest.h"
 #include "../TP3ProgJeux/Pile.hpp"
 #include "../TP3ProgJeux/file.hpp"
+#include "../TP3ProgJeux//liste.hpp"
 #include <vector>
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -181,6 +182,94 @@ namespace UnitTest1
 			file.PushBack(1);
 			file.clear();
 			Assert::IsTrue(file.isEmpty());
+		}
+
+		TEST_METHOD(TestMethodeList1)
+		{
+			Liste<int> list;
+			list.push_back(2);
+			Assert::AreEqual(2, list.front());
+			Assert::AreEqual(2, list.back());
+		}
+
+		TEST_METHOD(TestMethodeList2)
+		{
+			Liste<int> list;
+			list.push_back(2);
+			list.push_front(3);
+			Assert::AreEqual(3, list.front());
+			Assert::AreEqual(2, list.back());
+		}
+
+		TEST_METHOD(TestMethodeList3)
+		{
+			Liste<int> list;
+			list.push_back(4);
+			list.push_front(3);
+			list.push_front(2);
+			Assert::AreEqual(2, list.front());
+			Assert::AreEqual(4, list.back());
+			Assert::AreEqual(3, (int)list.size());
+		}
+
+		TEST_METHOD(TestMethodeList4)
+		{
+			Liste<int> list1;
+			Liste<int> list2;
+			list1.push_front(2);
+			list1.push_front(3);
+			list2.push_front(5);
+			list2.push_front(6);
+			list1.swap(list2);
+			Assert::AreEqual(6, list1.front());
+			Assert::AreEqual(5, list1.back());
+			Assert::AreEqual(3, list2.front());
+			Assert::AreEqual(2, list2.back());
+		}
+
+
+		TEST_METHOD(TestMethodeList5)
+		{
+			Liste<int> list;
+			list.push_back(2);
+			list.push_front(3);
+			list.pop_back();
+			Assert::AreEqual(3, list.front());
+			Assert::AreEqual(3, list.back());
+		}
+
+		TEST_METHOD(TestMethodeList6)
+		{
+			Liste<int> list;
+			list.push_back(4);
+			list.push_front(3);
+			list.push_front(2);
+			list.push_front(1);
+			list.pop_back();
+			list.pop_front();
+			Assert::AreEqual(2, list.front());
+			Assert::AreEqual(3, list.back());
+			Assert::AreEqual(2, (int)list.size());
+		}
+
+		TEST_METHOD(TestMethodeList7)
+		{
+			Liste<int> list;
+			list.Insert(list.begin(),2);
+			Assert::AreEqual(2, list.front());
+			Assert::AreEqual(2, list.back());
+		}
+
+		TEST_METHOD(TestMethodeList8)
+		{
+			Liste<int> list;
+			list.push_back(3);
+			list.push_front(2);
+			list.push_front(1);
+			list.erase(list.end());
+			Assert::AreEqual(2, (int)list.size());
+			Assert::AreEqual(1, list.front());
+			Assert::AreEqual(2, list.back());
 		}
 	};
 }
