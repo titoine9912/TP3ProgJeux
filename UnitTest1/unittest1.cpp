@@ -4,14 +4,15 @@
 #include "../TP3ProgJeux/file.hpp"
 #include "../TP3ProgJeux//liste.hpp"
 #include <vector>
+
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace UnitTest1
 {		
 	TEST_CLASS(UnitTest1)
 	{
+
 	public:
-		
 		TEST_METHOD(TestMethodPile1)
 		{
 			// TODO: Ici, votre code de test
@@ -260,16 +261,29 @@ namespace UnitTest1
 			Assert::AreEqual(2, list.back());
 		}
 
-		TEST_METHOD(TestMethodeList8)
+		/*TEST_METHOD(TestMethodeList9)
 		{
 			Liste<int> list;
-			list.push_back(3);
-			list.push_front(2);
+			Liste<int> list2;
+			int element[5] = { 1,4,3,2 };
+			auto pos = list.begin();
+			auto iter = list.begin();
+			for (int i = 0; i < 2; ++i)
+			{
+				pos++;
+			}
+			for (int i = 0; i < 4; ++i)
+			{
+				iter++;
+			}
 			list.push_front(1);
-			list.erase(list.end());
-			Assert::AreEqual(2, (int)list.size());
-			Assert::AreEqual(1, list.front());
-			Assert::AreEqual(2, list.back());
+			list.push_back(4);
+			list2.push_front(3);
+			list2.push_front(2);
+			list.splice(pos, list2);
+			
+			//Assert::IsTrue(iter == list.end());
 		}
+		*/
 	};
 }

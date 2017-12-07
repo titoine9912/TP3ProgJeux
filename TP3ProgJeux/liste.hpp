@@ -1,6 +1,6 @@
 #pragma once
 #include <algorithm> 
-
+#include <string.h>
 template <class T>
 class Liste
 {
@@ -256,7 +256,11 @@ void Liste<T>::reverse()
 template<class T>
 void Liste<T>::splice(iterator pos, Liste& other)
 {
-	insert(pos, other.front());
-	other.front() = pos->previous;
-	other.back() = other.back()->next;
+	other.end()=pos;
+	other.begin() = pos.POINTEUR->previous;
+	pos.POINTEUR->previous = other.begin().POINTEUR;
+	pos.POINTEUR->next = other.end().POINTEUR->previous;
+	other.avant = apres;
+	other.apres = avant;
+
 }
