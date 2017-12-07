@@ -3,11 +3,13 @@ Texture base_turret::texture_base_turret;
 Texture base_turret::texture_turret_tile;
 
 
-base_turret::base_turret(Vector2f position) : enemy(position,0), anim_delay(15), anim_delay_counter(0)
+base_turret::base_turret(Vector2f position) : enemy(position,0)
 {
 	//Aniation Variables
 	current_anim_ = 0;
 	current_frame_ = 0;
+	anim_delay = 15;
+	anim_delay_counter = 0;
 	
 	//State variables
 	triggered_ = false;
@@ -87,7 +89,6 @@ void base_turret::visual_adjustments()
 
 	int_rects_movable_ = new IntRect*[nb_character_anims];
 
-	//setRotation(90);
 
 	for (size_t i = 0; i < nb_character_anims; i++)
 	{

@@ -45,6 +45,7 @@ private:
 	void draw();
 	bool load_map();
 	void movable_and_tile_collision_detection(movable * movable) const;
+	void movable_and_kamikaze_collision_detection(movable *movable)const;
 
 	//Game variables
 	bool character_outofbounds_left_;

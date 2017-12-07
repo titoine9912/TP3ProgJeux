@@ -49,6 +49,12 @@
     <Filter Include="Fichiers d%27en-tête\Menu">
       <UniqueIdentifier>{d8d4050f-ea36-4cfe-87d6-e813b2523323}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\entity\movable\projectile">
+      <UniqueIdentifier>{a13a037d-4d04-4dae-b651-2eade0c5f5f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\entity\movable\Projectile">
+      <UniqueIdentifier>{507f0687-bee7-4d36-bf1a-0e19b0013096}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -146,6 +152,12 @@
     </ClCompile>
     <ClCompile Include="explosion.cpp">
       <Filter>Fichiers sources\entity\movable</Filter>
+    </ClCompile>
+    <ClCompile Include="projectile.cpp">
+      <Filter>Fichiers sources\entity\movable\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="base_projectile.cpp">
+      <Filter>Fichiers sources\entity\movable\Projectile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -256,6 +268,12 @@
     </ClInclude>
     <ClInclude Include="explosion.h">
       <Filter>Fichiers d%27en-tête\entity\movable</Filter>
+    </ClInclude>
+    <ClInclude Include="projectile.h">
+      <Filter>Fichiers d%27en-tête\entity\movable\projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="base_projectile.h">
+      <Filter>Fichiers d%27en-tête\entity\movable\projectile</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

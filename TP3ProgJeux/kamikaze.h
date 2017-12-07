@@ -11,11 +11,13 @@ public:
 	static Texture texture_kamikaze_;
 	void draw(sf::RenderWindow& main_win);
 	void kamikaze_range_check(Vector2f position_entity);
-	void rotate_and_move_towards_target(Vector2f position_entity);
+	void rotate_towards_target();
 	bool get_has_exploded();
 	void set_has_exploded(bool has_exploded);
+	void move();
 
 private:
+	Vector2f direction_;
 	int size_sprite_;
 	int anim_delay;
 	int anim_delay_counter;
@@ -23,6 +25,7 @@ private:
 	bool has_exploded_;
 	float trigger_range_;
 	float explosion_range_;
+	float angle_;
 	Vector2f base_position_;
 
 };

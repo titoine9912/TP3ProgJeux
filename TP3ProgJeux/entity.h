@@ -21,6 +21,9 @@ public:
 protected:
 
 	BitmaskManager bitmasks;
+	int size_sprite_;
+	int anim_delay;
+	int anim_delay_counter;
 
 	Vector2f top_left_point_;
 	Vector2f top_right_point_;

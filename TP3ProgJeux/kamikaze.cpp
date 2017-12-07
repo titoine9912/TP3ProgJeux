@@ -8,16 +8,16 @@ kamikaze::kamikaze(Vector2f position) : enemy(position,0), anim_delay(5), anim_d
 	//Aniation Variables
 	current_anim_ = 0;
 	current_frame_ = 0;
-	base_speed_ = 1;
-	speed_ = 5;
+	base_speed_ = 0;
+	speed_ = 4;
 	current_speed_x = 0;
 	current_speed_y = 0;
 
 
 	//State variables
 	triggered_ = false;
-	trigger_range_ = 200;
-	explosion_range_ = 50;
+	trigger_range_ = 450;
+	explosion_range_ = 30;
 	is_active_ = true;
 	has_exploded_ = false;
 
@@ -32,7 +32,8 @@ void kamikaze::update(Vector2f position)
 		kamikaze_range_check(position);
 		if(triggered_ == true)
 		{
-			rotate_and_move_towards_target(position);
+			rotate_towards_target();
+			move();
 		}
 
 		anim_delay_counter++;
@@ -83,8 +84,8 @@ void kamikaze::visual_adjustments()
 	// Adjust character collision points.
 	top_left_point_ = Vector2f(4, 0);
 	top_right_point_ = Vector2f(width - 4, 0);
-	left_upper_point_ = Vector2f(0, 8);
-	left_lower_point_ = Vector2f(0, 26);
+	left_upper_point_ = Vector2f(-8, 8);
+	left_lower_point_ = Vector2f(-8, 26);
 	bottom_left_point_ = Vector2f(12, height);
 	bottom_right_point_ = Vector2f(width - 12, height);
 	right_upper_point_ = Vector2f(width, height*0.25f);
@@ -106,11 +107,11 @@ void kamikaze::kamikaze_range_check(Vector2f position_entity)
 {
 	if (is_active_ == true)
 	{
-		Vector2f position_movable_ = position_entity;
+		direction_ = position_entity;
 		Vector2f position_turret_ = getPosition();
 
-		float diff_x_ = (position_movable_.x - position_turret_.x) * (position_movable_.x - position_turret_.x);
-		float diff_y_ = (position_movable_.y - position_turret_.y) * (position_movable_.y - position_turret_.y);
+		float diff_x_ = (direction_.x - position_turret_.x) * (direction_.x - position_turret_.x);
+		float diff_y_ = (direction_.y - position_turret_.y) * (direction_.y - position_turret_.y);
 
 		float distance = sqrt(diff_x_ + diff_y_);
 
@@ -129,18 +130,18 @@ void kamikaze::kamikaze_range_check(Vector2f position_entity)
 	}
 }
 
-void kamikaze::rotate_and_move_towards_target(Vector2f position_entity)
+void kamikaze::rotate_towards_target()
 {
 	if (is_active_ == true)
 	{
-		Vector2f position_movable_ = position_entity;
+		Vector2f position_movable_ = direction_;
 		Vector2f position_turret_ = getPosition();
 
 		float diff_x_ = position_turret_.x - position_movable_.x;
 		float diff_y_ = position_turret_.y - position_movable_.y;
 
 
-		float angle_ = atan2(diff_x_, diff_y_);
+		angle_ = atan2(diff_x_, diff_y_);
 		if (angle_ < 0)
 		{
 			angle_ += (2 * 3.1416);
@@ -149,20 +150,7 @@ void kamikaze::rotate_and_move_towards_target(Vector2f position_entity)
 		float angle_deg = angle_ *(180.0000 / 3.1416);
 
 		angle_deg = -angle_deg;
-		setRotation(angle_deg);
-
-
-		float moveX = (float)cos(angle_) * speed_;
-		float moveY = (float)sin(angle_) * speed_;
-		float x = position_movable_.x;
-		float y = position_movable_.y;
-
-		sf::Vector2f prochainePosition = sf::Vector2f(x + moveX, y + moveY);
-		if (sqrt(((prochainePosition.x - position_movable_.x)*(prochainePosition.x - position_movable_.x)) + ((prochainePosition.y - position_movable_.y)*(prochainePosition.y - position_movable_.y))) > speed_)
-		{
-			setPosition(x + moveX, y + moveY);
-		}
-
+		setRotation(angle_deg);		
 	}
 }
 
@@ -174,4 +162,45 @@ bool kamikaze::get_has_exploded()
 void kamikaze::set_has_exploded(bool has_exploded)
 {
 	has_exploded_ = has_exploded;
+}
+
+void kamikaze::move()
+{
+	is_moving_down = false;
+	is_moving_up = false;
+	is_moving_right = false;
+	is_moving_left = false;
+	float deltaX = direction_.x - getPosition().x;
+	float deltaY = direction_.y - getPosition().y;
+
+	float angle = (atan2(deltaY, deltaX));
+	if (angle < 0)
+	{
+		angle += (2 * 3.1416);
+	}
+
+	float moveX = (float)cos(angle) * speed_;
+	float moveY = (float)sin(angle) * speed_;
+	float x = getPosition().x;
+	float y = getPosition().y;
+
+	setPosition(x + moveX, y + moveY);
+	current_speed_x = moveX;
+	current_speed_y = moveY;
+	if (current_speed_x < 0)
+	{
+		is_moving_left = true;
+	}
+	else if(current_speed_x > 0)
+	{
+		is_moving_right = true;
+	}
+	if (current_speed_y < 0)
+	{
+		is_moving_up = true;
+	}
+	else if (current_speed_y > 0)
+	{
+		is_moving_down = true;
+	}
 }

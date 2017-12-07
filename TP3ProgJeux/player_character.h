@@ -12,14 +12,13 @@ public:
 	 static Texture texture_player_character_;
 	 void draw(sf::RenderWindow& main_win);
 	 float get_speed();
-	 float get_base_speed();
+
 	 void end_of_level(bool end_of_level);
 
 
 private:
 	bool end_of_level_;
 	bool base_speed_applied_;
-	int size_sprite_;
 	int anim_delay;
 	int anim_delay_counter;
 	bool is_respawning_;

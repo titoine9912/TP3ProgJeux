@@ -72,7 +72,7 @@ bool Game::init()
 		return false;
 	}
 
-	if(!tile::load_textures("Sprites\\pipe.png"))
+	if(!tile::load_textures("Sprites\\x_tile.png"))
 	{
 		return false;
 	}
@@ -167,6 +167,7 @@ void Game::update()
 	for (size_t i = 0; i < kamikazes_.size(); i++)
 	{
 		kamikazes_[i].update(player_character_.getPosition());
+		movable_and_tile_collision_detection(&kamikazes_[i]);
 
 		if (kamikazes_[i].get_is_active() == false)
 		{
@@ -178,6 +179,7 @@ void Game::update()
 					{
 						explosion_[j].activate_explosion(kamikazes_[i].getPosition());
 						kamikazes_[i].set_has_exploded(true);
+						break;
 					}
 				}
 			}
@@ -194,6 +196,7 @@ void Game::update()
 		scrolling_background_.move(0);
 		player_character_.update();
 		movable_and_tile_collision_detection(&player_character_);
+		
 }
 
 void Game::draw()
@@ -239,7 +242,7 @@ Game::game_state Game::get_current_game_state()
 	return current_game_state_;
 }
 
-void Game::movable_and_tile_collision_detection(movable* movable) const
+void Game::movable_and_tile_collision_detection(movable* movable ) const
 {
 	movable->set_is_colliding_wall_left(false);
 	movable->set_is_colliding_wall_right(false);
@@ -298,7 +301,92 @@ void Game::movable_and_tile_collision_detection(movable* movable) const
 				if (tiles_[j].contains(movable->get_right_upper_point()) ||
 					tiles_[j].contains(movable->get_right_lower_point()))
 				{
-					movable_adjustment.x = movable_adjustment.x -(movable->get_speed_x());
+
+					if((movable->get_is_going_up() ==true || movable->get_is_going_down() == true) && movable->get_base_speed() >0)
+					{
+						movable_adjustment.x = movable_adjustment.x - (movable->get_speed_x()+1);
+					}
+					else
+					{
+						movable_adjustment.x = movable_adjustment.x - (movable->get_speed_x());
+					}
+					movable->set_is_colliding_wall_right(true);
+				}
+			}
+		}
+	}
+	movable->adjust_movable_position(movable_adjustment);
+}
+
+
+void Game::movable_and_kamikaze_collision_detection(movable* movable) const
+{
+	movable->set_is_colliding_wall_left(false);
+	movable->set_is_colliding_wall_right(false);
+	movable->set_is_colliding_platform_over(false);
+	movable->set_is_colliding_platform_under(false);
+
+	auto movable_adjustment = Vector2f(0, 0);
+	for (size_t j = 0; j < kamikazes_.size(); j++)
+	{
+		if (abs(movable->getPosition().x - kamikazes_[j].getPosition().x) <=
+			kamikazes_[j].getGlobalBounds().width + movable->getGlobalBounds().width
+			&&
+			abs(movable->getPosition().y - kamikazes_[j].getPosition().y) <=
+			kamikazes_[j].getGlobalBounds().height + movable->getGlobalBounds().height)
+		{
+			if (movable->get_is_going_up() == true)
+			{
+
+				if (kamikazes_[j].contains(movable->get_top_left_point()) ||
+					kamikazes_[j].contains(movable->get_top_right_point()))
+				{
+					if (movable->get_speed_y() < 0 && movable->get_is_colliding_platform_over_() == false)
+					{
+						movable_adjustment.y = movable_adjustment.y + fabs(movable->get_speed_y());
+					}
+					movable->set_is_colliding_platform_over(true);
+				}
+			}
+			if (movable->get_is_going_down() == true)
+			{
+				if (kamikazes_[j].contains(movable->get_bottom_left_point()) ||
+					kamikazes_[j].contains(movable->get_bottom_right_point()))
+				{
+					if (movable_adjustment.y >= 0)
+					{
+						movable_adjustment.y = movable_adjustment.y - movable->get_speed_y();
+					}
+				}
+				movable->set_is_colliding_platform_under(true);
+			}
+			if (movable->get_is_going_left() == true && movable->get_is_colliding_wall_left_() == false)
+			{
+				if (kamikazes_[j].contains(movable->get_left_lower_point()) ||
+					kamikazes_[j].contains(movable->get_left_upper_point()))
+				{
+					if (movable_adjustment.x <= 0)
+					{
+						movable_adjustment.x = movable_adjustment.x + fabs(movable->get_speed_x());
+					}
+				}
+
+			}
+			if (movable->get_is_going_right() == true && movable->get_is_colliding_wall_right_() == false)
+			{
+
+				if (kamikazes_[j].contains(movable->get_right_upper_point()) ||
+					kamikazes_[j].contains(movable->get_right_lower_point()))
+				{
+
+					if ((movable->get_is_going_up() == true || movable->get_is_going_down() == true) && movable->get_base_speed() >0)
+					{
+						movable_adjustment.x = movable_adjustment.x - (movable->get_speed_x() + 1);
+					}
+					else
+					{
+						movable_adjustment.x = movable_adjustment.x - (movable->get_speed_x());
+					}
 					movable->set_is_colliding_wall_right(true);
 				}
 			}

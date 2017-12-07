@@ -286,12 +286,6 @@ float player_character::get_speed()
 }
 
 
-float player_character::get_base_speed()
-{
-	return base_speed_;
-}
-
-
 void player_character::end_of_level(bool end_of_level)
 {
 	end_of_level_ = end_of_level;

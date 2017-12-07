@@ -18,9 +18,6 @@ public:
 
 private:
 	Sprite sprite_turret_tile_;
-	int size_sprite_;
-	int anim_delay;
-	int anim_delay_counter;
 	bool triggered_;
 	float trigger_range_;
 	Vector2f position_;

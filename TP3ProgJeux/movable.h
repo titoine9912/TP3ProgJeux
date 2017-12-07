@@ -90,11 +90,14 @@ public:
 	/// </summary>
 	/// <returns></returns>
 	Vector2f get_left_lower_point() const;
+	
+
 
 	void adjust_movable_position(Vector2f adjustment_vector);
 
 	float get_speed_x();
 	float get_speed_y();
+	float get_base_speed();
 
 	// Accessors
 	bool get_is_active();

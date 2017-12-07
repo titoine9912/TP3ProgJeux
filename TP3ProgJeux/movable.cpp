@@ -137,3 +137,9 @@ bool movable::get_is_colliding_wall_right_()
 {
 	return is_colliding_wall_right_;
 }
+
+
+float movable::get_base_speed()
+{
+	return base_speed_;
+}

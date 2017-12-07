@@ -89,6 +89,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="base_enemy.cpp" />
+    <ClCompile Include="base_projectile.cpp" />
     <ClCompile Include="base_turret.cpp" />
     <ClCompile Include="bomb_launcher_bonus.cpp" />
     <ClCompile Include="bonus.cpp" />
@@ -114,6 +115,7 @@
     <ClCompile Include="pause_menu.cpp" />
     <ClCompile Include="player_character.cpp" />
     <ClCompile Include="point_bonus.cpp" />
+    <ClCompile Include="projectile.cpp" />
     <ClCompile Include="scrolling_background.cpp" />
     <ClCompile Include="text.cpp" />
     <ClCompile Include="tile.cpp" />
@@ -124,6 +126,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\TP2\TP2_Programmation_SideScroller\9_1_TP2_SideScrollingFighter\9_1_TP2_SideScrollingFighter\menu.h" />
     <ClInclude Include="base_enemy.h" />
+    <ClInclude Include="base_projectile.h" />
     <ClInclude Include="base_turret.h" />
     <ClInclude Include="bitmask_manager.h" />
     <ClInclude Include="bomb_launcher_bonus.h" />
@@ -152,6 +155,7 @@
     <ClInclude Include="pile.hpp" />
     <ClInclude Include="player_character.h" />
     <ClInclude Include="point_bonus.h" />
+    <ClInclude Include="projectile.h" />
     <ClInclude Include="scrolling_background.h" />
     <ClInclude Include="text.h" />
     <ClInclude Include="tile.h" />
