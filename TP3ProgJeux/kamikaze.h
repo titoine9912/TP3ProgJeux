@@ -17,6 +17,7 @@ public:
 	void move();
 
 private:
+
 	Vector2f direction_;
 	int size_sprite_;
 	int anim_delay;

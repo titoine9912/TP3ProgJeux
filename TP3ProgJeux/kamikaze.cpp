@@ -57,6 +57,7 @@ void kamikaze::set_texture()
 {
 	setTexture(texture_kamikaze_);
 	setTextureRect(int_rects_movable_[0][0]);
+	
 }
 
 void kamikaze::visual_adjustments()
@@ -88,10 +89,11 @@ void kamikaze::visual_adjustments()
 	left_lower_point_ = Vector2f(-8, 26);
 	bottom_left_point_ = Vector2f(12, height);
 	bottom_right_point_ = Vector2f(width - 12, height);
-	right_upper_point_ = Vector2f(width, height*0.25f);
-	right_lower_point_ = Vector2f(width, height*0.75f);
+	right_upper_point_ = Vector2f(width-10, height*0.25f);
+	right_lower_point_ = Vector2f(width-10, height*0.75f);
 
 	setOrigin(width / 2, width / 2);
+	
 
 }
 

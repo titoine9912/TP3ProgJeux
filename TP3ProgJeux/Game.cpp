@@ -168,6 +168,7 @@ void Game::update()
 	{
 		kamikazes_[i].update(player_character_.getPosition());
 		movable_and_tile_collision_detection(&kamikazes_[i]);
+		movable_and_kamikaze_collision_detection(&kamikazes_[i]);
 
 		if (kamikazes_[i].get_is_active() == false)
 		{
