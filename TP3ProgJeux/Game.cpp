@@ -170,13 +170,13 @@ void Game::update()
 
 
 
-	/*for (auto i = liste_projectiles_base_.begin(); i != liste_projectiles_base_.end(); ++i)
+	for (auto i = liste_projectiles_base_.begin(); i != liste_projectiles_base_.end(); ++i)
 	{
 		if (i==liste_projectiles_base_.begin())
 		{
 			(*i).counter();
 		}
-		if (i->get_is_active())
+		if (i->get_is_active()==true)
 		{
 			(*i).update(view_game_);
 		}
@@ -184,7 +184,7 @@ void Game::update()
 		{
 			(*i).shoot(player_character_.getPosition(), Vector2f(0, 0));
 		}
-	}*/
+	}
 
 	for (size_t i = 0; i < base_turrets_.size(); i++)
 	{
