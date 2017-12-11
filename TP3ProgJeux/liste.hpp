@@ -63,33 +63,33 @@ public:
 
 	T& operator*()const
 	{
-		return &POINTEUR;
+		return POINTEUR->value;
 	}
 
-	T* operator->()const { return &(POINTEUR->CONTENU); }
+	T* operator->()const { return &(POINTEUR->value); }
 
 	iterator& operator++()
 	{
 		++POINTEUR;
-		return &POINTEUR;
+		return *this;
 	}
 	
 	iterator operator++(int)
 	{
 		POINTEUR++;
-		return POINTEUR;
+		return *this;
 	}
 
 	iterator& operator--()
 	{
 		--POINTEUR;
-		return &POINTEUR;
+		return *this;
 	}
 
 	iterator operator--(int)
 	{
 		POINTEUR--;
-		return POINTEUR;
+		return *this;
 	}
 
 	bool operator==(const iterator&droite)const

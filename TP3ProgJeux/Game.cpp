@@ -99,6 +99,18 @@ bool Game::init()
 	{
 		return false;
 	}
+	if (!base_projectile::load_textures("Sprites\\base_projectile_.png", base_projectile::texture_base_projectile_))
+	{
+		return false;
+	}
+
+	for (int i = 0; i < 100; ++i)
+	{
+		liste_projectiles_base_.push_front(base_projectile::base_projectile());
+		liste_projectiles_base_.front().visual_adjustments();
+		liste_projectiles_base_.front().setTexture(base_projectile::texture_base_projectile_);
+	}
+
 
 	view_current_center_ = Vector2f(LARGEUR/2, HAUTEUR/2);
 	view_game_.setCenter(view_current_center_);
@@ -155,6 +167,24 @@ void Game::update()
 	{
 		player_character_.end_of_level(true);
 	}
+
+
+
+	/*for (auto i = liste_projectiles_base_.begin(); i != liste_projectiles_base_.end(); ++i)
+	{
+		if (i==liste_projectiles_base_.begin())
+		{
+			(*i).counter();
+		}
+		if (i->get_is_active())
+		{
+			(*i).update(view_game_);
+		}
+		else if (input_manager::get_input_manager()->get_space_key_is_pressed() == true)
+		{
+			(*i).shoot(player_character_.getPosition(), Vector2f(0, 0));
+		}
+	}*/
 
 	for (size_t i = 0; i < base_turrets_.size(); i++)
 	{
@@ -233,6 +263,13 @@ void Game::draw()
 		explosion_[i].draw(mainWin);
 	}
 
+	for (auto i = liste_projectiles_base_.begin(); i != liste_projectiles_base_.end(); ++i)
+	{
+		if (i->get_is_active())
+		{
+			(*i).draw(mainWin);		
+		}
+	}
 
 	mainWin.display();
 
