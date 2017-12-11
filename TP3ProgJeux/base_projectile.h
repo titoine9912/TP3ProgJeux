@@ -4,14 +4,16 @@ class base_projectile : public projectile
 {
 public:
 	base_projectile();
-	void update();
+	void update(sf::View view);
 	void move();
 	void visual_adjustments();
 	void set_texture();
 	void draw(sf::RenderWindow& main_win);
 	static Texture texture_base_projectile_;
+	void counter();
+	void shoot(Vector2f position, Vector2f direction);
 
 private:
-	static const int fire_rate_;
+	static float fire_rate_counter_;
 
 };

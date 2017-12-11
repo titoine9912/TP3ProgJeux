@@ -4,9 +4,11 @@ class projectile : public movable
 {
 public:
 	projectile();
-	void shoot(Vector2f position, Vector2f direction);
 
+	
 
-private :
+protected :
+	float fire_rate_;
 	Vector2f direction_;
+	bool hero_projectile_;
 };

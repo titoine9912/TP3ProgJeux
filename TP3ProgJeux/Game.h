@@ -11,6 +11,10 @@
 #include "boss.h"
 #include "scrolling_background.h"
 #include "explosion.h"
+#include "liste.hpp"
+#include "file.hpp"
+#include "projectile.h"
+#include "base_projectile.h"
 
 
 
@@ -64,6 +68,8 @@ private:
 	std::vector<boss> bosses_;
 	std::vector<kamikaze> kamikazes_;
 	explosion explosion_[15];
+	Liste<base_projectile> liste_projectiles_base_;
+	File<enemy> liste_ennemy_;
 
 	player_character player_character_;
 	scrolling_background scrolling_background_;

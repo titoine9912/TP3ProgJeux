@@ -1,6 +1,6 @@
 #include "base_projectile.h"
 Texture base_projectile::texture_base_projectile_;
-
+float base_projectile::fire_rate_counter_;
 base_projectile::base_projectile()
 {
 	//Animation Variables
@@ -11,10 +11,16 @@ base_projectile::base_projectile()
 
 	//State Variable
 	is_active_ = false;
+	fire_rate_ = 10;
+	fire_rate_counter_ = fire_rate_;
 }
 
-void base_projectile::update()
+void base_projectile::update(sf::View view)
 {
+	if ((getPosition().x > view.getCenter().x + (view.getSize().x) / 2) || (getPosition().x < 0) || (getPosition().y < 0) || (getPosition().y > view.getCenter().y + (view.getSize().y) / 2))
+	{
+		is_active_ = false;
+	}
 	if(is_active_ == true)
 	{
 		move();
@@ -79,5 +85,20 @@ void base_projectile::draw(sf::RenderWindow& main_win)
 	{
 		main_win.draw(*this);
 	}
+}
+
+void base_projectile::counter()
+{
+	fire_rate_counter_++;
+}
+void base_projectile::shoot(Vector2f position, Vector2f direction)
+{
+	if(fire_rate_counter_>=fire_rate_)
+	{ 
+		is_active_ = true;
+		direction_ = direction;
+		setPosition(position);
+		fire_rate_counter_ = 0;
+	}	
 }
 

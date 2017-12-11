@@ -92,6 +92,7 @@
     <ClCompile Include="base_projectile.cpp" />
     <ClCompile Include="base_turret.cpp" />
     <ClCompile Include="bomb_launcher_bonus.cpp" />
+    <ClCompile Include="bomb_launcher_projectile.cpp" />
     <ClCompile Include="bonus.cpp" />
     <ClCompile Include="boss.cpp" />
     <ClCompile Include="button.cpp" />
@@ -130,6 +131,7 @@
     <ClInclude Include="base_turret.h" />
     <ClInclude Include="bitmask_manager.h" />
     <ClInclude Include="bomb_launcher_bonus.h" />
+    <ClInclude Include="bomb_launcher_projectile.h" />
     <ClInclude Include="bonus.h" />
     <ClInclude Include="boss.h" />
     <ClInclude Include="button.h" />
