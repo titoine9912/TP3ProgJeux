@@ -15,6 +15,7 @@
 #include "file.hpp"
 #include "projectile.h"
 #include "base_projectile.h"
+#include "bomb_launcher_projectile.h"
 
 
 
@@ -42,7 +43,7 @@ public:
 	static const int HAUTEUR = 720;
 	static game_state get_current_game_state();
 private:
-
+	bool has_shot_ = false;
 	bool init();
 	void getInputs();
 	void update();
@@ -69,6 +70,7 @@ private:
 	std::vector<kamikaze> kamikazes_;
 	explosion explosion_[15];
 	Liste<base_projectile> liste_projectiles_base_;
+	Liste<bomb_launcher_projectile> liste_bomb_launcher_projectile_;
 	File<enemy> liste_ennemy_;
 
 	player_character player_character_;

@@ -162,6 +162,9 @@
     <ClCompile Include="bomb_launcher_projectile.cpp">
       <Filter>Fichiers sources\entity\movable\Projectile</Filter>
     </ClCompile>
+    <ClCompile Include="projectile_laser.cpp">
+      <Filter>Fichiers sources\entity\movable\Projectile</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -279,6 +282,9 @@
       <Filter>Fichiers d%27en-tête\entity\movable\projectile</Filter>
     </ClInclude>
     <ClInclude Include="bomb_launcher_projectile.h">
+      <Filter>Fichiers d%27en-tête\entity\movable\projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="projectile_Laser.h">
       <Filter>Fichiers d%27en-tête\entity\movable\projectile</Filter>
     </ClInclude>
   </ItemGroup>
