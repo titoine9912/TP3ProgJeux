@@ -16,4 +16,5 @@ public:
 
 private:
 	//static float fire_rate_counter_bomb;
+	//test
 };
