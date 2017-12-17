@@ -154,6 +154,9 @@ void input_manager::update(sf::RenderWindow& main_win, sf::Event& event)
 		case Keyboard::Key::D:
 			d_key_is_pressed_ = true;
 			break;
+		case Keyboard::Key::F:
+			f_key_is_pressed_ = true;
+			break;
 
 		default: 
 			break;

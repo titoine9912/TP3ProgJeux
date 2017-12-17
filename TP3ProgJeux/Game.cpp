@@ -226,7 +226,7 @@ void Game::update()
 		{
 			if (i == liste_bomb_launcher_projectile_.begin())
 			{
-				(*i).counter();
+				//(*i).counter();
 			}
 			if (i->get_is_active() == true)
 			{

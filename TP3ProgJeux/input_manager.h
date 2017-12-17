@@ -114,6 +114,8 @@ public:
 	/// <returns></returns>
 	bool get_d();
 
+	bool get_f_key_is_pressed()const;
+
 	bool get_space_key_is_pressed() const;
 
 	sf::String get_last_key_sequence();
@@ -136,6 +138,7 @@ private:
 	bool w_key_is_pressed_;
 	bool a_key_is_pressed_;
 	bool s_key_is_pressed_;
+	bool f_key_is_pressed_;
 	bool d_key_is_pressed_;
 #pragma endregion 
 
