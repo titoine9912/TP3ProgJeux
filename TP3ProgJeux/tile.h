@@ -12,6 +12,7 @@ class tile : public entity
 public :
 	//Overload Constructor
 	tile(Vector2f position, tile_type tile);
+	void Release();
 
 	// Mutators
 	/// <summary>

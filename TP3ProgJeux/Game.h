@@ -48,12 +48,15 @@ private:
 	void update();
 	void draw();
 	bool load_map();
-	void movable_and_tile_collision_detection(movable * movable) const;
-	void movable_and_kamikaze_collision_detection(movable *movable)const;
+	void movable_and_tile_collision_detection(movable*  movable) const;
+	void movable_and_kamikaze_collision_detection(movable* movable)const;
+	void Release();
 
 	//Game variables
 	bool character_outofbounds_left_;
 	bool character_outofbounds_right_;
+	bool game_has_started_;
+	bool load_new_level_;
 	Vector2f current_respawn_point_;
 	Vector2f default_respawn_point_;
 	map map_;

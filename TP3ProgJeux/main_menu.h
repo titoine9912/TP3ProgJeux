@@ -15,9 +15,6 @@ public:
 private:
 	text title_;
 	button play_;
-	button options_;
-	button scores_;
-	button change_account_;
 	button exit_;
 };
 

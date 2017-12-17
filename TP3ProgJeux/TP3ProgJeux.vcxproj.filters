@@ -230,9 +230,6 @@
     <ClInclude Include="scrolling_background.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\TP2\TP2_Programmation_SideScroller\9_1_TP2_SideScrollingFighter\9_1_TP2_SideScrollingFighter\menu.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="button.h">
       <Filter>Fichiers d%27en-tête\Menu</Filter>
     </ClInclude>

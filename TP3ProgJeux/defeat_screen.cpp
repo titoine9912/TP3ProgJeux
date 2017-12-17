@@ -1,5 +1,5 @@
 #include  "defeat_screen.h"
-#include "game.h"
+#include "Game.h"
 
 
 defeat_screen::~defeat_screen()
@@ -8,13 +8,13 @@ defeat_screen::~defeat_screen()
 
 defeat_screen::defeat_screen()
 {
-	/*
+	
 	title_ = text("Defeat!", sf::Vector2f(0, 0), text::title);
-	title_.set_position(sf::Vector2f(game::view_width / 2 - title_.get_text_size() / 2, game::view_height / 2 - 60));
+	title_.set_position(sf::Vector2f(Game::LARGEUR / 2 - title_.get_text_size() / 2, Game::HAUTEUR / 2 - 60));
 
 	back_ = button("Back", sf::Vector2f(30, 70), text::normal);
-	back_.set_position(sf::Vector2f(game::view_width / 2 - back_.get_text_size() / 2, game::view_height / 2 + 60));
-	*/
+	back_.set_position(sf::Vector2f(Game::LARGEUR / 2 - back_.get_text_size() / 2, Game::HAUTEUR / 2 + 60));
+	
 }
 
 void defeat_screen::draw(sf::RenderWindow& main_win)

@@ -125,7 +125,6 @@
     <ClCompile Include="vie_bonus.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\TP2\TP2_Programmation_SideScroller\9_1_TP2_SideScrollingFighter\9_1_TP2_SideScrollingFighter\menu.h" />
     <ClInclude Include="base_enemy.h" />
     <ClInclude Include="base_projectile.h" />
     <ClInclude Include="base_turret.h" />

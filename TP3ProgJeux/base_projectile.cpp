@@ -48,19 +48,19 @@ void base_projectile::move()
 
 void base_projectile::visual_adjustments()
 {
-	const int nb_projectile_frames = 2;
-	const auto nb_projectile_anims = 1;
+	nb_movable_frames = 2;
+	nb_movable_anims = 1;
 
-	int width = texture_base_projectile_.getSize().x / nb_projectile_frames;
-	int height = texture_base_projectile_.getSize().y / nb_projectile_anims;
+	int width = texture_base_projectile_.getSize().x / nb_movable_frames;
+	int height = texture_base_projectile_.getSize().y / nb_movable_anims;
 
-	int_rects_movable_ = new IntRect*[nb_projectile_anims];
+	int_rects_movable_ = new IntRect*[nb_movable_anims];
 
 
-	for (size_t i = 0; i < nb_projectile_anims; i++)
+	for (size_t i = 0; i < nb_movable_anims; i++)
 	{
-		int_rects_movable_[i] = new IntRect[nb_projectile_frames];
-		for (size_t j = 0; j < nb_projectile_frames; j++)
+		int_rects_movable_[i] = new IntRect[nb_movable_frames];
+		for (size_t j = 0; j < nb_movable_frames; j++)
 		{
 			int_rects_movable_[i][j].left = width * j;
 			int_rects_movable_[i][j].top = height * i;
@@ -79,6 +79,7 @@ void base_projectile::set_texture()
 	size_sprite_ = texture_base_projectile_.getSize().x / 2;
 }
 
+
 void base_projectile::draw(sf::RenderWindow& main_win)
 {
 	if (is_active_ == true)
@@ -86,6 +87,7 @@ void base_projectile::draw(sf::RenderWindow& main_win)
 		main_win.draw(*this);
 	}
 }
+
 
 void base_projectile::counter()
 {
