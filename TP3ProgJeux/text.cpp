@@ -45,7 +45,7 @@ void text::set_text_style(style_text style)
 	case title:
 		text_.setFont(font_bungee_);
 		color_ = sf::Color(110, 178, 0);
-		color_highlight_ = sf::Color(255, 255, 255);
+		color_highlight_ = sf::Color(157, 255, 0);
 		char_size_ = 26;
 		break;
 	case normal_plus:

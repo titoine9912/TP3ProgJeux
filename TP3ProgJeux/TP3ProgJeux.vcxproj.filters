@@ -162,9 +162,6 @@
     <ClCompile Include="bomb_launcher_projectile.cpp">
       <Filter>Fichiers sources\entity\movable\Projectile</Filter>
     </ClCompile>
-    <ClCompile Include="projectile_laser.cpp">
-      <Filter>Fichiers sources\entity\movable\Projectile</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -233,6 +230,9 @@
     <ClInclude Include="scrolling_background.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\TP2\TP2_Programmation_SideScroller\9_1_TP2_SideScrollingFighter\9_1_TP2_SideScrollingFighter\menu.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
     <ClInclude Include="button.h">
       <Filter>Fichiers d%27en-tête\Menu</Filter>
     </ClInclude>
@@ -279,9 +279,6 @@
       <Filter>Fichiers d%27en-tête\entity\movable\projectile</Filter>
     </ClInclude>
     <ClInclude Include="bomb_launcher_projectile.h">
-      <Filter>Fichiers d%27en-tête\entity\movable\projectile</Filter>
-    </ClInclude>
-    <ClInclude Include="projectile_Laser.h">
       <Filter>Fichiers d%27en-tête\entity\movable\projectile</Filter>
     </ClInclude>
   </ItemGroup>

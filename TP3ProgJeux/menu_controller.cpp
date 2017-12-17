@@ -5,25 +5,26 @@ menu_controller *menu_controller::menu_controller_;
 
 menu_controller::menu_controller()
 {
-	
-	current_game_state_ = Game::get_current_game_state();
-	if (current_game_state_ == Game::game_state::main_menu)
+	/*
+	current_game_state_ = game::get_current_game_state();
+	if (current_game_state_ == game::game_state::main_menu)
 	{
-		current_menu_type_ = menu_factory::menu_factory::main_menu_e;
+		current_menu_type_ = menu_factory::menu_factory::log_in_e;
 	}
-	else if (current_game_state_ == Game::game_state::paused)
+	else if (current_game_state_ == game::game_state::paused)
 	{
 		current_menu_type_ = menu_factory::menu_factory::pause_menu_e;
 	}
-	else if (current_game_state_ == Game::game_state::victory_screen)
+	else if (current_game_state_ == game::game_state::victory_screen)
 	{
 		current_menu_type_ = menu_factory::menu_factory::victory_screen_e;
 	}
-	else if (current_game_state_ == Game::game_state::defeat_screen)
+	else if (current_game_state_ == game::game_state::defeat_screen)
 	{
 		current_menu_type_ = menu_factory::menu_factory::defeat_screen_e;
 	}
 	current_menu_ = menu_factory::menu_factory::create_menu(current_menu_type_);
+	*/
 }
 
 menu_controller* menu_controller::get_menu_controller()
@@ -42,21 +43,56 @@ void menu_controller::release()
 	}
 }
 
-Game::game_state menu_controller::update()
+/*
+game::game_state menu_controller::update()
 {
 	const auto new_menu_type = current_menu_->update();
 	// Play Singleplayer mode.
 	if (new_menu_type == menu_factory::menu_factory::play_singleplayer_e)
 	{
-		current_game_state_ = Game::game_state::singleplayer;
+		current_game_state_ = game::game_state::singleplayer;
+	}
+	// Play COOP mode.
+	else if (new_menu_type == menu_factory::menu_factory::play_coop_e)
+	{
+		current_game_state_ = game::game_state::coop;
+	}
+	// Play VS mode.
+	else if (new_menu_type == menu_factory::menu_factory::play_vs_e)
+	{
+		current_game_state_ = game::game_state::vs;
 	}
 	// Exit the game.
 	else if (new_menu_type == menu_factory::menu_factory::exit_e)
 	{
-		current_game_state_ = Game::game_state::exiting;
+		current_game_state_ = game::game_state::exiting;
+	}
+	// Create new account.
+	else if (new_menu_type == menu_factory::menu_factory::main_menu_e && current_menu_type_ == menu_factory::menu_factory::create_account_e)
+	{
+		if (account_controller::create_account(account_controller::get_username_to_evaluate(), account_controller::get_password_to_evaluate()))
+		{
+			account_controller::log_in(account_controller::get_username_to_evaluate(), account_controller::get_password_to_evaluate());
+			current_menu_type_ = new_menu_type;
+			change_menu(current_menu_type_);
+		}
+		account_controller::set_username_to_evaluate("");
+		account_controller::set_password_to_evaluate("");
+	}
+	// Log in.
+	else if (new_menu_type == menu_factory::menu_factory::main_menu_e && current_menu_type_ == menu_factory::menu_factory::log_in_e)
+	{
+		if (account_controller::log_in(account_controller::get_username_to_evaluate(), account_controller::get_password_to_evaluate()))
+		{
+			current_menu_type_ = new_menu_type;
+			change_menu(current_menu_type_);
+		}
+		account_controller::set_username_to_evaluate("");
+		account_controller::set_password_to_evaluate("");
 	}
 	// If game is paused, return to Pause Menu from the options menu.
-	else if (new_menu_type == menu_factory::menu_factory::pause_menu_e)
+	else if (new_menu_type == menu_factory::menu_factory::main_menu_e && 
+		current_menu_type_ == menu_factory::menu_factory::options_e)
 	{
 		current_menu_type_ = menu_factory::menu_factory::pause_menu_e;
 		change_menu(current_menu_type_);
@@ -65,7 +101,7 @@ Game::game_state menu_controller::update()
 	else if (new_menu_type == menu_factory::menu_factory::main_menu_e &&
 		current_menu_type_ == menu_factory::menu_factory::pause_menu_e)
 	{
-		current_game_state_ = Game::game_state::main_menu;
+		current_game_state_ = game::game_state::main_menu;
 		current_menu_type_ = new_menu_type;
 		change_menu(current_menu_type_);
 	}
@@ -75,13 +111,13 @@ Game::game_state menu_controller::update()
 		current_menu_type_ = new_menu_type;
 		change_menu(current_menu_type_);
 	}
-	if (new_menu_type == menu_factory::menu_factory::main_menu_e && current_game_state_ != Game::main_menu)
+	if (new_menu_type == menu_factory::menu_factory::main_menu_e && current_game_state_ != game::main_menu)
 	{
-		current_game_state_ = Game::game_state::main_menu;
+		current_game_state_ = game::game_state::main_menu;
 	}
 	return current_game_state_;
 }
-
+*/
 
 void menu_controller::draw(sf::RenderWindow & main_win) const
 {

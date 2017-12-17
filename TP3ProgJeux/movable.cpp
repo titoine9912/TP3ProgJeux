@@ -6,14 +6,6 @@ movable::movable(Vector2f position, float speed) : entity(position), is_active_(
 	
 }
 
-void movable::Release()
-{
-	for (size_t i = 0; i < nb_movable_anims; i++)
-	{
-		delete[] int_rects_movable_[i];
-	}
-	delete[] int_rects_movable_;
-}
 
 void movable::move()
 {

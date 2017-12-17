@@ -7,7 +7,6 @@ sf::Texture scrolling_background::layer2_texture_;
 sf::Texture scrolling_background::layer3_texture_;
 sf::Texture scrolling_background::layer4_texture_;
 
-
 scrolling_background::scrolling_background(const int largeur, const int hauteur) : SCREEN_WIDTH_(largeur), SCREEN_HEIGHT_(hauteur)
 {
 	speed_layer1_ = 0.02f;
@@ -23,13 +22,10 @@ void scrolling_background::set_texture()
 	layer3_sprite_.setTexture(layer3_texture_);
 	layer4_sprite_.setTexture(layer4_texture_);
 
-
 	layer1_sprite_.setPosition(0, 0);
 	layer2_sprite_.setPosition(0, 0);
 	layer3_sprite_.setPosition(0, 0);
 	layer4_sprite_.setPosition(0, 0);
-
-
 
 	positions_layer1_[0].x = 0.0f;
 	positions_layer1_[0].y = 0.0f;

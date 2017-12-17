@@ -9,11 +9,6 @@ tile::tile(Vector2f position, tile_type tile): entity(position)
 	setPosition(Vector2f(position));
 }
 
-void tile::Release()
-{
-	delete[] int_rects_tiles_;
-}
-
 bool tile::load_textures(const char texture_path[])
 {
 	if (!texture_.loadFromFile(texture_path)) {

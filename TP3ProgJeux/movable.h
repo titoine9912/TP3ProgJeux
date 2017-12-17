@@ -7,7 +7,7 @@ class movable : public entity
 public:
 	//Overload Constructor
 	movable(Vector2f position, float speed);
-	void Release();
+
 	// Mutators
 	/// <summary>
 	/// Moves this instance.
@@ -114,9 +114,6 @@ public:
 
 
 protected:
-
-	int nb_movable_frames;
-	int  nb_movable_anims;
 
 	bool is_colliding_platform_under_;
 	bool is_colliding_platform_over_;

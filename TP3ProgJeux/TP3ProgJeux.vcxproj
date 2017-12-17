@@ -117,7 +117,6 @@
     <ClCompile Include="player_character.cpp" />
     <ClCompile Include="point_bonus.cpp" />
     <ClCompile Include="projectile.cpp" />
-    <ClCompile Include="projectile_laser.cpp" />
     <ClCompile Include="scrolling_background.cpp" />
     <ClCompile Include="text.cpp" />
     <ClCompile Include="tile.cpp" />
@@ -126,6 +125,7 @@
     <ClCompile Include="vie_bonus.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\TP2\TP2_Programmation_SideScroller\9_1_TP2_SideScrollingFighter\9_1_TP2_SideScrollingFighter\menu.h" />
     <ClInclude Include="base_enemy.h" />
     <ClInclude Include="base_projectile.h" />
     <ClInclude Include="base_turret.h" />
@@ -158,7 +158,6 @@
     <ClInclude Include="player_character.h" />
     <ClInclude Include="point_bonus.h" />
     <ClInclude Include="projectile.h" />
-    <ClInclude Include="projectile_Laser.h" />
     <ClInclude Include="scrolling_background.h" />
     <ClInclude Include="text.h" />
     <ClInclude Include="tile.h" />

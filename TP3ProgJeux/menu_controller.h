@@ -2,7 +2,7 @@
 #define MENU_CONTROLLER_H
 #include "menu_factory.h"
 #include <SFML/Graphics/RenderWindow.hpp>
-#include "Game.h"
+#include "game.h"
 
 class menu_controller
 {
@@ -13,10 +13,11 @@ public:
 private:
 	menu_controller();
 	menu_controller(const menu_controller&);
+	//void operator=(const menu_controller&);
 	static menu_controller *menu_controller_;
 #pragma endregion 
 public:
-	Game::game_state update();
+	//game::game_state update();
 	void draw(sf::RenderWindow& main_win) const;
 
 private:
@@ -26,6 +27,6 @@ private:
 	menu_factory::menu_factory::type_menu current_menu_type_;
 	menu *current_menu_;
 
-	Game::game_state current_game_state_;
+	//game::game_state current_game_state_;
 };
 #endif

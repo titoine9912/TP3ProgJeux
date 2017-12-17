@@ -70,28 +70,26 @@ public:
 
 	iterator& operator++()
 	{
-		POINTEUR=POINTEUR->next;
+		++POINTEUR;
 		return *this;
 	}
 	
 	iterator operator++(int)
 	{
-		Box* temp = POINTEUR;
-		POINTEUR=POINTEUR->next;
-		return temp;
+		POINTEUR++;
+		return *this;
 	}
 
 	iterator& operator--()
 	{
-		POINTEUR=POINTEUR->previous;
+		--POINTEUR;
 		return *this;
 	}
 
 	iterator operator--(int)
 	{
-		Box* temp = POINTEUR;
-		POINTEUR=POINTEUR->previous;
-		return temp;
+		POINTEUR--;
+		return *this;
 	}
 
 	bool operator==(const iterator&droite)const
