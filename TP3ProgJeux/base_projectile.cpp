@@ -8,7 +8,7 @@ base_projectile::base_projectile()
 	current_frame_ = 0;
 	anim_delay_counter = 0;
 	anim_delay = 5;
-
+	speed_ = 15;
 	//State Variable
 	is_active_ = false;
 	fire_rate_ = 10;
@@ -21,13 +21,13 @@ void base_projectile::update(sf::View view)
 	{
 		is_active_ = false;
 	}
-	if(is_active_ == true)
+	if (is_active_ == true)
 	{
 		move();
 		anim_delay_counter++;
 		if (anim_delay_counter >= anim_delay)
 		{
-			if(current_anim_ <1)
+			if (current_anim_ <1)
 			{
 				current_anim_++;
 			}
@@ -74,8 +74,8 @@ void base_projectile::set_texture()
 {
 	setTexture(texture_base_projectile_);
 	setTextureRect(int_rects_movable_[0][0]);
-	setOrigin(texture_base_projectile_.getSize().x/4, texture_base_projectile_.getSize().y / 2);
-	
+	setOrigin(texture_base_projectile_.getSize().x / 4, texture_base_projectile_.getSize().y / 2);
+
 	size_sprite_ = texture_base_projectile_.getSize().x / 2;
 }
 
@@ -95,12 +95,13 @@ void base_projectile::counter()
 }
 void base_projectile::shoot(Vector2f position, Vector2f direction)
 {
-	if(fire_rate_counter_>=fire_rate_)
-	{ 
+	if (fire_rate_counter_ >= fire_rate_)
+	{
 		is_active_ = true;
 		direction_ = direction;
 		setPosition(position);
 		fire_rate_counter_ = 0;
-	}	
+	}
 }
+
 

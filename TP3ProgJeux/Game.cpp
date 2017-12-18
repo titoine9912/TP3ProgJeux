@@ -114,15 +114,26 @@ bool Game::init()
 	{
 		return false;
 	}
+	if (!bomb_launcher_projectile::load_textures("Sprites\\base_projectile_.png", bomb_launcher_projectile::texture_bomb_launcher_projectile_))
+	{
+		return false;
+	}
 
-	/*
+	
 	for (int i = 0; i < 100; ++i)
 	{
 		liste_projectiles_base_.push_front(base_projectile::base_projectile());
 		liste_projectiles_base_.front().visual_adjustments();
 		liste_projectiles_base_.front().setTexture(base_projectile::texture_base_projectile_);
 	}
-	*/
+
+	for (int i = 0; i < 3; ++i)
+	{
+		liste_bomb_launcher_projectile_.push_front(bomb_launcher_projectile::bomb_launcher_projectile());
+		liste_bomb_launcher_projectile_.front().visual_adjustments();
+		liste_bomb_launcher_projectile_.front().setTexture(bomb_launcher_projectile::texture_bomb_launcher_projectile_);
+	}
+	
 
 
 	view_current_center_ = Vector2f(LARGEUR/2, HAUTEUR/2);
@@ -198,7 +209,7 @@ void Game::update()
 		}
 
 
-		/*
+		
 		for (auto i = liste_projectiles_base_.begin(); i != liste_projectiles_base_.end(); ++i)
 		{
 			if (i == liste_projectiles_base_.begin())
@@ -214,7 +225,36 @@ void Game::update()
 				(*i).shoot(player_character_.getPosition(), Vector2f(0, 0));
 			}
 		}
-		*/
+
+		if (liste_bomb_launcher_projectile_.size() > 0)
+		{
+			for (auto i = liste_bomb_launcher_projectile_.begin(); i != liste_bomb_launcher_projectile_.end(); ++i)
+			{
+				if (i == liste_bomb_launcher_projectile_.begin())
+				{
+					(*i).counter();
+				}
+				if (i->get_is_active() == true)
+				{
+					(*i).update(view_game_);
+				}
+				else if (input_manager::get_input_manager()->get_f_key_is_pressed() == true)
+				{
+					(*i).shoot(player_character_.getPosition(), Vector2f(0, 0));
+					has_shot_ = true;
+				}
+			}
+		}
+		if (has_shot_ == true)
+		{
+			if (liste_bomb_launcher_projectile_.begin()->get_is_active() == false)
+			{
+				liste_bomb_launcher_projectile_.pop_back();
+				has_shot_ = false;
+			}
+
+		}
+		
 
 
 		for (size_t i = 0; i < base_turrets_.size(); i++)
@@ -323,7 +363,7 @@ void Game::draw()
 				explosion_[i].draw(mainWin);
 			}
 
-			/*
+			
 			for (auto i = liste_projectiles_base_.begin(); i != liste_projectiles_base_.end(); ++i)
 			{
 				if (i->get_is_active())
@@ -331,12 +371,20 @@ void Game::draw()
 					(*i).draw(mainWin);
 				}
 			}
-			*/
+			
 		}
 		else
 		{
 			mainWin.setView(view_menu_);
 			menu_controller::get_menu_controller()->draw(mainWin);
+		}
+
+		for (auto i = liste_bomb_launcher_projectile_.begin(); i != liste_bomb_launcher_projectile_.end(); ++i)
+		{
+			if (i->get_is_active())
+			{
+				(*i).draw(mainWin);
+			}
 		}
 		mainWin.display();
 	}

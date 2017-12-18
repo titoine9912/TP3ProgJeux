@@ -154,6 +154,9 @@ void input_manager::update(sf::RenderWindow& main_win, sf::Event& event)
 		case Keyboard::Key::D:
 			d_key_is_pressed_ = true;
 			break;
+		case Keyboard::Key::F:
+			f_key_is_pressed_ = true;
+			break;
 
 		default: 
 			break;
@@ -189,6 +192,8 @@ void input_manager::update(sf::RenderWindow& main_win, sf::Event& event)
 		case Keyboard::Key::D:
 			d_key_is_pressed_ = false;
 			break;
+		case Keyboard::Key::F:
+			f_key_is_pressed_ = false;
 		default: 
 			break;
 		}
@@ -251,6 +256,11 @@ bool input_manager::get_esc_key() const
 bool input_manager::get_space_key_is_pressed() const
 {
 	return space_key_is_pressed_;
+}
+
+bool input_manager::get_f_key_is_pressed()const
+{
+	return f_key_is_pressed_;
 }
 
 bool input_manager::get_enter_key() const { return enter_key_is_pressed_; }
