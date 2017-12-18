@@ -4,7 +4,7 @@
 #include "vie_bonus.h"
 #include "nuke_bonus.h"
 #include "laser_bonus.h"
-
+#include "automatic_bonus.h"
 class bonus_manager
 {
 
@@ -28,7 +28,8 @@ public:
 		const char vie_bonus_path[],
 		const char nuke_bonus_path[],
 		const char point_bonus_path[],
-		const char laser_bonus_path[]);
+		const char laser_bonus_path[],
+		const char automatic_bonus_path[]);
 	void update(sf::View view);
 	void spawn_bonus_(Vector2f position);
 	bool collision(movable* movable1);
@@ -38,7 +39,6 @@ private:
 	static bonus_manager *bonus_manager_;
 
 	int random_bonus;
-	int random_number;
 	int chance_;
 	
 	bomb_launcher_bonus bomb_launcher_bonus_;
@@ -46,6 +46,7 @@ private:
 	vie_bonus vie_bonus_;
 	nuke_bonus nuke_bonus_;
 	laser_bonus laser_bonus_;
+	automatic_bonus automatic_bonus_;
 
 
 
