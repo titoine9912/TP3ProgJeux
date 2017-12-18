@@ -162,6 +162,9 @@
     <ClCompile Include="bonus_manager.cpp">
       <Filter>Fichiers sources\entity\movable\bonus</Filter>
     </ClCompile>
+    <ClCompile Include="laser_projectile.cpp">
+      <Filter>Fichiers sources\entity\movable\Projectile</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -277,6 +280,9 @@
     </ClInclude>
     <ClInclude Include="vie_bonus.h">
       <Filter>Fichiers d%27en-tête\entity\movable\bonus</Filter>
+    </ClInclude>
+    <ClInclude Include="laser_projectile.h">
+      <Filter>Fichiers d%27en-tête\entity\movable\projectile</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

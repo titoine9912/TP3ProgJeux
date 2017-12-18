@@ -118,6 +118,10 @@ bool Game::init()
 	{
 		return false;
 	}
+	if (!laser_projectile::load_textures("Sprites\\laser_green_.png", laser_projectile::texture_laser_projectile_))
+	{
+		return false;
+	}
 
 
 	
@@ -128,12 +132,18 @@ bool Game::init()
 		liste_projectiles_base_.front().setTexture(base_projectile::texture_base_projectile_);
 	}
 
+	//la boucle ci-dessous sera a enlever plus tard, ce n'est que pour tester si les projectiles speciaux fonctionnent
 	for (int i = 0; i < 3; ++i)
 	{
 		liste_bomb_launcher_projectile_.push_front(bomb_launcher_projectile::bomb_launcher_projectile());
 		liste_bomb_launcher_projectile_.front().visual_adjustments();
 		liste_bomb_launcher_projectile_.front().setTexture(bomb_launcher_projectile::texture_bomb_launcher_projectile_);
+
+		liste_laser_projectile_.push_front(laser_projectile::laser_projectile());
+		liste_laser_projectile_.front().visual_adjustments();
+		liste_laser_projectile_.front().setTexture(laser_projectile::texture_laser_projectile_);
 	}
+
 	
 
 
@@ -242,19 +252,51 @@ void Game::update()
 				else if (input_manager::get_input_manager()->get_f_key_is_pressed() == true)
 				{
 					(*i).shoot(player_character_.getPosition(), Vector2f(0, 0));
-					has_shot_ = true;
+					has_shot_bomb_projectile_ = true;
 				}
 			}
 		}
-		if (has_shot_ == true)
+		//On retire un projectile de bomb lorsquil y a un tir
+		if (has_shot_bomb_projectile_ == true)
 		{
 			if (liste_bomb_launcher_projectile_.begin()->get_is_active() == false)
 			{
 				liste_bomb_launcher_projectile_.pop_back();
-				has_shot_ = false;
+				has_shot_bomb_projectile_ = false;
 			}
 
 		}
+
+		if (liste_laser_projectile_.size() > 0)
+		{
+			for (auto i = liste_laser_projectile_.begin(); i != liste_laser_projectile_.end(); ++i)
+			{
+				if (i == liste_laser_projectile_.begin())
+				{
+					(*i).counter();
+				}
+				if (i->get_is_active() == true)
+				{
+					(*i).update(view_game_);
+				}
+				else if (input_manager::get_input_manager()->get_g_key_is_pressed() == true)
+				{
+					(*i).shoot(player_character_.getPosition(), Vector2f(0, 0));
+					has_shot_laser_projectile_ = true;
+				}
+			}
+		}
+		//On retire un projectile laser lorsquil y a un tir 
+		if (has_shot_laser_projectile_ == true)
+		{
+			if (liste_laser_projectile_.begin()->get_is_active() == false)
+			{
+				liste_laser_projectile_.pop_back();
+				has_shot_laser_projectile_ = false;
+			}
+		}
+
+
 		
 
 
@@ -366,6 +408,14 @@ void Game::draw()
 
 			
 			for (auto i = liste_projectiles_base_.begin(); i != liste_projectiles_base_.end(); ++i)
+			{
+				if (i->get_is_active())
+				{
+					(*i).draw(mainWin);
+				}
+			}
+
+			for (auto i = liste_laser_projectile_.begin(); i != liste_laser_projectile_.end(); ++i)
 			{
 				if (i->get_is_active())
 				{
