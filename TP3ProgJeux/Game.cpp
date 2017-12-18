@@ -631,5 +631,19 @@ void Game::Release()
 			//bonus_manager::get_bonus_manager()->Release();
 		}
 
+		for (auto i = liste_laser_projectile_.begin(); i != liste_laser_projectile_.end(); ++i)
+		{
+			(*i).Release();
+		}
+
+		for (auto i = liste_bomb_launcher_projectile_.begin(); i != liste_bomb_launcher_projectile_.end(); ++i)
+		{
+			(*i).Release();
+		}
+
+		for (auto i = liste_projectiles_base_.begin(); i != liste_projectiles_base_.end(); ++i)
+		{
+			(*i).Release();
+		}
 	}
 }
