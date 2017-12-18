@@ -17,10 +17,10 @@ public:
 	/// </summary>
 	/// <param name="main_win">The main win.</param>
 	
-/// <summary>
-/// Draws the specified main win.
-/// </summary>
-/// <param name="main_win">The main win.</param>
+	/// <summary>
+	/// Draws the specified main win.
+	/// </summary>
+	/// <param name="main_win">The main win.</param>
 	void draw(sf::RenderWindow& main_win) override;
 	
 	/// <summary>
@@ -28,11 +28,9 @@ public:
 	/// </summary>
 	/// <returns></returns>
 	menu_factory::menu_factory::type_menu update() override;
+
 private:
-	std::string score_str_;
 	text title_;
-	text score_;
-	button save_score_;
 	button back_;
 };
 

@@ -84,9 +84,6 @@
     <ClCompile Include="bomb_launcher_bonus.cpp">
       <Filter>Fichiers sources\entity\movable\bonus</Filter>
     </ClCompile>
-    <ClCompile Include="bonus.cpp">
-      <Filter>Fichiers sources\entity\movable\bonus</Filter>
-    </ClCompile>
     <ClCompile Include="laser_bonus.cpp">
       <Filter>Fichiers sources\entity\movable\bonus</Filter>
     </ClCompile>
@@ -162,6 +159,9 @@
     <ClCompile Include="bomb_launcher_projectile.cpp">
       <Filter>Fichiers sources\entity\movable\Projectile</Filter>
     </ClCompile>
+    <ClCompile Include="bonus_manager.cpp">
+      <Filter>Fichiers sources\entity\movable\bonus</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -170,13 +170,7 @@
     <ClInclude Include="map.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="vie_bonus.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="bomb_launcher_bonus.h">
-      <Filter>Fichiers d%27en-tête\entity\movable\bonus</Filter>
-    </ClInclude>
-    <ClInclude Include="bonus.h">
       <Filter>Fichiers d%27en-tête\entity\movable\bonus</Filter>
     </ClInclude>
     <ClInclude Include="laser_bonus.h">
@@ -230,9 +224,6 @@
     <ClInclude Include="scrolling_background.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\TP2\TP2_Programmation_SideScroller\9_1_TP2_SideScrollingFighter\9_1_TP2_SideScrollingFighter\menu.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="button.h">
       <Filter>Fichiers d%27en-tête\Menu</Filter>
     </ClInclude>
@@ -280,6 +271,12 @@
     </ClInclude>
     <ClInclude Include="bomb_launcher_projectile.h">
       <Filter>Fichiers d%27en-tête\entity\movable\projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="bonus_manager.h">
+      <Filter>Fichiers d%27en-tête\entity\movable\bonus</Filter>
+    </ClInclude>
+    <ClInclude Include="vie_bonus.h">
+      <Filter>Fichiers d%27en-tête\entity\movable\bonus</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

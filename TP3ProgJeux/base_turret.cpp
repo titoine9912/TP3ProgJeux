@@ -81,19 +81,19 @@ void base_turret::set_texture()
 
 void base_turret::visual_adjustments()
 {
-	const int nb_character_frames = 4;
-	const auto nb_character_anims = 1;
+	nb_movable_frames = 4;
+	nb_movable_anims = 1;
 
-	int width = texture_base_turret.getSize().x / nb_character_frames;
-	int height = texture_base_turret.getSize().y / nb_character_anims;
+	int width = texture_base_turret.getSize().x / nb_movable_frames;
+	int height = texture_base_turret.getSize().y / nb_movable_anims;
 
-	int_rects_movable_ = new IntRect*[nb_character_anims];
+	int_rects_movable_ = new IntRect*[nb_movable_anims];
 
 
-	for (size_t i = 0; i < nb_character_anims; i++)
+	for (size_t i = 0; i < nb_movable_anims; i++)
 	{
-		int_rects_movable_[i] = new IntRect[nb_character_frames];
-		for (size_t j = 0; j < nb_character_frames; j++)
+		int_rects_movable_[i] = new IntRect[nb_movable_frames];
+		for (size_t j = 0; j < nb_movable_frames; j++)
 		{
 			int_rects_movable_[i][j].left = width * j;
 			int_rects_movable_[i][j].top = height * i;
@@ -105,11 +105,12 @@ void base_turret::visual_adjustments()
 
 void base_turret::draw(sf::RenderWindow& main_win)
 {
+	main_win.draw(sprite_turret_tile_);
 	if(is_active_ == true)
 	{
-		main_win.draw(sprite_turret_tile_);
 		main_win.draw(*this);
 	}
+
 }
 
 void base_turret::turret_range_check(Vector2f position_entity)

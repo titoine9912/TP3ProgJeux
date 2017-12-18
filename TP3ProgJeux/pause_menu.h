@@ -14,7 +14,6 @@ public:
 private:
 	text title_;
 	button return_to_game_;
-	button options_;
 	button return_to_main_menu_;
 	button exit_;
 };

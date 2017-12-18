@@ -11,7 +11,7 @@ public:
 	void set_texture();
 	void draw(sf::RenderWindow& main_win);
 	static Texture texture_bomb_launcher_projectile_;
-	void shoot(Vector2f position, Vector2f direction);
+
 private:
-	//static const int fire_rate_;
+	static const int fire_rate_;
 };

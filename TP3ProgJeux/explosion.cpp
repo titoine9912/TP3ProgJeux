@@ -9,7 +9,6 @@ explosion::explosion() : movable(Vector2f(0,0),0)
 	anim_delay = 5;
 	anim_delay_counter = 5;
 	is_active_ = false;
-	
 }
 
 void explosion::update()
@@ -36,17 +35,17 @@ void explosion::update()
 
 void explosion::visual_adjustments()
 {
-	const auto nb_character_frames = 9;
-	const auto nb_character_anims = 1;
+	nb_movable_frames = 9;
+	nb_movable_anims = 1;
 
-	int width = texture_explosion.getSize().x / nb_character_frames;
-	int height = texture_explosion.getSize().y / nb_character_anims;
+	int width = texture_explosion.getSize().x / nb_movable_frames;
+	int height = texture_explosion.getSize().y / nb_movable_anims;
 
-	int_rects_movable_ = new IntRect*[nb_character_anims];
-	for (size_t i = 0; i < nb_character_anims; i++)
+	int_rects_movable_ = new IntRect*[nb_movable_anims];
+	for (size_t i = 0; i < nb_movable_anims; i++)
 	{
-		int_rects_movable_[i] = new IntRect[nb_character_frames];
-		for (size_t j = 0; j < nb_character_frames; j++)
+		int_rects_movable_[i] = new IntRect[nb_movable_frames];
+		for (size_t j = 0; j < nb_movable_frames; j++)
 		{
 			int_rects_movable_[i][j].left = width * j;
 			int_rects_movable_[i][j].top = height * i;

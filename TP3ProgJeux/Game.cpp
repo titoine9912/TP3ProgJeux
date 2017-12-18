@@ -74,6 +74,10 @@ bool Game::init()
 		return false;
 	}
 
+	if (!bonus_manager::get_bonus_manager()->load_textures("Sprites\\bomb_bonus_.png","Sprites\\health_bonus_.png","Sprites\\pipe.png","Sprites\\points_bonus_.png","Sprites\\laser_bonus_.png" ))
+	{
+		return false;
+	}
 	if(!explosion::load_textures("Sprites\\explosion.png", explosion::texture_explosion))
 	{
 		return false;
@@ -94,11 +98,11 @@ bool Game::init()
 		return false;
 	}
 
-	if (!base_turret::load_textures_("Sprites\\base_turret_.png","Sprites\\grid_tile.png"))
+	if (!base_turret::load_textures_("Sprites\\base_turret_.png","Sprites\\turret_tile.png"))
 	{
 		return false;
 	}
-	if (!upgraded_turret::load_textures_("Sprites\\upgraded_turret.png","Sprites\\grid_tile.png" ))
+	if (!upgraded_turret::load_textures_("Sprites\\upgraded_turret.png","Sprites\\turret_tile.png" ))
 	{
 		return false;
 	}
@@ -107,10 +111,6 @@ bool Game::init()
 		return false;
 	}
 	if (!base_projectile::load_textures("Sprites\\base_projectile_.png", base_projectile::texture_base_projectile_))
-	{
-		return false;
-	}
-	if (!bomb_launcher_projectile::load_textures("Sprites\\base_projectile_.png", bomb_launcher_projectile::texture_bomb_launcher_projectile_))
 	{
 		return false;
 	}
@@ -123,13 +123,6 @@ bool Game::init()
 		liste_projectiles_base_.front().setTexture(base_projectile::texture_base_projectile_);
 	}
 	*/
-
-	for (int i = 0; i < 3; ++i)
-	{
-		liste_bomb_launcher_projectile_.push_front(bomb_launcher_projectile::bomb_launcher_projectile());
-		liste_bomb_launcher_projectile_.front().visual_adjustments();
-		liste_bomb_launcher_projectile_.front().setTexture(bomb_launcher_projectile::texture_bomb_launcher_projectile_);
-	}
 
 
 	view_current_center_ = Vector2f(LARGEUR/2, HAUTEUR/2);
@@ -150,6 +143,7 @@ bool Game::init()
 
 
 	map_.load_map(maps_[current_map_].c_str(), tiles_, base_turrets_, upgraded_turrets_, kamikazes_);
+	bonus_manager::get_bonus_manager()->init();
 
 	return true;
 }
@@ -183,26 +177,28 @@ void Game::update()
 	if (current_game_state_ == singleplayer)
 	{
 		game_has_started_ = true;
+
 		//Supprime l'instance de menu si il y en a une
 		menu_controller::get_menu_controller()->release();
+
+		//Update les bonus
+		bonus_manager::get_bonus_manager()->update(view_game_);
 
 		mainWin.setView(view_game_);
 		player_character_.move(view_game_);
 
 
-	for (auto i = liste_projectiles_base_.begin(); i != liste_projectiles_base_.end(); ++i)
-	{
-		if (i==liste_projectiles_base_.begin())
+		if (view_game_.getCenter().x + view_game_.getSize().x / 2 < map_.get_map_size().x * 32)
 		{
 			view_game_.move(1, 0);
 		}
-		if (i->get_is_active()==true)
+		else
 		{
 			player_character_.end_of_level(true);
 		}
 
 
-		
+		/*
 		for (auto i = liste_projectiles_base_.begin(); i != liste_projectiles_base_.end(); ++i)
 		{
 			if (i == liste_projectiles_base_.begin())
@@ -218,52 +214,8 @@ void Game::update()
 				(*i).shoot(player_character_.getPosition(), Vector2f(0, 0));
 			}
 		}
-	}
+		*/
 
-	if (liste_bomb_launcher_projectile_.size() > 0)
-	{
-		for (auto i = liste_bomb_launcher_projectile_.begin(); i != liste_bomb_launcher_projectile_.end(); ++i)
-		{
-			if (i == liste_bomb_launcher_projectile_.begin())
-			{
-				//(*i).counter();
-			}
-			if (i->get_is_active() == true)
-			{
-				(*i).update(view_game_);
-			}
-			else if (input_manager::get_input_manager()->get_f_key_is_pressed() == true)
-			{
-				(*i).shoot(player_character_.getPosition(), Vector2f(0, 0));
-				has_shot_ = true;
-				//liste_bomb_launcher_projectile_.pop_front();
-			}
-		}
-		if (has_shot_ == true)
-		{
-			if (liste_bomb_launcher_projectile_.begin()->get_is_active() == false)
-			{
-				liste_bomb_launcher_projectile_.pop_back();
-				has_shot_ = false;
-			}
-			
-		}
-	}
-
-
-	for (size_t i = 0; i < base_turrets_.size(); i++)
-	{
-		base_turrets_[i].update(player_character_.getPosition());
-	}
-	for (size_t i = 0; i < upgraded_turrets_.size(); i++)
-	{
-		upgraded_turrets_[i].update(player_character_.getPosition());
-	}
-	for (size_t i = 0; i < kamikazes_.size(); i++)
-	{
-		kamikazes_[i].update(player_character_.getPosition());
-		movable_and_tile_collision_detection(&kamikazes_[i]);
-		movable_and_kamikaze_collision_detection(&kamikazes_[i]);
 
 		for (size_t i = 0; i < base_turrets_.size(); i++)
 		{
@@ -283,6 +235,7 @@ void Game::update()
 			{
 				if (kamikazes_[i].get_has_exploded() == false)
 				{
+					bonus_manager::get_bonus_manager()->spawn_bonus_(kamikazes_[i].getPosition());
 					for (int j = 0; j < 15; ++j)
 					{
 						if (explosion_[j].get_is_active() == false)
@@ -327,6 +280,7 @@ void Game::update()
 		player_character_.setPosition(default_respawn_point_);
 		map_.load_map(maps_[current_map_].c_str(), tiles_, base_turrets_, upgraded_turrets_, kamikazes_);
 		view_game_.setCenter(view_current_center_);
+		load_new_level_ = false;
 	}
 
 }
@@ -343,6 +297,7 @@ void Game::draw()
 			mainWin.setView(view_game_);
 
 			scrolling_background_.draw(mainWin);
+			bonus_manager::get_bonus_manager()->draw(mainWin);
 			player_character_.draw(mainWin);
 			for (size_t i = 0; i < tiles_.size(); i++)
 			{
@@ -385,16 +340,6 @@ void Game::draw()
 		}
 		mainWin.display();
 	}
-
-	for (auto i = liste_bomb_launcher_projectile_.begin(); i != liste_bomb_launcher_projectile_.end(); ++i)
-	{
-		if (i->get_is_active())
-		{
-			(*i).draw(mainWin);
-		}
-	}
-
-	mainWin.display();
 
 }
 
@@ -584,6 +529,7 @@ void Game::Release()
 		for (int i = 0; i<15; ++i)
 		{
 			explosion_[i].Release();
+			//bonus_manager::get_bonus_manager()->Release();
 		}
 
 	}
