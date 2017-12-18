@@ -114,10 +114,11 @@ bool Game::init()
 	{
 		return false;
 	}
-	if (!bomb_launcher_projectile::load_textures("Sprites\\base_projectile_.png", bomb_launcher_projectile::texture_bomb_launcher_projectile_))
+	if (!bomb_launcher_projectile::load_textures("Sprites\\missile.png", bomb_launcher_projectile::texture_bomb_launcher_projectile_))
 	{
 		return false;
 	}
+
 
 	
 	for (int i = 0; i < 100; ++i)
