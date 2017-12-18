@@ -16,7 +16,7 @@ public:
 		laser_e,
 		bomb_e,
 		nuke_e,
-		none,
+		automatic_e,
 	};
 
 	static bonus_manager *get_bonus_manager();
@@ -32,7 +32,7 @@ public:
 	void update(sf::View view);
 	void spawn_bonus_(Vector2f position);
 	bool collision(movable* movable1);
-	type_bonus last_bonus;
+	int last_bonus;
 private:
 	bonus_manager();
 	static bonus_manager *bonus_manager_;

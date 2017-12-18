@@ -2,7 +2,7 @@
 
 bonus_manager * bonus_manager::bonus_manager_ = nullptr;
 
-bonus_manager::bonus_manager() :chance_(9)
+bonus_manager::bonus_manager() :chance_(9), last_bonus(-1)
 {
 	
 }
@@ -130,31 +130,31 @@ bool bonus_manager::collision(movable* movable1)
 	if (bomb_launcher_bonus_.get_is_active() == true)
 	{
 		bomb_launcher_bonus_.collision(movable1);
-		last_bonus = bomb_e;
+		last_bonus = 3;
 		return true;
 	}
 	else if (nuke_bonus_.get_is_active() == true)
 	{
 		nuke_bonus_.collision(movable1);
-		last_bonus = nuke_e;
+		last_bonus = 4;
 		return true;
 	}
 	else if (point_bonus_.get_is_active() == true)
 	{
 		point_bonus_.collision(movable1);
-		last_bonus = points_e;
+		last_bonus = 1;
 		return true;
 	}
 	else if (vie_bonus_.get_is_active() == true)
 	{
 		vie_bonus_.collision(movable1);
-		last_bonus = health_e;
+		last_bonus = 0;
 		return true;
 	}
 	else if (laser_bonus_.get_is_active() == true)
 	{
 		laser_bonus_.collision(movable1);
-		last_bonus = laser_e;
+		last_bonus = 2;
 		return true;
 	}
 	return false;
