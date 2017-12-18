@@ -122,6 +122,10 @@ bool Game::init()
 	{
 		return false;
 	}
+	if (!automatic_projectile::load_textures("Sprites\\laser_red_.png", automatic_projectile::texture_automatic_projectile_))
+	{
+		return false;
+	}
 
 
 	
@@ -144,6 +148,19 @@ bool Game::init()
 		liste_laser_projectile_.front().setTexture(laser_projectile::texture_laser_projectile_);
 	}
 
+	for (int i = 0; i < 100; ++i)
+	{
+		liste_automatic_projectile_up_.push_front(automatic_projectile::automatic_projectile());
+		liste_automatic_projectile_up_.front().visual_adjustments();
+		liste_automatic_projectile_up_.front().setTexture(automatic_projectile::texture_automatic_projectile_);
+	}
+
+	for (int i = 0; i < 100; ++i)
+	{
+		liste_automatic_projectile_down_.push_front(automatic_projectile::automatic_projectile());
+		liste_automatic_projectile_down_.front().visual_adjustments();
+		liste_automatic_projectile_down_.front().setTexture(automatic_projectile::texture_automatic_projectile_);
+	}
 	
 
 
@@ -296,9 +313,93 @@ void Game::update()
 			}
 		}
 
+		if (liste_automatic_projectile_up_.size() > 0)
+		{
+			for (auto i = liste_automatic_projectile_up_.begin(); i != liste_automatic_projectile_up_.end(); ++i)
+			{
+				if (i == liste_automatic_projectile_up_.begin())
+				{
+					(*i).counter();
+				}
+				if (i->get_is_active() == true)
+				{
+					(*i).update(view_game_);
+				}
+				else if (input_manager::get_input_manager()->get_h_key_is_pressed() == true)
+				{
+					(*i).shoot(player_character_.getPosition(), Vector2f(0, 0));
+					has_shot_automatic_projectile_up_ = true;
+				}
+			}			
+		}
+		//On retire un projectile laser lorsquil y a un tir 
+		if (has_shot_automatic_projectile_up_ == true)
+		{
+			if (liste_automatic_projectile_up_.begin()->get_is_active() == false)
+			{
+				liste_automatic_projectile_up_.pop_back();
+				has_shot_automatic_projectile_up_ = false;
+			}
+		}
 
-		
+		if (liste_automatic_projectile_down_.size() > 0)
+		{
+			for (auto i = liste_automatic_projectile_down_.begin(); i != liste_automatic_projectile_down_.end(); ++i)
+			{
+				if (i == liste_automatic_projectile_down_.begin())
+				{
+					(*i).counter();
+				}
+				if (i->get_is_active() == true)
+				{
+					(*i).update(view_game_);
+				}
+				else if (input_manager::get_input_manager()->get_j_key_is_pressed() == true)
+				{
+					(*i).shoot(Vector2f(player_character_.getPosition().x, player_character_.getPosition().y + 20), Vector2f(0, 0));
+					has_shot_automatic_projectile_down_ = true;
+				}
+			}
+		}
 
+		if (has_shot_automatic_projectile_down_ == true)
+		{
+			if (liste_automatic_projectile_down_.begin()->get_is_active() == false)
+			{
+				liste_automatic_projectile_down_.pop_back();
+				has_shot_automatic_projectile_down_ = false;
+			}
+		}
+
+		/*
+		if (liste_automatic_projectile_down_.size() > 0 && liste_automatic_projectile_up_.size()>0)
+		{
+			for (auto i = liste_automatic_projectile_down_.begin(); i != liste_automatic_projectile_down_.end(); ++i)
+			{
+				for (auto j = liste_automatic_projectile_up_.begin(); j != liste_automatic_projectile_up_.end(); ++j)
+				{
+
+					if (i == liste_automatic_projectile_down_.begin() && j==liste_automatic_projectile_up_.begin())
+					{
+						(*i).counter();
+						(*j).counter();
+					}
+					if (i->get_is_active() == true && j->get_is_active()==true)
+					{
+						(*i).update(view_game_);
+						(*j).update(view_game_);
+					}
+					else if (input_manager::get_input_manager()->get_j_and_h_are_pressed() == true)
+					{
+						(*i).shoot(Vector2f(player_character_.getPosition().x, player_character_.getPosition().y + 32), Vector2f(0, 0));
+						(*j).shoot(player_character_.getPosition(), Vector2f(0, 0));
+						has_shot_automatic_projectile_down_ = true;
+						has_shot_automatic_projectile_up_ = true;
+					}
+				}
+			}
+		}
+		*/
 
 		for (size_t i = 0; i < base_turrets_.size(); i++)
 		{
@@ -415,7 +516,32 @@ void Game::draw()
 				}
 			}
 
+
+			for (auto i = liste_bomb_launcher_projectile_.begin(); i != liste_bomb_launcher_projectile_.end(); ++i)
+			{
+				if (i->get_is_active())
+				{
+					(*i).draw(mainWin);
+				}
+			}
+
 			for (auto i = liste_laser_projectile_.begin(); i != liste_laser_projectile_.end(); ++i)
+			{
+				if (i->get_is_active())
+				{
+					(*i).draw(mainWin);
+				}
+			}
+
+			for (auto i = liste_automatic_projectile_up_.begin(); i != liste_automatic_projectile_up_.end(); ++i)
+			{
+				if (i->get_is_active())
+				{
+					(*i).draw(mainWin);
+				}
+			}
+
+			for (auto i = liste_automatic_projectile_down_.begin(); i != liste_automatic_projectile_down_.end(); ++i)
 			{
 				if (i->get_is_active())
 				{
@@ -430,13 +556,6 @@ void Game::draw()
 			menu_controller::get_menu_controller()->draw(mainWin);
 		}
 
-		for (auto i = liste_bomb_launcher_projectile_.begin(); i != liste_bomb_launcher_projectile_.end(); ++i)
-		{
-			if (i->get_is_active())
-			{
-				(*i).draw(mainWin);
-			}
-		}
 		mainWin.display();
 	}
 
@@ -642,6 +761,16 @@ void Game::Release()
 		}
 
 		for (auto i = liste_projectiles_base_.begin(); i != liste_projectiles_base_.end(); ++i)
+		{
+			(*i).Release();
+		}
+
+		for (auto i = liste_automatic_projectile_up_.begin(); i != liste_automatic_projectile_up_.end(); ++i)
+		{
+			(*i).Release();
+		}
+
+		for (auto i = liste_automatic_projectile_down_.begin(); i != liste_automatic_projectile_down_.end(); ++i)
 		{
 			(*i).Release();
 		}
