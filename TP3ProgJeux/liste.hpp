@@ -11,7 +11,7 @@ private:
 	{
 		T value;
 		Box *next, *previous;
-		Box(const T& value, Box*N = nullptr, Box*P = nullptr):value(value),next(N),previous(P) {}
+		Box(const T& value, Box*N = nullptr, Box*P = nullptr) :value(value), next(N), previous(P) {}
 		~Box() { previous = next = nullptr; }
 	};
 
@@ -26,7 +26,7 @@ public:
 	class iterator;
 	Liste();
 	~Liste();
-//	Liste(const Liste& other);
+	//	Liste(const Liste& other);
 	Liste& operator=(const Liste& other);
 	void swap(Liste& other);
 
@@ -59,7 +59,7 @@ class Liste<T>::iterator
 private:
 	Box* POINTEUR;
 public:
-	iterator(Box*value=nullptr) :POINTEUR(value) {}
+	iterator(Box*value = nullptr) :POINTEUR(value) {}
 
 	T& operator*()const
 	{
@@ -70,26 +70,28 @@ public:
 
 	iterator& operator++()
 	{
-		++POINTEUR;
+		POINTEUR = POINTEUR->next;
 		return *this;
 	}
-	
+
 	iterator operator++(int)
 	{
-		POINTEUR++;
-		return *this;
+		Box* temp = POINTEUR;
+		POINTEUR = POINTEUR->next;
+		return temp;
 	}
 
 	iterator& operator--()
 	{
-		--POINTEUR;
+		POINTEUR = POINTEUR->previous;
 		return *this;
 	}
 
 	iterator operator--(int)
 	{
-		POINTEUR--;
-		return *this;
+		Box* temp = POINTEUR;
+		POINTEUR = POINTEUR->previous;
+		return temp;
 	}
 
 	bool operator==(const iterator&droite)const
@@ -107,7 +109,7 @@ public:
 
 
 template<class T>
-inline Liste<T>::Liste():avant(T()),apres(T()),sz(0)
+inline Liste<T>::Liste() :avant(T()), apres(T()), sz(0)
 {
 	avant.next = &apres;
 	apres.previous = &avant;
@@ -141,7 +143,7 @@ typename Liste<T>::Box * Liste<T>::insert(Box * iterator, const T & value)
 	Box* temp = new Box(value, iterator->previous->next, iterator->previous);
 	iterator->previous->next = temp;
 	iterator->previous = temp;
-	
+
 	sz++;
 	return iterator->previous;
 }
@@ -154,7 +156,7 @@ typename Liste<T>::Box * Liste<T>::Erase(Box * iterator)
 	iterator->next->previous = iterator->previous;
 	delete iterator;
 	sz--;
-	
+
 	return temp;
 }
 
@@ -256,7 +258,7 @@ void Liste<T>::reverse()
 template<class T>
 void Liste<T>::splice(iterator pos, Liste& other)
 {
-	other.end()=pos;
+	other.end() = pos;
 	other.begin() = pos.POINTEUR->previous;
 	pos.POINTEUR->previous = other.begin().POINTEUR;
 	pos.POINTEUR->next = other.end().POINTEUR->previous;

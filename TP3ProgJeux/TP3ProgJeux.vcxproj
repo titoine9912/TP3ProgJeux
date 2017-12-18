@@ -88,6 +88,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="automatic_projectile.cpp" />
     <ClCompile Include="base_enemy.cpp" />
     <ClCompile Include="base_projectile.cpp" />
     <ClCompile Include="base_turret.cpp" />
@@ -105,6 +106,7 @@
     <ClCompile Include="input_manager.cpp" />
     <ClCompile Include="kamikaze.cpp" />
     <ClCompile Include="laser_bonus.cpp" />
+    <ClCompile Include="laser_projectile.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="main_menu.cpp" />
     <ClCompile Include="map.cpp" />
@@ -125,6 +127,7 @@
     <ClCompile Include="vie_bonus.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="automatic_projectile.h" />
     <ClInclude Include="base_enemy.h" />
     <ClInclude Include="base_projectile.h" />
     <ClInclude Include="base_turret.h" />
@@ -144,6 +147,7 @@
     <ClInclude Include="input_manager.h" />
     <ClInclude Include="kamikaze.h" />
     <ClInclude Include="laser_bonus.h" />
+    <ClInclude Include="laser_projectile.h" />
     <ClInclude Include="liste.hpp" />
     <ClInclude Include="main_menu.h" />
     <ClInclude Include="map.h" />

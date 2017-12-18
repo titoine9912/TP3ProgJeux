@@ -1,23 +1,22 @@
-#include "base_projectile.h"
-Texture base_projectile::texture_base_projectile_;
-float base_projectile::fire_rate_counter_;
+#include "laser_projectile.h"
+Texture laser_projectile::texture_laser_projectile_;
+float laser_projectile::fire_rate_counter_laser_;
 
-
-base_projectile::base_projectile()
+laser_projectile::laser_projectile()
 {
 	//Animation Variables
 	current_anim_ = 0;
 	current_frame_ = 0;
 	anim_delay_counter = 0;
 	anim_delay = 5;
-	speed_ = 15;
+	speed_ = 40;
 	//State Variable
 	is_active_ = false;
 	fire_rate_ = 10;
-	fire_rate_counter_ = fire_rate_;
+	fire_rate_counter_laser_ = fire_rate_;
 }
 
-void base_projectile::update(sf::View view)
+void laser_projectile::update(sf::View view)
 {
 	if ((getPosition().x > view.getCenter().x + (view.getSize().x) / 2) || (getPosition().x < 0) || (getPosition().y < 0) || (getPosition().y > view.getCenter().y + (view.getSize().y) / 2))
 	{
@@ -43,18 +42,18 @@ void base_projectile::update(sf::View view)
 	}
 }
 
-void base_projectile::move()
+void laser_projectile::move()
 {
 	setPosition(getPosition().x + speed_, getPosition().y);
 }
 
-void base_projectile::visual_adjustments()
+void laser_projectile::visual_adjustments()
 {
 	nb_movable_frames = 2;
 	nb_movable_anims = 1;
 
-	int width = texture_base_projectile_.getSize().x / nb_movable_frames;
-	int height = texture_base_projectile_.getSize().y / nb_movable_anims;
+	int width = texture_laser_projectile_.getSize().x / nb_movable_frames;
+	int height = texture_laser_projectile_.getSize().y / nb_movable_anims;
 
 	int_rects_movable_ = new IntRect*[nb_movable_anims];
 
@@ -72,17 +71,17 @@ void base_projectile::visual_adjustments()
 	}
 }
 
-void base_projectile::set_texture()
+void laser_projectile::set_texture()
 {
-	setTexture(texture_base_projectile_);
+	setTexture(texture_laser_projectile_);
 	setTextureRect(int_rects_movable_[0][0]);
-	setOrigin(texture_base_projectile_.getSize().x / 4, texture_base_projectile_.getSize().y / 2);
+	setOrigin(texture_laser_projectile_.getSize().x / 4, texture_laser_projectile_.getSize().y / 2);
 
-	size_sprite_ = texture_base_projectile_.getSize().x / 2;
+	size_sprite_ = texture_laser_projectile_.getSize().x / 2;
 }
 
 
-void base_projectile::draw(sf::RenderWindow& main_win)
+void laser_projectile::draw(sf::RenderWindow& main_win)
 {
 	if (is_active_ == true)
 	{
@@ -91,19 +90,17 @@ void base_projectile::draw(sf::RenderWindow& main_win)
 }
 
 
-void base_projectile::counter()
+void laser_projectile::counter()
 {
-	fire_rate_counter_++;
+	fire_rate_counter_laser_++;
 }
-void base_projectile::shoot(Vector2f position, Vector2f direction)
+void laser_projectile::shoot(Vector2f position, Vector2f direction)
 {
-	if (fire_rate_counter_ >= fire_rate_)
+	if (fire_rate_counter_laser_ >= fire_rate_)
 	{
 		is_active_ = true;
 		direction_ = direction;
 		setPosition(position);
-		fire_rate_counter_ = 0;
+		fire_rate_counter_laser_ = 0;
 	}
 }
-
-

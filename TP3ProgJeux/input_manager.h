@@ -116,6 +116,16 @@ public:
 
 	bool get_space_key_is_pressed() const;
 
+	bool get_f_key_is_pressed() const;
+
+	bool get_g_key_is_pressed() const;
+
+	bool get_h_key_is_pressed() const;
+
+	bool get_j_key_is_pressed() const;
+
+	bool get_j_and_h_are_pressed();
+
 	sf::String get_last_key_sequence();
 	bool get_text_entered_event() const;
 	bool get_tab_is_pressed() const;
@@ -137,6 +147,11 @@ private:
 	bool a_key_is_pressed_;
 	bool s_key_is_pressed_;
 	bool d_key_is_pressed_;
+	bool f_key_is_pressed_;
+	bool g_key_is_pressed_;
+	bool h_key_is_pressed_;
+	bool j_key_is_pressed_;
+	bool j_and_h_are_pressed_;
 #pragma endregion 
 
 #pragma region Mouse

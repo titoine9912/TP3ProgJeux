@@ -154,6 +154,18 @@ void input_manager::update(sf::RenderWindow& main_win, sf::Event& event)
 		case Keyboard::Key::D:
 			d_key_is_pressed_ = true;
 			break;
+		case Keyboard::Key::F:
+			f_key_is_pressed_ = true;
+			break;
+		case Keyboard::Key::G:
+			g_key_is_pressed_ = true;
+			break;
+		case Keyboard::Key::H:
+			h_key_is_pressed_ = true;
+			break;
+		case Keyboard::Key::J:
+			j_key_is_pressed_ = true;
+			break;
 
 		default: 
 			break;
@@ -189,6 +201,19 @@ void input_manager::update(sf::RenderWindow& main_win, sf::Event& event)
 		case Keyboard::Key::D:
 			d_key_is_pressed_ = false;
 			break;
+		case Keyboard::Key::F:
+			f_key_is_pressed_ = false;
+			break;
+		case Keyboard::Key::G:
+			g_key_is_pressed_ = false;
+			break;
+		case Keyboard::Key::H:
+			h_key_is_pressed_ = false;
+			break;
+		case Keyboard::Key::J:
+			j_key_is_pressed_ = false;
+			break;
+
 		default: 
 			break;
 		}
@@ -251,6 +276,36 @@ bool input_manager::get_esc_key() const
 bool input_manager::get_space_key_is_pressed() const
 {
 	return space_key_is_pressed_;
+}
+
+bool input_manager::get_f_key_is_pressed()const
+{
+	return f_key_is_pressed_;
+}
+
+bool input_manager::get_g_key_is_pressed() const
+{
+	return g_key_is_pressed_;
+}
+
+bool input_manager::get_h_key_is_pressed()const
+{
+	return h_key_is_pressed_;
+}
+
+bool input_manager::get_j_key_is_pressed()const
+{
+	return j_key_is_pressed_;
+}
+
+bool input_manager::get_j_and_h_are_pressed()
+{
+	if (j_key_is_pressed_ == true && h_key_is_pressed_ == true)
+	{
+		j_and_h_are_pressed_ = true;
+	}
+
+	return j_and_h_are_pressed_;
 }
 
 bool input_manager::get_enter_key() const { return enter_key_is_pressed_; }
