@@ -90,6 +90,10 @@ public:
 	/// </summary>
 	/// <returns></returns>
 	Vector2f get_left_lower_point() const;
+
+	void set_is_active(bool is_active);
+
+	bool collision(movable* movable);
 	
 
 

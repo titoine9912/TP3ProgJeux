@@ -6,7 +6,7 @@
 
 Game::game_state Game::current_game_state_;
 
-Game::Game() : scrolling_background_(LARGEUR, HAUTEUR), player_character_(Vector2f(128,352) ,1) , game_has_started_(false), load_new_level_(false), default_respawn_point_(Vector2f(128, 352))
+Game::Game() : scrolling_background_(LARGEUR, HAUTEUR), player_character_(Vector2f(128,352) ,1) , game_has_started_(false), load_new_level_(false), default_respawn_point_(Vector2f(128, 352)) , points_(0)
 {
 
 	//On place dans le contructeur ce qui permet à la game elle-même de fonctionner
@@ -127,7 +127,6 @@ bool Game::init()
 
 	view_current_center_ = Vector2f(LARGEUR/2, HAUTEUR/2);
 	view_game_.setCenter(view_current_center_);
-	view_x_pos_last_frame_ = view_current_center_.x;
 	view_menu_.setCenter(Vector2f(LARGEUR / 2, HAUTEUR / 2));
 	mainWin.setView(view_game_);
 
@@ -229,8 +228,6 @@ void Game::update()
 		{
 			kamikazes_[i].update(player_character_.getPosition());
 			movable_and_tile_collision_detection(&kamikazes_[i]);
-			//movable_and_kamikaze_collision_detection(&kamikazes_[i]);
-
 			if (kamikazes_[i].get_is_active() == false)
 			{
 				if (kamikazes_[i].get_has_exploded() == false)
@@ -259,6 +256,36 @@ void Game::update()
 		scrolling_background_.move(0);
 		player_character_.update();
 		movable_and_tile_collision_detection(&player_character_);
+
+		if (bonus_manager::get_bonus_manager()->collision(&player_character_) == true)
+		{
+			//Le joueur obtient un bonus de type vie
+			if (bonus_manager::get_bonus_manager()->last_bonus == 0)
+			{
+				player_character_.set_health(player_character_.get_health() + 5);
+			}
+			//Le joueur obtient un bonus de type points
+			else if (bonus_manager::get_bonus_manager()->last_bonus == 1)
+			{
+				points_ + 100;
+			}
+			//Le joueur obtient un bonus de type laser
+			else if (bonus_manager::get_bonus_manager()->last_bonus == 2)
+			{
+
+			}
+			//Le joueur obtient un bonus de type bombe_launcher
+			else if (bonus_manager::get_bonus_manager()->last_bonus == 3)
+			{
+
+			}
+			//Le joueur obtient un bonus de type nuke
+			else if (bonus_manager::get_bonus_manager()->last_bonus == 4)
+			{
+
+			}
+		}
+		points_++;
 	}
 	else if (current_game_state_ != exiting)
 	{
@@ -424,82 +451,6 @@ void Game::movable_and_tile_collision_detection(movable* movable ) const
 	movable->adjust_movable_position(movable_adjustment);
 }
 
-
-void Game::movable_and_kamikaze_collision_detection(movable* movable) const
-{
-	movable->set_is_colliding_wall_left(false);
-	movable->set_is_colliding_wall_right(false);
-	movable->set_is_colliding_platform_over(false);
-	movable->set_is_colliding_platform_under(false);
-
-	auto movable_adjustment = Vector2f(0, 0);
-	for (size_t j = 0; j < kamikazes_.size(); j++)
-	{
-		if (abs(movable->getPosition().x - kamikazes_[j].getPosition().x) <=
-			kamikazes_[j].getGlobalBounds().width + movable->getGlobalBounds().width
-			&&
-			abs(movable->getPosition().y - kamikazes_[j].getPosition().y) <=
-			kamikazes_[j].getGlobalBounds().height + movable->getGlobalBounds().height)
-		{
-			if (movable->get_is_going_up() == true)
-			{
-
-				if (kamikazes_[j].contains(movable->get_top_left_point()) ||
-					kamikazes_[j].contains(movable->get_top_right_point()))
-				{
-					if (movable->get_speed_y() < 0 && movable->get_is_colliding_platform_over_() == false)
-					{
-						movable_adjustment.y = movable_adjustment.y + fabs(movable->get_speed_y());
-					}
-					movable->set_is_colliding_platform_over(true);
-				}
-			}
-			if (movable->get_is_going_down() == true)
-			{
-				if (kamikazes_[j].contains(movable->get_bottom_left_point()) ||
-					kamikazes_[j].contains(movable->get_bottom_right_point()))
-				{
-					if (movable_adjustment.y >= 0)
-					{
-						movable_adjustment.y = movable_adjustment.y - movable->get_speed_y();
-					}
-				}
-				movable->set_is_colliding_platform_under(true);
-			}
-			if (movable->get_is_going_left() == true && movable->get_is_colliding_wall_left_() == false)
-			{
-				if (kamikazes_[j].contains(movable->get_left_lower_point()) ||
-					kamikazes_[j].contains(movable->get_left_upper_point()))
-				{
-					if (movable_adjustment.x <= 0)
-					{
-						movable_adjustment.x = movable_adjustment.x + fabs(movable->get_speed_x());
-					}
-				}
-
-			}
-			if (movable->get_is_going_right() == true && movable->get_is_colliding_wall_right_() == false)
-			{
-
-				if (kamikazes_[j].contains(movable->get_right_upper_point()) ||
-					kamikazes_[j].contains(movable->get_right_lower_point()))
-				{
-
-					if ((movable->get_is_going_up() == true || movable->get_is_going_down() == true) && movable->get_base_speed() >0)
-					{
-						movable_adjustment.x = movable_adjustment.x - (movable->get_speed_x() + 1);
-					}
-					else
-					{
-						movable_adjustment.x = movable_adjustment.x - (movable->get_speed_x());
-					}
-					movable->set_is_colliding_wall_right(true);
-				}
-			}
-		}
-	}
-	movable->adjust_movable_position(movable_adjustment);
-}
 
 void Game::Release()
 {

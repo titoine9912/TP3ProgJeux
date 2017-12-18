@@ -50,7 +50,6 @@ private:
 	void draw();
 	bool load_map();
 	void movable_and_tile_collision_detection(movable*  movable) const;
-	void movable_and_kamikaze_collision_detection(movable* movable)const;
 	void Release();
 
 	//Game variables
@@ -63,6 +62,7 @@ private:
 	map map_;
 	int current_map_;
 	std::string maps_[3];
+	int points_;
 
 	//Entity vectors and elements
 	std::vector<tile> tiles_;
@@ -82,7 +82,6 @@ private:
 	View view_game_;
 	View view_menu_;
 	Vector2f view_current_center_;
-	int view_x_pos_last_frame_;
 
 	RenderWindow mainWin;
 	Event event;

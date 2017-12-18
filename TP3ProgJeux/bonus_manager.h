@@ -7,6 +7,8 @@
 
 class bonus_manager
 {
+
+public:
 	enum type_bonus
 	{
 		health_e,
@@ -14,9 +16,9 @@ class bonus_manager
 		laser_e,
 		bomb_e,
 		nuke_e,
+		none,
 	};
 
-public:
 	static bonus_manager *get_bonus_manager();
 	void Release();
 	void draw(sf::RenderWindow& main_win);
@@ -29,11 +31,12 @@ public:
 		const char laser_bonus_path[]);
 	void update(sf::View view);
 	void spawn_bonus_(Vector2f position);
-
+	bool collision(movable* movable1);
+	type_bonus last_bonus;
 private:
 	bonus_manager();
 	static bonus_manager *bonus_manager_;
-	
+
 	int random_bonus;
 	int random_number;
 	int chance_;

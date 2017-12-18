@@ -18,12 +18,15 @@ public:
 	static bool load_textures(const char entity_texture_path[] , Texture& texture_);
 	bool entity_pixel_perfect_collision_detection(entity& autre_entity);
 	bool contains(Vector2f point) const;
+	void set_health(int health);
+	int get_health();
 protected:
 
 	BitmaskManager bitmasks;
 	int size_sprite_;
 	int anim_delay;
 	int anim_delay_counter;
+	int health_;
 
 	Vector2f top_left_point_;
 	Vector2f top_right_point_;

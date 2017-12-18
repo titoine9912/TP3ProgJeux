@@ -125,6 +125,40 @@ bonus_manager* bonus_manager::get_bonus_manager()
 	return bonus_manager_;
 }
 
+bool bonus_manager::collision(movable* movable1)
+{
+	if (bomb_launcher_bonus_.get_is_active() == true)
+	{
+		bomb_launcher_bonus_.collision(movable1);
+		last_bonus = bomb_e;
+		return true;
+	}
+	else if (nuke_bonus_.get_is_active() == true)
+	{
+		nuke_bonus_.collision(movable1);
+		last_bonus = nuke_e;
+		return true;
+	}
+	else if (point_bonus_.get_is_active() == true)
+	{
+		point_bonus_.collision(movable1);
+		last_bonus = points_e;
+		return true;
+	}
+	else if (vie_bonus_.get_is_active() == true)
+	{
+		vie_bonus_.collision(movable1);
+		last_bonus = health_e;
+		return true;
+	}
+	else if (laser_bonus_.get_is_active() == true)
+	{
+		laser_bonus_.collision(movable1);
+		last_bonus = laser_e;
+		return true;
+	}
+	return false;
+}
 
 void bonus_manager::spawn_bonus_(Vector2f position)
 {

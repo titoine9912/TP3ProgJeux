@@ -19,6 +19,11 @@ void movable::move()
 {
 }
 
+void movable::set_is_active(bool is_active)
+{
+	is_active_ == is_active;
+}
+
 bool movable::get_is_active()
 {
 	return is_active_;
@@ -150,4 +155,22 @@ bool movable::get_is_colliding_wall_right_()
 float movable::get_base_speed()
 {
 	return base_speed_;
+}
+
+bool movable::collision(movable* movable)
+{
+	Vector2f position_movable1_ = movable->getPosition();
+	Vector2f position_movable2_ = getPosition();
+
+	float diff_x_ = (position_movable1_.x - position_movable2_.x) * (position_movable1_.x - position_movable2_.x);
+	float diff_y_ = (position_movable1_.y - position_movable2_.y) * (position_movable1_.y - position_movable2_.y);
+
+	float distance = sqrt(diff_x_ + diff_y_);
+	float trigger_range_ = movable->getTexture()->getSize().y; // a changer
+
+	if (distance < trigger_range_)
+	{
+		return true;
+	}
+	return false;
 }

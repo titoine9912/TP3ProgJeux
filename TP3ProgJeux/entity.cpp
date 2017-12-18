@@ -61,3 +61,13 @@ bool entity::contains(Vector2f point) const
 {
 	return getGlobalBounds().contains(point);
 }
+
+int entity::get_health()
+{
+	return health_;
+}
+
+void entity::set_health(int health)
+{
+	health_ = health;
+}
