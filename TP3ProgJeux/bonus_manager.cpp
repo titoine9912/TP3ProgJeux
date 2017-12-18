@@ -141,6 +141,7 @@ bool bonus_manager::collision(movable* movable1)
 		if (bomb_launcher_bonus_.collision(movable1) == true)
 		{
 			last_bonus = 3;
+			bomb_launcher_bonus_.set_is_active(false);
 			return true;
 		}
 	}
@@ -149,6 +150,7 @@ bool bonus_manager::collision(movable* movable1)
 		if (nuke_bonus_.collision(movable1))
 		{
 			last_bonus = 4;
+			nuke_bonus_.set_is_active(false);
 			return true;
 		}
 	}
@@ -157,6 +159,7 @@ bool bonus_manager::collision(movable* movable1)
 		if (point_bonus_.collision(movable1) == true)
 		{
 			last_bonus = 1;
+			point_bonus_.set_is_active(false);
 			return true;
 		}
 	}
@@ -165,6 +168,7 @@ bool bonus_manager::collision(movable* movable1)
 		if (vie_bonus_.collision(movable1) == true)
 		{
 			last_bonus = 0;
+			vie_bonus_.set_is_active(false);
 			return true;
 		}
 	}
@@ -173,6 +177,7 @@ bool bonus_manager::collision(movable* movable1)
 		if (laser_bonus_.collision(movable1) == true)
 		{
 			last_bonus = 2;
+			laser_bonus_.set_is_active(false);
 			return true;
 		}
 	}
@@ -181,6 +186,7 @@ bool bonus_manager::collision(movable* movable1)
 		if (automatic_bonus_.collision(movable1) == true)
 		{
 			last_bonus = 5;
+			automatic_bonus_.set_is_active(false);
 			return true;
 		}
 	}
