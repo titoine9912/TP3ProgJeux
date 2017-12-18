@@ -137,16 +137,7 @@ bool Game::init()
 	}
 
 	//la boucle ci-dessous sera a enlever plus tard, ce n'est que pour tester si les projectiles speciaux fonctionnent
-	for (int i = 0; i < 3; ++i)
-	{
-		liste_bomb_launcher_projectile_.push_front(bomb_launcher_projectile::bomb_launcher_projectile());
-		liste_bomb_launcher_projectile_.front().visual_adjustments();
-		liste_bomb_launcher_projectile_.front().setTexture(bomb_launcher_projectile::texture_bomb_launcher_projectile_);
 
-		liste_laser_projectile_.push_front(laser_projectile::laser_projectile());
-		liste_laser_projectile_.front().visual_adjustments();
-		liste_laser_projectile_.front().setTexture(laser_projectile::texture_laser_projectile_);
-	}
 
 	for (int i = 0; i < 100; ++i)
 	{
@@ -456,12 +447,22 @@ void Game::update()
 			//Le joueur obtient un bonus de type laser
 			else if (bonus_manager::get_bonus_manager()->last_bonus == 2)
 			{
-
+				for (int i = 0; i < 3; ++i)
+				{
+					liste_laser_projectile_.push_front(laser_projectile::laser_projectile());
+					liste_laser_projectile_.front().visual_adjustments();
+					liste_laser_projectile_.front().setTexture(laser_projectile::texture_laser_projectile_);
+				}	
 			}
 			//Le joueur obtient un bonus de type bombe_launcher
 			else if (bonus_manager::get_bonus_manager()->last_bonus == 3)
 			{
-
+				for (int i = 0; i < 3; ++i)
+				{
+					liste_bomb_launcher_projectile_.push_front(bomb_launcher_projectile::bomb_launcher_projectile());
+					liste_bomb_launcher_projectile_.front().visual_adjustments();
+					liste_bomb_launcher_projectile_.front().setTexture(bomb_launcher_projectile::texture_bomb_launcher_projectile_);
+				}
 			}
 			//Le joueur obtient un bonus de type nuke
 			else if (bonus_manager::get_bonus_manager()->last_bonus == 4)
