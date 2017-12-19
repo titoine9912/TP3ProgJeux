@@ -48,8 +48,7 @@ public:
 private:
 	bool has_shot_bomb_projectile_ = false;
 	bool has_shot_laser_projectile_ = false;
-	bool has_shot_automatic_projectile_up_ = false;
-	bool has_shot_automatic_projectile_down_ = false;
+	bool has_shot_automatic_projectile_ = false;
 	bool init();
 	void getInputs();
 	void update();
@@ -84,8 +83,7 @@ private:
 	Liste<base_projectile> liste_projectiles_base_;
 	Liste<bomb_launcher_projectile> liste_bomb_launcher_projectile_;
 	Liste<laser_projectile> liste_laser_projectile_;
-	Liste<automatic_projectile> liste_automatic_projectile_up_;
-	Liste<automatic_projectile> liste_automatic_projectile_down_;
+	Liste<automatic_projectile> liste_automatic_projectile_;
 	File<enemy> liste_ennemy_;
 
 	player_character player_character_;

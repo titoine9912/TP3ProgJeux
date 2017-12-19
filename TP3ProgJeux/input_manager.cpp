@@ -298,16 +298,6 @@ bool input_manager::get_j_key_is_pressed()const
 	return j_key_is_pressed_;
 }
 
-bool input_manager::get_j_and_h_are_pressed()
-{
-	if (j_key_is_pressed_ == true && h_key_is_pressed_ == true)
-	{
-		j_and_h_are_pressed_ = true;
-	}
-
-	return j_and_h_are_pressed_;
-}
-
 bool input_manager::get_enter_key() const { return enter_key_is_pressed_; }
 bool input_manager::get_backspace_key() const
 {

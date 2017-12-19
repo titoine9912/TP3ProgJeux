@@ -168,6 +168,12 @@
     <ClCompile Include="automatic_bonus.cpp">
       <Filter>Fichiers sources\entity\movable\bonus</Filter>
     </ClCompile>
+    <ClCompile Include="automatic_projectile.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="laser_projectile.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -289,6 +295,12 @@
     </ClInclude>
     <ClInclude Include="automatic_bonus.h">
       <Filter>Fichiers d%27en-tête\entity\movable\bonus</Filter>
+    </ClInclude>
+    <ClInclude Include="laser_projectile.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="automatic_projectile.h">
+      <Filter>Fichiers d%27en-tête\entity\movable\projectile</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
