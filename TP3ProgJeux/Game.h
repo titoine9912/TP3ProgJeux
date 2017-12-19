@@ -72,6 +72,7 @@ private:
 	int current_map_;
 	std::string maps_[3];
 	int points_;
+	int compteur_automatic_ = 0;
 
 	//Entity vectors and elements
 	std::vector<tile> tiles_;

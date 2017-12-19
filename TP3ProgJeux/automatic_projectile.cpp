@@ -14,6 +14,7 @@ automatic_projectile::automatic_projectile()
 	is_active_ = false;
 	fire_rate_ = 10;
 	fire_rate_counter_automatic = fire_rate_;
+	up_projectile_ = true;
 }
 
 void automatic_projectile::update(sf::View view)

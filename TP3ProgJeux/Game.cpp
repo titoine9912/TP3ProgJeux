@@ -493,6 +493,10 @@ void Game::Release()
 		{
 			(*i).Release();
 		}
+		for (auto i = liste_base_projectile_enemy_.begin(); i != liste_base_projectile_enemy_.end(); ++i)
+		{
+			(*i).Release();
+		}
 	}
 }
 
@@ -567,7 +571,7 @@ void Game::player_character_actions()
 			}
 			else if (input_manager::get_input_manager()->get_g_key_is_pressed() == true)
 			{
-				Vector2f position = Vector2f(player_character_.getPosition().x + 32, player_character_.getPosition().y + 100);
+				Vector2f position = Vector2f(player_character_.getPosition().x + 32, player_character_.getPosition().y + 13);
 				(*i).shoot(position, Vector2f(0, 0));
 				has_shot_laser_projectile_ = true;
 			}
@@ -597,13 +601,19 @@ void Game::player_character_actions()
 			}
 			else if (input_manager::get_input_manager()->get_h_key_is_pressed() == true)
 			{
-				(*i).shoot(player_character_.getPosition(), Vector2f(0, 0));
-				has_shot_automatic_projectile_ = true;
-			}
-			else if (input_manager::get_input_manager()->get_j_key_is_pressed() == true)
-			{
-				(*i).shoot(Vector2f(player_character_.getPosition().x,(player_character_.getPosition().y)+20), Vector2f(0, 0));
-				has_shot_automatic_projectile_ = true;
+			
+				if (compteur_automatic_ % 2 == 0)
+				{
+					(*i).shoot(player_character_.getPosition(), Vector2f(0, 0));
+					has_shot_automatic_projectile_ = true;
+					compteur_automatic_++;
+				}
+				else
+				{
+					(*i).shoot(Vector2f(player_character_.getPosition().x, (player_character_.getPosition().y) + 20), Vector2f(0, 0));
+					has_shot_automatic_projectile_ = true;
+					compteur_automatic_++;
+				}			
 			}
 		}
 	}
