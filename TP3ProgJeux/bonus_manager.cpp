@@ -2,7 +2,7 @@
 
 bonus_manager * bonus_manager::bonus_manager_ = nullptr;
 
-bonus_manager::bonus_manager() :chance_(9)
+bonus_manager::bonus_manager() :chance_(9), last_bonus(-1)
 {
 	
 }
@@ -33,6 +33,11 @@ void bonus_manager::update(sf::View view)
 	{
 		point_bonus_.update(view);
 	}
+
+	if (automatic_bonus_.get_is_active() == true)
+	{
+		automatic_bonus_.update(view);
+	}
 }
 
 void bonus_manager::draw(sf::RenderWindow& main_win)
@@ -61,13 +66,18 @@ void bonus_manager::draw(sf::RenderWindow& main_win)
 	{
 		point_bonus_.draw(main_win);
 	}
+
+	if (automatic_bonus_.get_is_active() == true)
+	{
+		automatic_bonus_.draw(main_win);
+	}
 }
 
 void bonus_manager::Release()
 {
+	point_bonus_.Release();
 	delete bonus_manager_;
 	bonus_manager_ = nullptr;
-	point_bonus_.Release();
 }
 
 bool bonus_manager::load_textures(
@@ -75,7 +85,8 @@ bool bonus_manager::load_textures(
 	const char vie_bonus_path[],
 	const char nuke_bonus_path[],
 	const char point_bonus_path[],
-	const char laser_bonus_path[])
+	const char laser_bonus_path[],
+	const char automatic_bonus_path[])
 {
 	if (!bomb_launcher_bonus_.load_textures(bomb_launcher_bonus_path, bomb_launcher_bonus::texture_bomb_launcher_bonus))
 	{
@@ -97,6 +108,11 @@ bool bonus_manager::load_textures(
 	{
 		return false;
 	}
+	if (!automatic_bonus_.load_textures(automatic_bonus_path, automatic_bonus::texture_automatic_bonus))
+	{
+		return false;
+	}
+
 	return true;
 }
 
@@ -116,6 +132,9 @@ void bonus_manager::init()
 
 	laser_bonus_.visual_adjustments();
 	laser_bonus_.set_texture();
+
+	automatic_bonus_.visual_adjustments();
+	automatic_bonus_.set_texture();
 }
 
 bonus_manager* bonus_manager::get_bonus_manager()
@@ -129,42 +148,83 @@ bool bonus_manager::collision(movable* movable1)
 {
 	if (bomb_launcher_bonus_.get_is_active() == true)
 	{
-		bomb_launcher_bonus_.collision(movable1);
-		last_bonus = bomb_e;
-		return true;
+		if (bomb_launcher_bonus_.collision(movable1) == true)
+		{
+			if (bomb_launcher_bonus_.get_spawncooldown() <= 0)
+			{
+				last_bonus = 3;
+				bomb_launcher_bonus_.kill_movable();
+				return true;
+			}
+		}
 	}
-	else if (nuke_bonus_.get_is_active() == true)
+	if (nuke_bonus_.get_is_active() == true)
 	{
-		nuke_bonus_.collision(movable1);
-		last_bonus = nuke_e;
-		return true;
+		if (nuke_bonus_.collision(movable1))
+		{
+			if (nuke_bonus_.get_spawncooldown() <= 0)
+			{
+				last_bonus = 4;
+				nuke_bonus_.kill_movable();
+				return true;
+			}
+		}
 	}
-	else if (point_bonus_.get_is_active() == true)
+	if (point_bonus_.get_is_active() == true)
 	{
-		point_bonus_.collision(movable1);
-		last_bonus = points_e;
-		return true;
+		if (point_bonus_.collision(movable1) == true)
+		{
+			if (point_bonus_.get_spawncooldown() <= 0)
+			{
+				last_bonus = 1;
+				point_bonus_.kill_movable();
+				return true;
+			}
+		}
 	}
-	else if (vie_bonus_.get_is_active() == true)
+	if (vie_bonus_.get_is_active() == true)
 	{
-		vie_bonus_.collision(movable1);
-		last_bonus = health_e;
-		return true;
+		if (vie_bonus_.collision(movable1) == true)
+		{
+			if (vie_bonus_.get_spawncooldown() <= 0)
+			{
+				last_bonus = 0;
+				vie_bonus_.kill_movable();
+				return true;
+			}
+		}
 	}
-	else if (laser_bonus_.get_is_active() == true)
+	if (laser_bonus_.get_is_active() == true)
 	{
-		laser_bonus_.collision(movable1);
-		last_bonus = laser_e;
-		return true;
+		if (laser_bonus_.collision(movable1) == true)
+		{
+			if (laser_bonus_.get_spawncooldown() <= 0)
+			{
+				last_bonus = 2;
+				laser_bonus_.kill_movable();
+				return true;
+			}
+		}
+	}
+	if (automatic_bonus_.get_is_active() == true)
+	{
+		if (automatic_bonus_.collision(movable1) == true)
+		{
+			if (automatic_bonus_.get_spawncooldown() <= 0)
+			{
+				last_bonus = 5;
+				automatic_bonus_.kill_movable();
+				return true;
+			}
+		}
 	}
 	return false;
 }
 
 void bonus_manager::spawn_bonus_(Vector2f position)
 {
-	//random_number = rand() % 10;
+	int random_number = rand() % 10;
 	random_number = 9;
-
 	if (chance_ == random_number)
 	{
 		random_number = rand() % 5;
@@ -179,6 +239,8 @@ void bonus_manager::spawn_bonus_(Vector2f position)
 		case 3:nuke_bonus_.spawn_bonus(position);
 			break;
 		case 4:laser_bonus_.spawn_bonus(position);
+			break;
+		case 5:automatic_bonus_.spawn_bonus(position);
 			break;
 		default:;
 		}

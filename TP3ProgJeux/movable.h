@@ -91,8 +91,6 @@ public:
 	/// <returns></returns>
 	Vector2f get_left_lower_point() const;
 
-	void set_is_active(bool is_active);
-
 	bool collision(movable* movable);
 	
 
@@ -109,18 +107,23 @@ public:
 	bool get_is_going_down();
 	bool get_is_going_right();
 	bool get_is_going_left();
+	int get_spawncooldown();
+	bool get_has_exploded();
 
 	bool get_is_colliding_platform_under_();
 	bool get_is_colliding_platform_over_();
 	bool get_is_colliding_wall_left_();
 	bool get_is_colliding_wall_right_();
 
+	void set_has_exploded(bool exploded);
+
 
 
 protected:
 
 	int nb_movable_frames;
-	int  nb_movable_anims;
+	int nb_movable_anims;
+	int spawn_cooldown_;
 
 	bool is_colliding_platform_under_;
 	bool is_colliding_platform_over_;
@@ -131,12 +134,12 @@ protected:
 	bool is_moving_right;
 	bool is_moving_up;
 	bool is_moving_down;
+	bool has_exploded_;
 
 	float base_speed_;
 	float speed_;
 	float current_speed_x;
 	float current_speed_y;
-	bool is_active_;
 	IntRect** int_rects_movable_;
 
 

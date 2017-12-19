@@ -1,5 +1,5 @@
 #include "movable.h"
-movable::movable(Vector2f position, float speed) : entity(position), is_active_(true)
+movable::movable(Vector2f position, float speed) : entity(position), has_exploded_(false)
 {
 	speed_ = speed;
 	setPosition(position);
@@ -17,11 +17,6 @@ void movable::Release()
 
 void movable::move()
 {
-}
-
-void movable::set_is_active(bool is_active)
-{
-	is_active_ == is_active;
 }
 
 bool movable::get_is_active()
@@ -52,7 +47,6 @@ void movable::set_is_colliding_wall_right(bool is_colliding)
 void movable::kill_movable()
 {
 	is_active_ = false;
-	speed_ = 0;
 }
 
 bool movable::get_is_going_down()
@@ -173,4 +167,19 @@ bool movable::collision(movable* movable)
 		return true;
 	}
 	return false;
+}
+
+int movable::get_spawncooldown()
+{
+	return spawn_cooldown_;
+}
+
+bool movable::get_has_exploded()
+{
+	return  has_exploded_;
+}
+
+void movable::set_has_exploded(bool has_exploded)
+{
+	has_exploded_ = has_exploded;
 }

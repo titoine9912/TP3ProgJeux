@@ -11,7 +11,7 @@ upgraded_turret::upgraded_turret(Vector2f position) : enemy(position,0), anim_de
 	//State variables
 	triggered_ = false;
 	trigger_range_ = 350;
-	is_active_ = false;
+	is_active_ = true;
 
 	position_ = Vector2f(position.x / 32, position.y / 32);
 	setPosition(Vector2f(position.x + 16, position.y + 16));
@@ -20,26 +20,30 @@ upgraded_turret::upgraded_turret(Vector2f position) : enemy(position,0), anim_de
 
 void upgraded_turret::update(Vector2f position)
 {
-	anim_delay_counter++;
-	turret_range_check(position);
+	if (is_active_ == true)
+	{
+		health_check();
+		anim_delay_counter++;
+		turret_range_check(position);
 
-	if (anim_delay_counter >= anim_delay && triggered_ == false)
-	{
-		if (current_anim_ < 3)
+		if (anim_delay_counter >= anim_delay && triggered_ == false)
 		{
-			current_anim_++;
+			if (current_anim_ < 3)
+			{
+				current_anim_++;
+			}
+			else
+			{
+				current_anim_ = 0;
+			}
+			setTextureRect(int_rects_movable_[0][current_anim_]);
+			anim_delay_counter = 0;
 		}
-		else
+		if (triggered_ == true)
 		{
-			current_anim_ = 0;
+			setTextureRect(int_rects_movable_[0][2]);
+			rotate_towards_target(position);
 		}
-		setTextureRect(int_rects_movable_[0][current_anim_]);
-		anim_delay_counter = 0;
-	}
-	if (triggered_ == true)
-	{
-		setTextureRect(int_rects_movable_[0][2]);
-		rotate_towards_target(position);
 	}
 }
 

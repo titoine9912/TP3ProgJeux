@@ -1,7 +1,7 @@
 #include "entity.h"
 
 
-entity::entity(Vector2f position)
+entity::entity(Vector2f position) : is_active_(true), health_(1)
 {
 }
 
@@ -70,4 +70,12 @@ int entity::get_health()
 void entity::set_health(int health)
 {
 	health_ = health;
+}
+
+void entity::health_check()
+{
+	if (health_ <= 0)
+	{
+		is_active_ = false;
+	}
 }

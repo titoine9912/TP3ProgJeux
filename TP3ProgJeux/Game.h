@@ -57,6 +57,9 @@ private:
 	bool load_map();
 	void movable_and_tile_collision_detection(movable*  movable) const;
 	void Release();
+	void player_character_actions();
+	void enemy_actions();
+	void projectile_and_movable_collision(movable*  movable);
 
 	//Game variables
 	bool character_outofbounds_left_;

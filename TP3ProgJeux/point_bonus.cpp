@@ -14,6 +14,7 @@ void point_bonus::update(sf::View view)
 {
 	if (is_active_ == true)
 	{
+		spawn_cooldown_--;
 		if ((getPosition().x +size_sprite_ ) < (view.getCenter().x - view.getSize().x/2))
 		{
 				is_active_ = false;
@@ -75,6 +76,7 @@ void point_bonus::draw(sf::RenderWindow& main_win)
 
 void point_bonus::spawn_bonus(Vector2f position)
 {
+	spawn_cooldown_ = 60;
 	setPosition(position);
 	is_active_ = true;
 }

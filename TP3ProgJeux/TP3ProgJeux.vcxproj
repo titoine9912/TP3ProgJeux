@@ -88,6 +88,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="automatic_bonus.cpp" />
     <ClCompile Include="automatic_projectile.cpp" />
     <ClCompile Include="base_enemy.cpp" />
     <ClCompile Include="base_projectile.cpp" />
@@ -127,6 +128,7 @@
     <ClCompile Include="vie_bonus.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="automatic_bonus.h" />
     <ClInclude Include="automatic_projectile.h" />
     <ClInclude Include="base_enemy.h" />
     <ClInclude Include="base_projectile.h" />

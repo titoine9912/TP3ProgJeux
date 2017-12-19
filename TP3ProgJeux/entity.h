@@ -20,6 +20,7 @@ public:
 	bool contains(Vector2f point) const;
 	void set_health(int health);
 	int get_health();
+	void health_check();
 protected:
 
 	BitmaskManager bitmasks;
@@ -27,6 +28,7 @@ protected:
 	int anim_delay;
 	int anim_delay_counter;
 	int health_;
+	bool is_active_;
 
 	Vector2f top_left_point_;
 	Vector2f top_right_point_;

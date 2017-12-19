@@ -40,6 +40,7 @@ void base_turret::update(Vector2f position)
 {
 	if(is_active_ == true)
 	{
+		health_check();
 		anim_delay_counter++;
 		turret_range_check(position);
 

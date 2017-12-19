@@ -29,6 +29,7 @@ void kamikaze::update(Vector2f position)
 {
 	if(is_active_ == true)
 	{
+		health_check();
 		kamikaze_range_check(position);
 		if(triggered_ == true)
 		{
@@ -83,6 +84,7 @@ void kamikaze::visual_adjustments()
 	width = 32;
 	height = 32;
 	// Adjust character collision points.
+
 	top_left_point_ = Vector2f(4, 0);
 	top_right_point_ = Vector2f(width - 4, 0);
 	left_upper_point_ = Vector2f(-8, 8);
@@ -91,6 +93,7 @@ void kamikaze::visual_adjustments()
 	bottom_right_point_ = Vector2f(width - 12, height);
 	right_upper_point_ = Vector2f(width-10, height*0.25f);
 	right_lower_point_ = Vector2f(width-10, height*0.75f);
+
 
 	setOrigin(width / 2, width / 2);
 	
@@ -154,16 +157,6 @@ void kamikaze::rotate_towards_target()
 		angle_deg = -angle_deg;
 		setRotation(angle_deg);		
 	}
-}
-
-bool kamikaze::get_has_exploded()
-{
-	return  has_exploded_;
-}
-
-void kamikaze::set_has_exploded(bool has_exploded)
-{
-	has_exploded_ = has_exploded;
 }
 
 void kamikaze::move()
