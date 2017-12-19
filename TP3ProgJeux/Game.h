@@ -19,6 +19,7 @@
 #include "laser_projectile.h"
 #include "automatic_projectile.h"
 #include "bonus_manager.h"
+#include "base_projectile_enemy.h"
 
 //test
 
@@ -84,6 +85,7 @@ private:
 	Liste<bomb_launcher_projectile> liste_bomb_launcher_projectile_;
 	Liste<laser_projectile> liste_laser_projectile_;
 	Liste<automatic_projectile> liste_automatic_projectile_;
+	Liste<base_projectile_enemy> liste_base_projectile_enemy_;
 	File<enemy> liste_ennemy_;
 
 	player_character player_character_;

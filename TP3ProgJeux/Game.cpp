@@ -114,6 +114,10 @@ bool Game::init()
 	{
 		return false;
 	}
+	if (!base_projectile_enemy::load_textures("Sprites\\base_projectile_.png", base_projectile_enemy::texture_base_projectile_enemy_))
+	{
+		return false;
+	}
 	if (!bomb_launcher_projectile::load_textures("Sprites\\missile.png", bomb_launcher_projectile::texture_bomb_launcher_projectile_))
 	{
 		return false;
@@ -134,6 +138,13 @@ bool Game::init()
 		liste_projectiles_base_.push_front(base_projectile::base_projectile());
 		liste_projectiles_base_.front().visual_adjustments();
 		liste_projectiles_base_.front().setTexture(base_projectile::texture_base_projectile_);
+	}
+
+	for (int i = 0; i < 100; ++i)
+	{
+		liste_base_projectile_enemy_.push_front(base_projectile_enemy::base_projectile_enemy());
+		liste_base_projectile_enemy_.front().visual_adjustments();
+		liste_base_projectile_enemy_.front().setTexture(base_projectile_enemy::texture_base_projectile_enemy_);
 	}
 
 	//la boucle ci-dessous sera a enlever plus tard, ce n'est que pour tester si les projectiles speciaux fonctionnent
@@ -321,6 +332,14 @@ void Game::draw()
 			}
 
 			for (auto i = liste_automatic_projectile_.begin(); i != liste_automatic_projectile_.end(); ++i)
+			{
+				if (i->get_is_active())
+				{
+					(*i).draw(mainWin);
+				}
+			}
+
+			for (auto i = liste_base_projectile_enemy_.begin(); i != liste_base_projectile_enemy_.end(); ++i)
 			{
 				if (i->get_is_active())
 				{
@@ -522,6 +541,7 @@ void Game::player_character_actions()
 			}
 		}
 	}
+
 	//On retire un projectile de bomb lorsquil y a un tir
 	if (has_shot_bomb_projectile_ == true)
 	{
@@ -649,6 +669,24 @@ void Game::enemy_actions()
 	{
 		if (base_turrets_[i].get_is_active() == true)
 		{
+			if (base_turrets_[i].get_triggered() == true)
+			{
+				if (liste_base_projectile_enemy_.size() > 0)
+				{
+					for (auto j = liste_base_projectile_enemy_.begin(); j != liste_base_projectile_enemy_.end(); ++j)
+					{
+						if (j == liste_base_projectile_enemy_.begin())
+						{
+							(*j).counter();
+						}
+						if (j->get_is_active() == true)
+						{
+							(*j).update(view_game_);
+						}
+						(*j).shoot(base_turrets_[i].getPosition(), player_character_.getPosition());
+					}
+				}
+			}
 			projectile_and_movable_collision(&base_turrets_[i]);
 		}
 		base_turrets_[i].update(player_character_.getPosition());

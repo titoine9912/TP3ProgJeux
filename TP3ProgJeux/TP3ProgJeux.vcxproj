@@ -92,6 +92,7 @@
     <ClCompile Include="automatic_projectile.cpp" />
     <ClCompile Include="base_enemy.cpp" />
     <ClCompile Include="base_projectile.cpp" />
+    <ClCompile Include="base_projectile_enemy.cpp" />
     <ClCompile Include="base_turret.cpp" />
     <ClCompile Include="bomb_launcher_bonus.cpp" />
     <ClCompile Include="bomb_launcher_projectile.cpp" />
@@ -132,6 +133,7 @@
     <ClInclude Include="automatic_projectile.h" />
     <ClInclude Include="base_enemy.h" />
     <ClInclude Include="base_projectile.h" />
+    <ClInclude Include="base_projectile_enemy.h" />
     <ClInclude Include="base_turret.h" />
     <ClInclude Include="bitmask_manager.h" />
     <ClInclude Include="bomb_launcher_bonus.h" />
