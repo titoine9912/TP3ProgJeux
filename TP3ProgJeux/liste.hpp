@@ -119,7 +119,7 @@ inline Liste<T>::Liste() :avant(T()), apres(T()), sz(0)
 template<class T>
 inline Liste<T>::~Liste()
 {
-
+	clear();
 }
 
 //template<class T>
@@ -212,9 +212,10 @@ T& Liste<T>::front()
 template<class T>
 void Liste<T>::clear()
 {
-	avant = nullptr;
-	apres = nullptr;
-	sz = 0;
+	while (size() > 0)
+	{
+		pop_back();
+	}
 }
 
 template<class T>

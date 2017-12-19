@@ -18,7 +18,8 @@ namespace UnitTest1
 			// TODO: Ici, votre code de test
 			Pile<int> pile;
 			pile.Push(2);
-			Assert::AreEqual(2, pile.Top());			
+			Assert::AreEqual(2, pile.Top());	
+			pile.~Pile();
 		}
 
 		TEST_METHOD(TestMethodPile2)
@@ -28,6 +29,7 @@ namespace UnitTest1
 			pile.Push(2);
 			pile.Push(3);
 			Assert::AreEqual(3, pile.Top());
+			pile.~Pile();
 		}
 
 		TEST_METHOD(TestMethodPile3)
@@ -38,6 +40,7 @@ namespace UnitTest1
 			pile.Push(3);
 			pile.Pop();
 			Assert::AreEqual(2, pile.Top());
+			pile.~Pile();
 		}
 
 		TEST_METHOD(TestMethodPile4)
@@ -47,6 +50,7 @@ namespace UnitTest1
 			pile.Push(2);
 			pile.Push(3);
 			Assert::IsFalse(pile.isEmpty());
+			pile.~Pile();
 		}
 
 		TEST_METHOD(TestMethodPile5)
@@ -56,6 +60,7 @@ namespace UnitTest1
 			pile.Push(2);
 			pile.Pop();
 			Assert::IsTrue(pile.isEmpty());
+			pile.~Pile();
 		}
 
 		TEST_METHOD(TestMethodPile6)
@@ -65,6 +70,7 @@ namespace UnitTest1
 			pile.Push(2);
 			pile.Push(3);
 			Assert::AreEqual(2, (int)pile.Size());
+			pile.~Pile();
 		}
 
 		TEST_METHOD(TestMethodPile7)
@@ -75,12 +81,14 @@ namespace UnitTest1
 			pile.Push(3);
 			pile.Pop();
 			Assert::AreEqual(1, (int)pile.Size());
+			pile.~Pile();
 		}
 
 		TEST_METHOD(TestMethodPile8)
 		{
 			Pile<int> pile;
 			Assert::AreEqual(0, (int)pile.Size());
+			pile.~Pile();
 		}
 
 		TEST_METHOD(TestMethodFile1)
@@ -90,6 +98,7 @@ namespace UnitTest1
 			file.PushFront(4);
 			Assert::AreEqual(4, file.front());
 			Assert::AreEqual(3, file.back());
+			file.~File();
 		}
 		
 		TEST_METHOD(TestMethodFile2)
@@ -99,6 +108,7 @@ namespace UnitTest1
 			file.PushBack(4);
 			Assert::AreEqual(3, file.front());
 			Assert::AreEqual(4, file.back());
+			file.~File();
 		}
 
 		TEST_METHOD(TestMethodFile3)
@@ -110,6 +120,7 @@ namespace UnitTest1
 			file.pop_back();
 			Assert::AreEqual(3, file.back());
 			Assert::AreEqual(2, (int)file.Size());
+			file.~File();
 		}
 
 		TEST_METHOD(TestMethodFile4)
@@ -122,6 +133,7 @@ namespace UnitTest1
 			file.pop_front();
 			Assert::AreEqual(4, file.front());
 			Assert::AreEqual(1, (int)file.Size());
+			file.~File();
 		}
 
 		TEST_METHOD(TestMethodeFile5)
@@ -137,6 +149,7 @@ namespace UnitTest1
 			Assert::AreEqual(1, file.front());
 			Assert::AreEqual(3, file.back());
 			Assert::AreEqual(3, (int)file.Size());
+			file.~File();
 		}
 
 		TEST_METHOD(TestMethodeFile6)
@@ -150,6 +163,7 @@ namespace UnitTest1
 			Assert::AreEqual(4, file.at(1));
 			Assert::AreEqual(5, file.at(2));
 			Assert::AreEqual(6, file.at(3));
+			file.~File();
 		}
 
 		TEST_METHOD(TestMethodeFile7)
@@ -162,6 +176,7 @@ namespace UnitTest1
 			file.pop_front();
 			file.pop_back();
 			Assert::IsTrue(file.isEmpty());
+			file.~File();
 		}
 
 		TEST_METHOD(TestMethodeFile8)
@@ -173,6 +188,7 @@ namespace UnitTest1
 			file.pop_front();
 			file.pop_front();
 			Assert::IsFalse(file.isEmpty());
+			file.~File();
 		}
 
 		TEST_METHOD(TestMethodeFile9)
@@ -183,6 +199,7 @@ namespace UnitTest1
 			file.PushBack(1);
 			file.clear();
 			Assert::IsTrue(file.isEmpty());
+			file.~File();
 		}
 
 		TEST_METHOD(TestMethodeList1)
@@ -191,6 +208,7 @@ namespace UnitTest1
 			list.push_back(2);
 			Assert::AreEqual(2, list.front());
 			Assert::AreEqual(2, list.back());
+			list.~Liste();
 		}
 
 		TEST_METHOD(TestMethodeList2)
@@ -200,6 +218,7 @@ namespace UnitTest1
 			list.push_front(3);
 			Assert::AreEqual(3, list.front());
 			Assert::AreEqual(2, list.back());
+			list.~Liste();
 		}
 
 		TEST_METHOD(TestMethodeList3)
@@ -211,6 +230,7 @@ namespace UnitTest1
 			Assert::AreEqual(2, list.front());
 			Assert::AreEqual(4, list.back());
 			Assert::AreEqual(3, (int)list.size());
+			list.~Liste();
 		}
 
 		TEST_METHOD(TestMethodeList4)
@@ -226,6 +246,8 @@ namespace UnitTest1
 			Assert::AreEqual(5, list1.back());
 			Assert::AreEqual(3, list2.front());
 			Assert::AreEqual(2, list2.back());
+			list1.~Liste();
+			list2.~Liste();
 		}
 
 
@@ -237,6 +259,7 @@ namespace UnitTest1
 			list.pop_back();
 			Assert::AreEqual(3, list.front());
 			Assert::AreEqual(3, list.back());
+			list.~Liste();
 		}
 
 		TEST_METHOD(TestMethodeList6)
@@ -251,6 +274,7 @@ namespace UnitTest1
 			Assert::AreEqual(2, list.front());
 			Assert::AreEqual(3, list.back());
 			Assert::AreEqual(2, (int)list.size());
+			list.~Liste();
 		}
 
 		TEST_METHOD(TestMethodeList7)
@@ -259,6 +283,7 @@ namespace UnitTest1
 			list.Insert(list.begin(),2);
 			Assert::AreEqual(2, list.front());
 			Assert::AreEqual(2, list.back());
+			list.~Liste();
 		}
 
 		/*TEST_METHOD(TestMethodeList9)

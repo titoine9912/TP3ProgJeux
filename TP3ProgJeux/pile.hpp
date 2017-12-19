@@ -27,7 +27,7 @@ Pile<T>::Pile()
 template<class T>
 Pile<T>::~Pile()
 {
-
+	container.clear();
 }
 
 template<class T>
