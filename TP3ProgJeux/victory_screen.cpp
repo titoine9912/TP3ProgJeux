@@ -14,6 +14,10 @@ victory_screen::victory_screen()
 
 	back_ = button("Back", sf::Vector2f(30, 70), text::normal);
 	back_.set_position(sf::Vector2f(Game::LARGEUR / 2 - back_.get_text_size() / 2, Game::HAUTEUR / 2 + 60));
+
+	score_str_ = std::to_string(Game::get_current_points());
+	score_ = text("Score : " + score_str_, sf::Vector2f(0, 0), text::normal);
+	score_.set_position(sf::Vector2f(Game::LARGEUR / 2 - score_.get_text_size() / 2, Game::HAUTEUR / 2 - 30));
 }
 
 
@@ -21,6 +25,7 @@ void victory_screen::draw(sf::RenderWindow& main_win)
 {
 	title_.draw(main_win);
 	back_.draw(main_win);
+	score_.draw(main_win);
 }
 
 menu_factory::menu_factory::type_menu victory_screen::update()

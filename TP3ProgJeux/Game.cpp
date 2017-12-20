@@ -5,8 +5,10 @@
 #include "menu_controller.h"
 
 Game::game_state Game::current_game_state_;
+int Game::points_;
 
-Game::Game() : scrolling_background_(LARGEUR, HAUTEUR), player_character_(Vector2f(128,352) ,1) , game_has_started_(false), load_new_level_(false), default_respawn_point_(Vector2f(128, 352)) , points_(0)
+
+Game::Game() : scrolling_background_(LARGEUR, HAUTEUR), player_character_(Vector2f(128,352) ,1) , game_has_started_(false), load_new_level_(false), default_respawn_point_(Vector2f(128, 352)) 
 {
 
 	//On place dans le contructeur ce qui permet à la game elle-même de fonctionner
@@ -15,6 +17,7 @@ Game::Game() : scrolling_background_(LARGEUR, HAUTEUR), player_character_(Vector
 	view_game_ = mainWin.getDefaultView();
 	view_menu_ = mainWin.getDefaultView();
 
+	points_ = 0;
 	current_map_ = 0;
 	current_game_state_ = main_menu;
 	maps_[0] = "Levels\\scene_default_layout_template_23.txt";
@@ -221,8 +224,17 @@ void Game::update()
 		}
 		else
 		{
-			player_character_.end_of_level(true);
+			player_character_.end_of_level_=true;
 		}
+		if (player_character_.end_of_level_ == true)
+		{
+			if (player_character_.getPosition().x > (view_game_.getCenter().x + (view_game_.getSize().x / 2)))
+			{
+				current_game_state_ = victory_screen;
+				points_ = points_ - kamikazes_[0].points_kamikaze;
+			}
+		}
+		
 
 		//Update tout ce qui à rapport au personnage 
 		player_character_actions();
@@ -243,7 +255,7 @@ void Game::update()
 	}
 	else if (current_game_state_ != exiting)
 	{
-		if (current_game_state_ == main_menu && game_has_started_)
+		if (current_game_state_ == main_menu  && game_has_started_)
 		{
 			load_new_level_ = true;
 		}
@@ -261,7 +273,9 @@ void Game::update()
 		player_character_.setPosition(default_respawn_point_);
 		map_.load_map(maps_[current_map_].c_str(), tiles_, base_turrets_, upgraded_turrets_, kamikazes_);
 		view_game_.setCenter(view_current_center_);
+		points_ = 0;
 		load_new_level_ = false;
+		game_has_started_ = false;
 	}
 
 }
@@ -361,6 +375,11 @@ void Game::draw()
 Game::game_state Game::get_current_game_state()
 {
 	return current_game_state_;
+}
+
+int Game::get_current_points()
+{
+	return points_;
 }
 
 void Game::movable_and_tile_collision_detection(movable* movable ) const
@@ -729,7 +748,7 @@ void Game::enemy_actions()
 	for (size_t i = 0; i < base_turrets_.size(); i++)
 	{
 		if (base_turrets_[i].get_is_active() == true)
-		{
+		{	
 			projectile_and_movable_collision(&base_turrets_[i]);
 		}
 		base_turrets_[i].update(player_character_.getPosition());
@@ -783,6 +802,11 @@ void Game::enemy_actions()
 		{
 			projectile_and_movable_collision(&kamikazes_[i]);
 			movable_and_tile_collision_detection(&kamikazes_[i]);
+			//On regarde si le kamikaze est en collision avec un bonus
+			if (bonus_manager::get_bonus_manager()->collision(&kamikazes_[i]) == true)
+			{
+  				bonus_manager::get_bonus_manager()->notify_observers(&kamikazes_[i]);
+			}
 		}
 		if (kamikazes_[i].get_is_active() == false)
 		{

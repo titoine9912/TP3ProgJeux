@@ -1,10 +1,17 @@
 #include  "kamikaze.h"
 #include <iostream>
 #include <type_traits>
+#include "bonus_manager.h"
 Texture kamikaze::texture_kamikaze_;
+int kamikaze::points_kamikaze;
 
-kamikaze::kamikaze(Vector2f position) : enemy(position,0), anim_delay(5), anim_delay_counter(3)
+kamikaze::kamikaze(Vector2f position) : anim_delay(5), anim_delay_counter(3)
 {
+	if (points_kamikaze != 0 && points_kamikaze < 1)
+	{
+		points_kamikaze = 0;
+	}
+
 	//Aniation Variables
 	current_anim_ = 0;
 	current_frame_ = 0;
@@ -197,5 +204,20 @@ void kamikaze::move()
 	else if (current_speed_y > 0)
 	{
 		is_moving_down = true;
+	}
+}
+
+void kamikaze::notify()
+{
+	//Tout les kamikaze gagnent 5 de vie
+	if (bonus_manager::get_bonus_manager()->last_bonus == 0)
+	{
+		set_health(get_health() + 5);
+	}
+	//Les points de kamikazes seront enlever au joueur a la fin de la partie
+	//Le joueur perd donc 20 point par kamikaze en vie
+	else if (bonus_manager::get_bonus_manager()->last_bonus == 1)
+	{
+		points_kamikaze = points_kamikaze + 20;
 	}
 }

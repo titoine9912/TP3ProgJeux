@@ -45,6 +45,7 @@ public:
 	static const int LARGEUR = 1280;
 	static const int HAUTEUR = 720;
 	static game_state get_current_game_state();
+	static int get_current_points();
 private:
 	bool has_shot_bomb_projectile_ = false;
 	bool has_shot_laser_projectile_ = false;
@@ -71,7 +72,7 @@ private:
 	map map_;
 	int current_map_;
 	std::string maps_[3];
-	int points_;
+	static int points_;
 
 	//Entity vectors and elements
 	std::vector<tile> tiles_;

@@ -154,7 +154,7 @@ bool bonus_manager::collision(movable* movable1)
 			{
 				last_bonus = 3;
 				bomb_launcher_bonus_.kill_movable();
-				return true;
+ 				return true;
 			}
 		}
 	}
@@ -245,4 +245,9 @@ void bonus_manager::spawn_bonus_(Vector2f position)
 		default:;
 		}
 	}
+}
+
+void bonus_manager::notify_observers(observer* observer)
+{
+		observer->notify();
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include "enemy.h"
-class kamikaze : public enemy
+#include "observer.h"
+class kamikaze : public observer
 {
 public:
 	// Overload Constructor
@@ -9,13 +10,15 @@ public:
 	void set_texture();
 	void visual_adjustments();
 	static Texture texture_kamikaze_;
+	static int points_kamikaze;
 	void draw(sf::RenderWindow& main_win);
 	void kamikaze_range_check(Vector2f position_entity);
 	void rotate_towards_target();
 	void move();
+	void notify();
 
 private:
-
+	
 	Vector2f direction_;
 	int size_sprite_;
 	int anim_delay;

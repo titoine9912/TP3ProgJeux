@@ -32,6 +32,8 @@ public:
 private:
 	text title_;
 	button back_;
+	text score_;
+	std::string score_str_;
 };
 
 #endif

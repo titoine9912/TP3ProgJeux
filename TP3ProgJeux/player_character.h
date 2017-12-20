@@ -13,16 +13,12 @@ public:
 	 void draw(sf::RenderWindow& main_win);
 	 float get_speed();
 
-	 void end_of_level(bool end_of_level);
+	 bool end_of_level_;
 
 
 private:
-	bool end_of_level_;
 	bool base_speed_applied_;
 	int anim_delay;
 	int anim_delay_counter;
-	bool is_respawning_;
-	int respawn_delay_;
-	int respawn_counter_;
-	
+
 };

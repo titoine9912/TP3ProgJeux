@@ -3,7 +3,7 @@
 #include <iostream>
 Texture player_character::texture_player_character_;
 
-player_character::player_character(Vector2f position, int player_id) :character(position,0), respawn_counter_(120)
+player_character::player_character(Vector2f position, int player_id) :character(position,0)
 {
 	setPosition(position);
 
@@ -19,8 +19,6 @@ player_character::player_character(Vector2f position, int player_id) :character(
 	anim_delay_counter = 0;
 
 	//Character state variables
-	is_respawning_ = false;
-	respawn_delay_ = 120;
 	base_speed_applied_ = false;
 	end_of_level_ = false;
 	is_active_ = true;
@@ -211,24 +209,6 @@ void player_character::move(View view)
 			current_speed_x = base_speed_;
 		}
 	}
-	system("CLS");
-
-	int a = current_speed_x;
-	std::string x = std::to_string(a);
-	std::cout << x << std::endl;
-
-	int b = current_speed_y;
-	std::string y = std::to_string(b);
-	std::cout << y << std::endl;
-
-	int c = getPosition().x;
-	std::string co = std::to_string(c);
-	std::cout << "Pos x" << co << std::endl;
-
-	int d = getPosition().y;
-	std::string coo = std::to_string(d);
-	std::cout << "Pos y" << coo << std::endl;
-
 }
 
 void player_character::visual_adjustments()
@@ -286,9 +266,4 @@ float player_character::get_speed()
 	return base_speed_;
 }
 
-
-void player_character::end_of_level(bool end_of_level)
-{
-	end_of_level_ = end_of_level;
-}
 

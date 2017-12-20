@@ -5,6 +5,7 @@
 #include "nuke_bonus.h"
 #include "laser_bonus.h"
 #include "automatic_bonus.h"
+#include "observer.h"
 class bonus_manager
 {
 
@@ -22,7 +23,6 @@ public:
 	static bonus_manager *get_bonus_manager();
 	void Release();
 	void draw(sf::RenderWindow& main_win);
-	void init();
 	bool load_textures(
 		const char bomb_launcher_bonus_path[],
 		const char vie_bonus_path[],
@@ -34,6 +34,8 @@ public:
 	void spawn_bonus_(Vector2f position);
 	bool collision(movable* movable1);
 	int last_bonus;
+	void init();
+	void notify_observers(observer* observers);
 private:
 	bonus_manager();
 	static bonus_manager *bonus_manager_;
@@ -41,6 +43,9 @@ private:
 	int random_bonus;
 	int chance_;
 	
+
+	
+
 	bomb_launcher_bonus bomb_launcher_bonus_;
 	point_bonus point_bonus_;
 	vie_bonus vie_bonus_;
