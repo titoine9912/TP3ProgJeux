@@ -15,4 +15,5 @@ public:
 
 private:
 	static float fire_rate_counter_automatic;
+	bool up_projectile_;
 };
