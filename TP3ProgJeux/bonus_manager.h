@@ -18,6 +18,7 @@ public:
 		bomb_e,
 		nuke_e,
 		automatic_e,
+		shield_e,
 	};
 
 	static bonus_manager *get_bonus_manager();

@@ -13,6 +13,7 @@
 #include "explosion.h"
 #include "liste.hpp"
 #include "file.hpp"
+#include "pile.hpp"
 #include "projectile.h"
 #include "base_projectile.h"
 #include "bomb_launcher_projectile.h"
@@ -20,6 +21,7 @@
 #include "automatic_projectile.h"
 #include "bonus_manager.h"
 #include "base_projectile_enemy.h"
+#include "shield.h"
 
 //test
 
@@ -90,6 +92,8 @@ private:
 	Liste<automatic_projectile> liste_automatic_projectile_;
 	Liste<base_projectile_enemy> liste_base_projectile_enemy_;
 	File<enemy> liste_ennemy_;
+	Pile<shield> pile_shield_;
+	
 
 	player_character player_character_;
 	scrolling_background scrolling_background_;

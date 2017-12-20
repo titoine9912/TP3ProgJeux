@@ -183,6 +183,9 @@
     <ClCompile Include="automatic_projectile.cpp">
       <Filter>Fichiers sources\entity\movable\Projectile</Filter>
     </ClCompile>
+    <ClCompile Include="shield.cpp">
+      <Filter>Fichiers sources\entity\movable</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -319,6 +322,9 @@
     </ClInclude>
     <ClInclude Include="base_projectile_enemy.h">
       <Filter>Fichiers d%27en-tête\entity\movable\projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="shield.h">
+      <Filter>Fichiers d%27en-tête\entity\movable</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

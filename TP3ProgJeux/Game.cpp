@@ -133,8 +133,20 @@ bool Game::init()
 	{
 		return false;
 	}
+	
+	//a décommenter lorsque le sprites de bouclier aura été fait
+	/*
+	if (!shield::load_textures("Sprites\\shield_.png", shield::texture_base_shield_))
+	{
+		return false;
+	}
+	*/
 
-
+	for (int i = 0; i < 5; ++i)
+	{
+		pile_shield_.Push(shield::shield());
+		//pile_shield_.Top().setTexture(shield::texture_base_shield_);
+    }
 	
 	for (int i = 0; i < 100; ++i)
 	{
