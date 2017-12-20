@@ -28,6 +28,7 @@ private:
 	size_type cap;
 };
 
+//Constructeur de la file
 template<class T>
 File<T>::File()	
 {
@@ -37,12 +38,15 @@ File<T>::File()
 	head = 0;
 }
 
+//Destructeur de la file
 template<class T>
 File<T>::~File()
 {
 	clear();
 }
 
+//Méthode PushBack de la file, elle permet d'ajouter des éléments à la fin de celle-ci
+//Elle prends en paramètre la valeur que l'on veut ajouter à la file
 template<class T>
 void File<T>::PushBack(const T& valeur)
 {
@@ -54,6 +58,8 @@ void File<T>::PushBack(const T& valeur)
 	
 }
 
+//Méthode PushFront de la file, elle permet d'ajouter des éléments au début de la file
+//Elle prends en paramètre la valeur que l'on veut ajouter à la file
 template<class T>
 void File<T>::PushFront(const T& valeur)
 {
@@ -70,6 +76,7 @@ void File<T>::PushFront(const T& valeur)
 	tab[head] = valeur;
 }
 
+//Méthode popback de la file qui permet d'enlever un élément à la fin de la file
 template<class T>
 void File<T>::pop_back()
 {
@@ -77,7 +84,7 @@ void File<T>::pop_back()
 	tab[nbElem] = T();
 }
 
-
+//Méthode popfront de la file qui permet d'enlever un élément au début de la file
 template<class T>
 void File<T>::pop_front()
 {
@@ -90,36 +97,42 @@ void File<T>::pop_front()
 	
 }
 
+//Méthode front qui retourne l'élément au début de la file
 template<class T>
 const T& File<T>::front()
 {
 	return tab[head];
 }
 
+//Méthode back qui retourne l'élément à la fin de la file
 template<class T>
 const T& File<T>::back()
 {
 	return tab[(head+nbElem-1)%cap];
 }
 
+//Méthode at qui retourne l'élément à l'index passé en paramètre
 template<class T>
 T& File<T>::at(size_type index)
 {
 	return tab[(head + index)%cap];
 }
 
+//Méthode isEmpty qui retourne si la file est vide ou non
 template<class T>
 bool File<T>::isEmpty()
 {
 	return nbElem == 0;
 }
 
+//Méthode qui retourne le size de la file
 template<class T>
 size_t File<T>::Size()
 {
 	return nbElem;
 }
 
+//Méthode qui change le size de la file
 template<class T>
 void File<T>::resize(size_type new_size)
 {
@@ -131,6 +144,7 @@ void File<T>::resize(size_type new_size)
 	nbElem = new_size;
 }
 
+//Méthode qui détruit les éléments de la file
 template<class T>
 void File<T>::clear()
 {
@@ -140,6 +154,7 @@ void File<T>::clear()
 	tab = nullptr;
 }
 
+//Méthode qui augmente la capacité de la file
 template<class T>
 void File<T>::reserve(size_type new_cap)
 {
@@ -162,6 +177,7 @@ void File<T>::reserve(size_type new_cap)
 	}
 }
 
+//Méthode qui retourne la capacité de la file
 template<class T>
 size_t File<T>::capacity() const
 {

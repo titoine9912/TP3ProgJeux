@@ -541,6 +541,8 @@ void Game::Release()
 	}
 }
 
+//Méthode qui contient les actions du joueur, lorsqu'il lance un projectile, entre en collision avec un bonus
+//Correspond au update de tout ce que fait le joueur
 void Game::player_character_actions()
 {
 	player_character_.move(view_game_);
