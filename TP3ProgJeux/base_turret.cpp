@@ -156,3 +156,8 @@ void base_turret::rotate_towards_target(Vector2f position_entity)
 
 	setRotation(angle_deg);
 }
+
+bool base_turret::get_triggered()
+{
+	return triggered_;
+}

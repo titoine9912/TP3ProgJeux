@@ -180,6 +180,9 @@
     <ClCompile Include="kamikaze_factory.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="base_projectile_enemy.cpp">
+      <Filter>Fichiers sources\entity\movable\Projectile</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -313,6 +316,9 @@
     </ClInclude>
     <ClInclude Include="kamikaze_factory.h">
       <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="base_projectile_enemy.h">
+      <Filter>Fichiers d%27en-tête\entity\movable\projectile</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
