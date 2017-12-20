@@ -122,6 +122,8 @@ public:
 
 	bool get_h_key_is_pressed() const;
 
+	bool get_r_key_is_pressed() const;
+
 	sf::String get_last_key_sequence();
 	bool get_text_entered_event() const;
 	bool get_tab_is_pressed() const;
@@ -146,6 +148,7 @@ private:
 	bool f_key_is_pressed_;
 	bool g_key_is_pressed_;
 	bool h_key_is_pressed_;
+	bool r_key_is_pressed_;
 #pragma endregion 
 
 #pragma region Mouse
