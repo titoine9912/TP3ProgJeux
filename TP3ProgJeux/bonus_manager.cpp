@@ -226,8 +226,8 @@ void bonus_manager::spawn_bonus_(Vector2f position)
 	int random_number = rand() % 9;
 	if (chance_ == random_number)
 	{
-		int random_numbers = rand() % 5;
-		switch (random_numbers)
+		int random_number = rand() % 6;
+		switch (random_number)
 		{
 		case 0:bomb_launcher_bonus_.spawn_bonus(position);
 			break;
