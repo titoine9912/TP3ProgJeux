@@ -5,6 +5,7 @@
 #include "upgraded_turret.h"
 #include "kamikaze.h"
 #include "base_enemy.h"
+#include "boss.h"
 
 class map
 {
@@ -16,7 +17,8 @@ public:
 		std::vector<tile>& tiles,
 		std::vector<base_turret>& base_turrets, 
 		std::vector<upgraded_turret>& upgraded_turrets, 
-		std::vector<kamikaze>& kamikazes
+		std::vector<kamikaze>& kamikazes,
+		std::vector<boss>&bosses_
 		);
 	Vector2f get_map_size();
 

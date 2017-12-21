@@ -5,6 +5,10 @@ class enemy : public character
 {
 public:
 	enemy(Vector2f position, float speed);
-
-private:
+	int get_fire_rate_counter();
+	int get_fire_rate();
+	void set_counter(float coutner);
+protected:
+	int fire_rate_;
+	int fire_rate_counter;
 };

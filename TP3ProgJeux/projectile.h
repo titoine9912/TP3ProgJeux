@@ -12,4 +12,5 @@ protected :
 	Vector2f direction_;
 	bool hero_projectile_;
 	int damage_;
+	
 };

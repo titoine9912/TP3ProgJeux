@@ -12,6 +12,9 @@ upgraded_turret::upgraded_turret(Vector2f position) : enemy(position,0), anim_de
 	triggered_ = false;
 	trigger_range_ = 350;
 	is_active_ = true;
+	fire_rate_ = 75;
+	fire_rate_counter = 0;
+	health_ = 4;
 
 	position_ = Vector2f(position.x / 32, position.y / 32);
 	setPosition(Vector2f(position.x + 16, position.y + 16));
@@ -25,6 +28,7 @@ void upgraded_turret::update(Vector2f position)
 		health_check();
 		anim_delay_counter++;
 		turret_range_check(position);
+		fire_rate_counter++;
 
 		if (anim_delay_counter >= anim_delay && triggered_ == false)
 		{
@@ -150,5 +154,10 @@ void upgraded_turret::rotate_towards_target(Vector2f position_entity)
 
 
 	setRotation(angle_deg);
+}
+
+bool upgraded_turret::get_triggered()
+{
+	return triggered_;
 }
 

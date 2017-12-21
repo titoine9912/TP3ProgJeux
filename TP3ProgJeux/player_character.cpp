@@ -11,6 +11,7 @@ player_character::player_character(Vector2f position, int player_id) :character(
 	speed_ = 5;
 	current_speed_x = 0;
 	current_speed_y = 0;
+	health_ = 1000;
 
 	//Aniation Variables
 	current_anim_ = 0;
@@ -35,6 +36,7 @@ void player_character::update()
 {
 	if(is_active_ ==true)
 	{
+		health_check();
 		anim_delay_counter++;
 		if (anim_delay_counter >= anim_delay)
 		{
@@ -266,4 +268,12 @@ float player_character::get_speed()
 	return base_speed_;
 }
 
+void player_character::set_health(int h)
+{
+	health_ = h;
+}
 
+void player_character::set_is_active(bool active)
+{
+	is_active_ = active;
+}

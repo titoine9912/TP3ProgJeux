@@ -14,6 +14,7 @@ public:
 	void draw(sf::RenderWindow& main_win);
 	void turret_range_check(Vector2f position_entity);
 	void rotate_towards_target(Vector2f position_entity);
+	bool get_triggered();
 
 private:
 	Sprite sprite_upgraded_turret_tile_;

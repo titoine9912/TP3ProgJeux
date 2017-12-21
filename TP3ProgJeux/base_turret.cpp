@@ -15,6 +15,11 @@ base_turret::base_turret(Vector2f position) : enemy(position,0)
 	triggered_ = false;
 	trigger_range_ = 350;
 	is_active_ = true;
+	health_ = 2;
+
+	fire_rate_ = 45;
+	fire_rate_counter = 0;
+
 
 	position_ = Vector2f(position.x / 32, position.y / 32);
 	setPosition(Vector2f(position.x +16, position.y+16));
@@ -42,6 +47,7 @@ void base_turret::update(Vector2f position)
 	{
 		health_check();
 		anim_delay_counter++;
+		fire_rate_counter++;
 		turret_range_check(position);
 
 		if (anim_delay_counter >= anim_delay && triggered_ == false)

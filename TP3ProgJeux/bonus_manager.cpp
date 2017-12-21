@@ -2,7 +2,7 @@
 
 bonus_manager * bonus_manager::bonus_manager_ = nullptr;
 
-bonus_manager::bonus_manager() :chance_(9), last_bonus(-1)
+bonus_manager::bonus_manager() :chance_(8), last_bonus(-1)
 {
 	
 }
@@ -223,12 +223,11 @@ bool bonus_manager::collision(movable* movable1)
 
 void bonus_manager::spawn_bonus_(Vector2f position)
 {
-	int random_number = rand() % 10;
-	random_number = 9;
+	int random_number = rand() % 9;
 	if (chance_ == random_number)
 	{
-		random_number = rand() % 5;
-		switch (random_number)
+		int random_numbers = rand() % 5;
+		switch (random_numbers)
 		{
 		case 0:bomb_launcher_bonus_.spawn_bonus(position);
 			break;

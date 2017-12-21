@@ -39,10 +39,14 @@ public :
 	tile_type get_tile_type() const;
 
 	float get_size() const;
+
+	bool get_contains_turret();
+	void set_contains_turret(bool contains);
 	
 
 
 private:
+	bool contains_turret_;
 	float size_;
 	static Texture texture_;
 	IntRect* int_rects_tiles_;

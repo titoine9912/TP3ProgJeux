@@ -7,6 +7,7 @@ tile::tile(Vector2f position, tile_type tile): entity(position)
 	position_ = Vector2f(position.x / 32, position.y / 32);
 	tile_type_ = tile;
 	setPosition(Vector2f(position));
+	contains_turret_ = false;
 }
 
 void tile::Release()
@@ -56,3 +57,14 @@ float tile::get_size() const
 {
 	return size_;
 }
+
+bool tile::get_contains_turret()
+{
+	return contains_turret_;
+}
+
+void tile::set_contains_turret(bool contains)
+{
+	contains_turret_ = contains;
+}
+

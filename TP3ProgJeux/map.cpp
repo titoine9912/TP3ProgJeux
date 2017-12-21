@@ -13,7 +13,8 @@ bool map::load_map(const char scene_path[],
 	std::vector<tile>& tiles,
 	std::vector<base_turret>& base_turrets,
 	std::vector<upgraded_turret>& upgraded_turrets,
-	std::vector<kamikaze>& kamikazes
+	std::vector<kamikaze>& kamikazes,
+	std::vector<boss>&bosses_
 	)
 {
 	//Load map
@@ -47,6 +48,10 @@ bool map::load_map(const char scene_path[],
 				tiles.push_back(tile(Vector2f(x * Game::grid_size, y * Game::grid_size), empty));
 				tiles.back().visual_adjustments();
 				tiles.back().set_texture(*map_, scene_width, scene_height);
+				if (map_[y][x] == 2 || map_[y][x] == 3)
+				{
+					tiles.back().set_contains_turret(true);
+				}
 			}
 			if (map_[y][x] == 2)
 			{
@@ -65,6 +70,12 @@ bool map::load_map(const char scene_path[],
 				kamikazes.push_back(kamikaze(Vector2f(x * Game::grid_size, y * Game::grid_size)));
 				kamikazes.back().visual_adjustments();
 				kamikazes.back().set_texture();
+			}
+			if (map_[y][x] == 5)
+			{
+				bosses_.push_back(boss(Vector2f(x * Game::grid_size, y * Game::grid_size)));
+				bosses_.back().visual_adjustments();
+				bosses_.back().set_texture();
 			}
 		}
 	}

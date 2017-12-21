@@ -12,8 +12,9 @@ public:
 	 static Texture texture_player_character_;
 	 void draw(sf::RenderWindow& main_win);
 	 float get_speed();
-
+	 void set_health(int h);
 	 bool end_of_level_;
+	 void set_is_active(bool active);
 
 
 private:

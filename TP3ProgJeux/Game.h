@@ -21,8 +21,10 @@
 #include "automatic_projectile.h"
 #include "bonus_manager.h"
 #include "base_projectile_enemy.h"
+#include "missile_enemy.h"
 #include "shield.h"
 #include "nuke.h"
+#include "boss.h"
 
 //test
 
@@ -61,10 +63,14 @@ private:
 	void draw();
 	bool load_map();
 	void movable_and_tile_collision_detection(movable*  movable) const;
+	void projectile_and_tile_collision_detection(movable* movable);
 	void Release();
 	void player_character_actions();
 	void enemy_actions();
 	void projectile_and_movable_collision(movable*  movable);
+	void projectile_and_projectile_collision(movable*  movable);
+	void projectile_and_hero_collision(movable* movable);
+
 
 	//Game variables
 	bool character_outofbounds_left_;
@@ -85,17 +91,19 @@ private:
 	std::vector<base_turret> base_turrets_;
 	std::vector<upgraded_turret> upgraded_turrets_ ;
 	std::vector<base_enemy> base_enemies_;
-	std::vector<boss> bosses_;
 	std::vector<kamikaze> kamikazes_;
+	std::vector<boss> bosses_;
 	explosion explosion_[15];
 	Liste<base_projectile> liste_projectiles_base_;
 	Liste<bomb_launcher_projectile> liste_bomb_launcher_projectile_;
 	Liste<laser_projectile> liste_laser_projectile_;
 	Liste<automatic_projectile> liste_automatic_projectile_;
 	Liste<base_projectile_enemy> liste_base_projectile_enemy_;
+	Liste<missile_enemy> liste_missile_enemy_;
 	Liste<nuke> liste_nuke_;
 	File<enemy> liste_ennemy_;
 	Pile<shield> pile_shield_;
+	
 	
 
 	player_character player_character_;

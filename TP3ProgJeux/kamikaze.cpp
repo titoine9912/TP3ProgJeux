@@ -19,6 +19,7 @@ kamikaze::kamikaze(Vector2f position) : anim_delay(5), anim_delay_counter(3)
 	speed_ = 4;
 	current_speed_x = 0;
 	current_speed_y = 0;
+	health_ = 2;
 
 
 	//State variables
@@ -91,7 +92,7 @@ void kamikaze::visual_adjustments()
 	width = 32;
 	height = 32;
 	// Adjust character collision points.
-
+	/*
 	top_left_point_ = Vector2f(4, 0);
 	top_right_point_ = Vector2f(width - 4, 0);
 	left_upper_point_ = Vector2f(-8, 8);
@@ -100,6 +101,16 @@ void kamikaze::visual_adjustments()
 	bottom_right_point_ = Vector2f(width - 12, height);
 	right_upper_point_ = Vector2f(width-10, height*0.25f);
 	right_lower_point_ = Vector2f(width-10, height*0.75f);
+	*/
+
+	top_left_point_ = Vector2f(-10, -12);
+	top_right_point_ = Vector2f(10, -12);
+	left_upper_point_ = Vector2f(-10, -3);
+	left_lower_point_ = Vector2f(-10, 3);
+	bottom_left_point_ = Vector2f(-10, 6);
+	bottom_right_point_ = Vector2f(10, 6);
+	right_upper_point_ = Vector2f(10, 3);
+	right_lower_point_ = Vector2f(10, 3);
 
 
 	setOrigin(width / 2, width / 2);

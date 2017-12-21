@@ -1,4 +1,5 @@
 #include "boss.h"
+#include "kamikaze.h"
 Texture boss::texture_boss_;
 boss::boss(Vector2f position) :enemy(position,0), is_moving_up(true), is_moving_down(false), last_position_(2), spawn_rate_(60),spawn_rate_counter(60), fire_rate_(60), fire_rate_counter_(0)
 {
@@ -6,25 +7,50 @@ boss::boss(Vector2f position) :enemy(position,0), is_moving_up(true), is_moving_
 	current_anim_ = 0;
 	current_frame_ = 0;
 	speed_ = 3;
+	health_=20;
+
+	fire_rate_ = 60;
+	fire_rate_counter = 60;
 
 	is_active_ = true;
 	has_exploded_ = false;
+	triggered_ = false;
 
 
 	base_position_ = Vector2f(position.x / 32, position.y / 32);
-	setPosition(Vector2f(position.x + 16, position.y + 16));
+	setPosition(position);
+	
 }
 
-void boss::update()
+void boss::update(std::vector<kamikaze>& kamikazes)
 {
 	if (is_active_ == true)
 	{
-		fire_rate_counter_++;
+		fire_rate_counter++;
 		spawn_rate_counter++;
 		health_check();
-		if (spawn_rate_counter >= spawn_rate_)
+		if (spawn_rate_counter >= spawn_rate_ && triggered_ == true)
 		{
+			kamikazes.push_back(spawn_kamikaze());
+			kamikazes.back().visual_adjustments();
+			kamikazes.back().set_texture();
+			spawn_rate_counter = 0;
+		}
+		
 
+		anim_delay_counter++;
+		if (anim_delay_counter >= anim_delay)
+		{
+			if (current_anim_ < 3)
+			{
+				current_anim_++;
+			}
+			else
+			{
+				current_anim_ = 0;
+			}
+			setTextureRect(int_rects_movable_[0][current_anim_]);
+			anim_delay_counter = 0;
 		}
 
 	}
@@ -32,9 +58,10 @@ void boss::update()
 
 void boss::set_texture()
 {
-	boss_sprite_.setTexture(texture_boss_);
-	boss_sprite_.setTextureRect(int_rects_movable_[0][0]);
+	setTexture(texture_boss_);
+	setTextureRect(int_rects_movable_[0][0]);
 	size_sprite_ = texture_boss_.getSize().x / 4;
+	setRotation(270);
 }
 
 void boss::move(View view)
@@ -83,18 +110,45 @@ void boss::visual_adjustments()
 			int_rects_movable_[i][j].height = height;
 		}
 	}
+	setOrigin(width / 2, width / 2);
 }
 
 void boss::draw(sf::RenderWindow& main_win)
 {
 	if (is_active_ == true)
 	{
+		Vector2f allo = getPosition();
 		main_win.draw(*this);
 	}
 }
 
 kamikaze boss::spawn_kamikaze()
 {
-	position_1_ = Vector2f(getPosition().x + 32, getPosition().y);
+	position_1_ = Vector2f(getPosition().x - 50, getPosition().y);
 	return kamikaze_factory_.create_kamikaze(position_1_);
+}
+
+bool boss::get_is_triggered()
+{
+	return triggered_;
+}
+
+void boss::set_is_triggered(bool triggered)
+{
+	triggered_ = triggered;
+}
+
+int boss::get_fire_rate()
+{
+	return fire_rate_;
+}
+
+int boss::get_fire_rate_counter()
+{
+	return fire_rate_counter;
+}
+
+void boss::set_counter(int counter)
+{
+	fire_rate_counter = counter;
 }

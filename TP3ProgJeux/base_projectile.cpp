@@ -70,6 +70,11 @@ void base_projectile::visual_adjustments()
 			int_rects_movable_[i][j].height = height;
 		}
 	}
+
+	top_left_point_ = Vector2f(-4, -3);
+	top_right_point_ = Vector2f(4, -3);
+	bottom_left_point_ = Vector2f(-4, 3);
+	bottom_right_point_ = Vector2f(4, 3);
 }
 
 void base_projectile::set_texture()

@@ -116,6 +116,7 @@
     <ClCompile Include="menu.cpp" />
     <ClCompile Include="menu_controller.cpp" />
     <ClCompile Include="menu_factory.cpp" />
+    <ClCompile Include="missile_enemy.cpp" />
     <ClCompile Include="movable.cpp" />
     <ClCompile Include="nuke.cpp" />
     <ClCompile Include="nuke_bonus.cpp" />
@@ -163,6 +164,7 @@
     <ClInclude Include="menu.h" />
     <ClInclude Include="menu_controller.h" />
     <ClInclude Include="menu_factory.h" />
+    <ClInclude Include="missile_enemy.h" />
     <ClInclude Include="movable.h" />
     <ClInclude Include="nuke.h" />
     <ClInclude Include="nuke_bonus.h" />
