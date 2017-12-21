@@ -67,13 +67,13 @@ public:
 	}
 
 	T* operator->()const { return &(POINTEUR->value); }
-
+	//Méthode qui incrémente l'itérateur de 1
 	iterator& operator++()
 	{
 		POINTEUR = POINTEUR->next;
 		return *this;
 	}
-
+	//Méthode qui incrémente l'itérateur de 1
 	iterator operator++(int)
 	{
 		Box* temp = POINTEUR;
@@ -81,24 +81,25 @@ public:
 		return temp;
 	}
 
+	//Méthode qui désincrémente l'itérateur de 1
 	iterator& operator--()
 	{
 		POINTEUR = POINTEUR->previous;
 		return *this;
 	}
-
+	//Méthode qui désincrémente l'itérateur de 1 
 	iterator operator--(int)
 	{
 		Box* temp = POINTEUR;
 		POINTEUR = POINTEUR->previous;
 		return temp;
 	}
-
+	//Méthode qui retourne si un itérateur est égale à un autre
 	bool operator==(const iterator&droite)const
 	{
 		return POINTEUR == droite.POINTEUR;
 	}
-
+	//Méthode qui retourne si un itérateur n'est pas égale à un autre
 	bool operator!=(const iterator&droite)const
 	{
 		return POINTEUR != droite.POINTEUR;
@@ -107,7 +108,7 @@ public:
 
 
 
-
+//Constructeur de la liste
 template<class T>
 inline Liste<T>::Liste() :avant(T()), apres(T()), sz(0)
 {
@@ -116,18 +117,15 @@ inline Liste<T>::Liste() :avant(T()), apres(T()), sz(0)
 	sz = 0;
 }
 
+//destructeur de la liste
 template<class T>
 inline Liste<T>::~Liste()
 {
 	clear();
 }
 
-//template<class T>
-//inline Liste<T>::Liste(const Liste&)
-//{
-//	*this = other;
-//}
-
+//Méthode qui interchange les contenus de deux listes
+//Elle reçoit en paramètre l'autre liste
 template<class T>
 void Liste<T>::swap(Liste& other)
 {
@@ -136,6 +134,9 @@ void Liste<T>::swap(Liste& other)
 	std::swap(apres, other.apres);
 }
 
+//Méthode qui insère une box dans une list
+//Elle reçoit en paramètre la position à laquelle on veut insérer et la valeur que l'on veut donner à la nouvelle box
+//Elle retourne la boite suivant la place qu'on la insérer
 template<class T>
 typename Liste<T>::Box * Liste<T>::insert(Box * iterator, const T & value)
 {
@@ -148,6 +149,8 @@ typename Liste<T>::Box * Liste<T>::insert(Box * iterator, const T & value)
 	return iterator->previous;
 }
 
+//Détruit une box dans la liste
+//Elle recoit en paramètre la position de la box que l'on veut détruire
 template<class T>
 typename Liste<T>::Box * Liste<T>::Erase(Box * iterator)
 {
@@ -160,12 +163,14 @@ typename Liste<T>::Box * Liste<T>::Erase(Box * iterator)
 	return temp;
 }
 
+//Insert un élément dans la liste
 template<class T>
 typename Liste<T>::iterator Liste<T>::Insert(iterator pos, const T& value)
 {
 	return insert(pos.POINTEUR, value);
 }
 
+//efface un élément dans la liste
 template<class T>
 typename Liste<T>::iterator Liste<T>::erase(iterator pos)
 {
@@ -173,42 +178,49 @@ typename Liste<T>::iterator Liste<T>::erase(iterator pos)
 	return temp;
 }
 
+//ajoute un élément à la fin de la liste
 template<class T>
 void Liste<T>::push_back(const T& value)
 {
 	insert(&apres, value);
 }
 
+//efface un élément à la fin de la liste
 template<class T>
 void Liste<T>::pop_back()
 {
 	Erase(apres.previous);
 }
 
+//ajoute un élément au début de la liste
 template<class T>
 void Liste<T>::push_front(const T& value)
 {
 	insert(avant.next, value);
 }
 
+//efface un élément au début de la liste
 template<class T>
 void Liste<T>::pop_front()
 {
 	Erase(avant.next);
 }
 
+//Retourne la valeur du dernier élément de la liste
 template<class T>
 T& Liste<T>::back()
 {
 	return apres.previous->value;
 }
 
+//Retourne la valeur du premier élément de la liste
 template<class T>
 T& Liste<T>::front()
 {
 	return avant.next->value;
 }
 
+//efface la liste
 template<class T>
 void Liste<T>::clear()
 {
@@ -218,30 +230,35 @@ void Liste<T>::clear()
 	}
 }
 
+//retourne le size de la liste
 template<class T>
 size_t Liste<T>::size() const
 {
 	return sz;
 }
 
+//Retourne si la liste est vide ou non
 template<class T>
 bool Liste<T>::empty() const
 {
 	return sz == 0;
 }
 
+//retourne un itérateur sur le début de la liste
 template<class T>
 typename Liste<T>::iterator Liste<T>::begin()
 {
 	return avant.next;
 }
 
+//retourne un itérateur sur la fin de la liste
 template<class T>
 typename Liste<T>::iterator Liste<T>::end()
 {
 	return &apres;
 }
 
+//inverse les éléments de la liste
 template<class T>
 void Liste<T>::reverse()
 {
@@ -256,6 +273,7 @@ void Liste<T>::reverse()
 	}
 }
 
+//insère le contenu d'une autre liste dans la liste actuelle
 template<class T>
 void Liste<T>::splice(iterator pos, Liste& other)
 {

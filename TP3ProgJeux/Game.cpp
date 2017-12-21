@@ -146,6 +146,13 @@ bool Game::init()
 	}
 	*/
 
+	for (int i = 0; i < 3; ++i)
+	{
+		liste_bomb_launcher_projectile_.push_front(bomb_launcher_projectile::bomb_launcher_projectile());
+		liste_bomb_launcher_projectile_.front().visual_adjustments();
+		liste_bomb_launcher_projectile_.front().setTexture(bomb_launcher_projectile::texture_bomb_launcher_projectile_);
+	}
+
 	for (int i = 0; i < 5; ++i)
 	{
 		pile_shield_.Push(shield::shield());
@@ -610,6 +617,8 @@ void Game::Release()
 	}
 }
 
+//Méthode qui contient les actions du joueur, lorsqu'il lance un projectile, entre en collision avec un bonus
+//Correspond au update de tout ce que fait le joueur
 void Game::player_character_actions()
 {
 	player_character_.move(view_game_);
@@ -1096,7 +1105,25 @@ void Game::projectile_and_movable_collision(movable* movable)
 				{
 					movable->set_health(movable->get_health() - (*i).get_damage());
 					//générer une explosion ici??
-					(*i).kill_movable();
+
+					for (size_t h = 0; h < kamikazes_.size(); ++h)
+					{
+						if ((kamikazes_[h].getPosition().x > (*i).getPosition().x - 10) && (kamikazes_[h].getPosition().x < (*i).getPosition().x + 10) && (kamikazes_[h].getPosition().y > (*i).getPosition().y - 10) && (kamikazes_[h].getPosition().y < (*i).getPosition().y + 10))
+						{
+							(*i).kill_movable();
+							for (int j = 0; j < 15; ++j)
+							{
+								if (explosion_[j].get_is_active() == false)
+								{
+									explosion_[j].activate_explosion((*i).getPosition());
+									(*i).set_has_exploded(true);
+									break;
+								}
+							}
+						
+						}
+					}
+					
 				}
 			}
 		}
@@ -1120,10 +1147,12 @@ void Game::projectile_and_movable_collision(movable* movable)
 }
 
 
+
 void Game::projectile_and_hero_collision(movable* movable)
 {
 	if (liste_base_projectile_enemy_.size() > 0)
 	{
+
 		for (auto i = liste_base_projectile_enemy_.begin(); i != liste_base_projectile_enemy_.end(); ++i)
 		{
 			if ((*i).get_is_active() == true)
