@@ -13,6 +13,7 @@
 #include "explosion.h"
 #include "liste.hpp"
 #include "file.hpp"
+#include "pile.hpp"
 #include "projectile.h"
 #include "base_projectile.h"
 #include "bomb_launcher_projectile.h"
@@ -20,6 +21,8 @@
 #include "automatic_projectile.h"
 #include "bonus_manager.h"
 #include "base_projectile_enemy.h"
+#include "shield.h"
+#include "nuke.h"
 
 //test
 
@@ -51,6 +54,7 @@ private:
 	bool has_shot_bomb_projectile_ = false;
 	bool has_shot_laser_projectile_ = false;
 	bool has_shot_automatic_projectile_ = false;
+	bool has_shot_nuke_ = false;
 	bool init();
 	void getInputs();
 	void update();
@@ -89,7 +93,10 @@ private:
 	Liste<laser_projectile> liste_laser_projectile_;
 	Liste<automatic_projectile> liste_automatic_projectile_;
 	Liste<base_projectile_enemy> liste_base_projectile_enemy_;
+	Liste<nuke> liste_nuke_;
 	File<enemy> liste_ennemy_;
+	Pile<shield> pile_shield_;
+	
 
 	player_character player_character_;
 	scrolling_background scrolling_background_;

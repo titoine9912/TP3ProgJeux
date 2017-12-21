@@ -9,7 +9,7 @@ laser_projectile::laser_projectile()
 	current_frame_ = 0;
 	anim_delay_counter = 0;
 	anim_delay = 5;
-	speed_ = 40;
+	speed_ = 60;
 	//State Variable
 	is_active_ = false;
 	fire_rate_ = 10;

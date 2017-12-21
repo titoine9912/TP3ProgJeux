@@ -168,9 +168,6 @@
     <ClCompile Include="automatic_bonus.cpp">
       <Filter>Fichiers sources\entity\movable\bonus</Filter>
     </ClCompile>
-    <ClCompile Include="laser_projectile.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="observer.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
@@ -181,6 +178,15 @@
       <Filter>Fichiers sources\entity\movable\Projectile</Filter>
     </ClCompile>
     <ClCompile Include="automatic_projectile.cpp">
+      <Filter>Fichiers sources\entity\movable\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="shield.cpp">
+      <Filter>Fichiers sources\entity\movable</Filter>
+    </ClCompile>
+    <ClCompile Include="laser_projectile.cpp">
+      <Filter>Fichiers sources\entity\movable\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="nuke.cpp">
       <Filter>Fichiers sources\entity\movable\Projectile</Filter>
     </ClCompile>
   </ItemGroup>
@@ -305,12 +311,6 @@
     <ClInclude Include="automatic_bonus.h">
       <Filter>Fichiers d%27en-tête\entity\movable\bonus</Filter>
     </ClInclude>
-    <ClInclude Include="automatic_projectile.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="laser_projectile.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="observer.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
@@ -318,6 +318,18 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="base_projectile_enemy.h">
+      <Filter>Fichiers d%27en-tête\entity\movable\projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="shield.h">
+      <Filter>Fichiers d%27en-tête\entity\movable</Filter>
+    </ClInclude>
+    <ClInclude Include="automatic_projectile.h">
+      <Filter>Fichiers d%27en-tête\entity\movable\projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="laser_projectile.h">
+      <Filter>Fichiers d%27en-tête\entity\movable\projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="nuke.h">
       <Filter>Fichiers d%27en-tête\entity\movable\projectile</Filter>
     </ClInclude>
   </ItemGroup>

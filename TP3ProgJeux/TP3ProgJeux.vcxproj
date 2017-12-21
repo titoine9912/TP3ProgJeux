@@ -117,6 +117,7 @@
     <ClCompile Include="menu_controller.cpp" />
     <ClCompile Include="menu_factory.cpp" />
     <ClCompile Include="movable.cpp" />
+    <ClCompile Include="nuke.cpp" />
     <ClCompile Include="nuke_bonus.cpp" />
     <ClCompile Include="observer.cpp" />
     <ClCompile Include="pause_menu.cpp" />
@@ -124,6 +125,7 @@
     <ClCompile Include="point_bonus.cpp" />
     <ClCompile Include="projectile.cpp" />
     <ClCompile Include="scrolling_background.cpp" />
+    <ClCompile Include="shield.cpp" />
     <ClCompile Include="text.cpp" />
     <ClCompile Include="tile.cpp" />
     <ClCompile Include="upgraded_turret.cpp" />
@@ -162,6 +164,7 @@
     <ClInclude Include="menu_controller.h" />
     <ClInclude Include="menu_factory.h" />
     <ClInclude Include="movable.h" />
+    <ClInclude Include="nuke.h" />
     <ClInclude Include="nuke_bonus.h" />
     <ClInclude Include="observer.h" />
     <ClInclude Include="pause_menu.h" />
@@ -170,6 +173,7 @@
     <ClInclude Include="point_bonus.h" />
     <ClInclude Include="projectile.h" />
     <ClInclude Include="scrolling_background.h" />
+    <ClInclude Include="shield.h" />
     <ClInclude Include="text.h" />
     <ClInclude Include="tile.h" />
     <ClInclude Include="upgraded_turret.h" />

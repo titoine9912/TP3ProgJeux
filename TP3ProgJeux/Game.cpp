@@ -133,8 +133,20 @@ bool Game::init()
 	{
 		return false;
 	}
+	
+	//a décommenter lorsque le sprites de bouclier aura été fait
+	/*
+	if (!shield::load_textures("Sprites\\shield_.png", shield::texture_base_shield_))
+	{
+		return false;
+	}
+	*/
 
-
+	for (int i = 0; i < 5; ++i)
+	{
+		pile_shield_.Push(shield::shield());
+		//pile_shield_.Top().setTexture(shield::texture_base_shield_);
+    }
 	
 	for (int i = 0; i < 100; ++i)
 	{
@@ -150,9 +162,12 @@ bool Game::init()
 		liste_base_projectile_enemy_.front().setTexture(base_projectile_enemy::texture_base_projectile_enemy_);
 	}
 
-	//la boucle ci-dessous sera a enlever plus tard, ce n'est que pour tester si les projectiles speciaux fonctionnent
+	for (int i = 0; i < 2; ++i)
+	{
+		liste_nuke_.push_front(nuke::nuke());
+	}
 
-
+	//si tu reussit a spawner un bonus de type automatic, tu effacera cette boucle la et decommentera celle dans la collision bonus automatic
 	for (int i = 0; i < 100; ++i)
 	{
 
@@ -160,6 +175,7 @@ bool Game::init()
 		liste_automatic_projectile_.front().visual_adjustments();
 		liste_automatic_projectile_.front().setTexture(automatic_projectile::texture_automatic_projectile_);
 	}
+
 	
 
 	view_current_center_ = Vector2f(LARGEUR/2, HAUTEUR/2);
@@ -531,6 +547,8 @@ void Game::player_character_actions()
 	player_character_.update();
 	movable_and_tile_collision_detection(&player_character_);
 
+	
+	//AntoineRL
 	//Update et tire des projectiles de base du joueur si il y a lieu
 	for (auto i = liste_projectiles_base_.begin(); i != liste_projectiles_base_.end(); ++i)
 	{
@@ -658,6 +676,41 @@ void Game::player_character_actions()
 		}
 	}
 
+	if (liste_nuke_.size() > 0)
+	{
+		if (input_manager::get_input_manager()->get_r_key_is_pressed() == true)
+		{
+			for (size_t i = 0; i < kamikazes_.size(); ++i)
+			{
+				
+				if ((kamikazes_[i].getPosition().x < view_game_.getCenter().x + (view_game_.getSize().x) / 2) && (kamikazes_[i].getPosition().x > 0) && (kamikazes_[i].getPosition().y < view_game_.getCenter().y + (view_game_.getSize().y) / 2))
+				{
+					kamikazes_[i].kill_movable();
+					if (kamikazes_[i].get_has_exploded() == false)
+					{
+						bonus_manager::get_bonus_manager()->spawn_bonus_(kamikazes_[i].getPosition());
+						for (int j = 0; j < 15; ++j)
+						{
+							if (explosion_[j].get_is_active() == false)
+							{
+								explosion_[j].activate_explosion(kamikazes_[i].getPosition());
+								kamikazes_[i].set_has_exploded(true);
+								break;
+							}
+						}
+					}
+				}
+			}
+			has_shot_nuke_ = true;
+		}
+	}
+	if (has_shot_nuke_ == true)
+	{
+		liste_nuke_.pop_back();
+		has_shot_nuke_ = false;
+	}
+	//AntoineRL
+
 	//On regarde si le joueur est en collision avec un bonus
 	if (bonus_manager::get_bonus_manager()->collision(&player_character_) == true)
 	{
@@ -699,7 +752,13 @@ void Game::player_character_actions()
 		//Le joueur obtient un bonus de type fusil automatique
 		else if (bonus_manager::get_bonus_manager()->last_bonus == 5)
 		{
+			//for (int i = 0; i < 20; ++i)
+			//{
 
+			//	liste_automatic_projectile_.push_front(automatic_projectile::automatic_projectile());
+			//	liste_automatic_projectile_.front().visual_adjustments();
+			//	liste_automatic_projectile_.front().setTexture(automatic_projectile::texture_automatic_projectile_);
+			//}
 		}
 	}
 

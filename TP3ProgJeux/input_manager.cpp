@@ -163,6 +163,9 @@ void input_manager::update(sf::RenderWindow& main_win, sf::Event& event)
 		case Keyboard::Key::H:
 			h_key_is_pressed_ = true;
 			break;
+		case Keyboard::Key::R:
+			r_key_is_pressed_ = true;
+			break;
 
 		default: 
 			break;
@@ -207,6 +210,8 @@ void input_manager::update(sf::RenderWindow& main_win, sf::Event& event)
 		case Keyboard::Key::H:
 			h_key_is_pressed_ = false;
 			break;
+		case Keyboard::Key::R:
+			r_key_is_pressed_ = false;
 			break;
 
 		default: 
@@ -286,6 +291,10 @@ bool input_manager::get_g_key_is_pressed() const
 bool input_manager::get_h_key_is_pressed()const
 {
 	return h_key_is_pressed_;
+}
+bool input_manager::get_r_key_is_pressed()const
+{
+	return r_key_is_pressed_;
 }
 
 
